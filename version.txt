@@ -1,4 +1,4 @@
-v29
-2026-08-25
-index.html 146800 bytes md5 4b7c8905
-Filter rows hold their sideways position; tab bar always pinned to the bottom
+v30
+2026-10-02
+index.html 146924 bytes md5 b38e9a6a
+Money totals respect the paid flag on activities; currency symbols for THB, AUD and QAR
