@@ -1,4 +1,4 @@
-v30
+v31
 2026-10-02
-index.html 146924 bytes md5 b38e9a6a
-Money totals respect the paid flag on activities; currency symbols for THB, AUD and QAR
+index.html 149010 bytes md5 308f0f50
+Maps removed; money shown as a paid/to-pay table; to-do ticks sync; grid, scrim and deadline fixes
