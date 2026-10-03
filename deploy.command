@@ -15,6 +15,13 @@ echo
 cat version.txt 2>/dev/null
 echo
 
+# Rebuild index.html from src/ so a deploy can never ship stale output.
+if [ -d src ] && [ -f build.py ]; then
+  echo "Rebuilding index.html from src/ ..."
+  python3 build.py || { echo "Build failed - nothing deployed."; read -r -p "Press return to close."; exit 1; }
+  echo
+fi
+
 # Guard: the manifest references icon-512.png, so a deploy without it 404s.
 missing=""
 for f in index.html sw.js manifest.webmanifest config.js version.txt icon-180.png icon-512.png; do
