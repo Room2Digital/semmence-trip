@@ -1,4 +1,4 @@
-v31
-2026-10-02
-index.html 149010 bytes md5 308f0f50
-Maps removed; money shown as a paid/to-pay table; to-do ticks sync; grid, scrim and deadline fixes
+v32
+2026-10-03
+index.html 150014 bytes md5 cb625a5d
+Tablet layout: constrained measure, 3-up nav tiles, centred tab bar, 3-4 column destinations

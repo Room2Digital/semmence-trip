@@ -38,6 +38,32 @@
 .dl-row h3{flex:1 1 auto;min-width:0}
 .dl-row .mchip{flex:0 0 auto;white-space:nowrap}
 .stays.in-dest .cap{display:none}
+
+@media(min-width:760px){
+.wrap{max-width:880px;padding:0 26px}
+h2{font-size:21px}
+.sec{padding:26px 0 2px}
+.card{padding:17px 19px;margin-bottom:12px}
+.toggle{width:auto;min-width:420px}
+.toggle button{padding:8px 22px;font-size:13px}
+.title{font-size:30px}
+nav.tabs{justify-content:center;gap:10px}
+nav.tabs button{flex:0 0 164px;font-size:11px;padding:11px 2px 12px}
+nav.tabs svg{width:22px;height:22px}
+.dgrid{grid-template-columns:repeat(3,1fr)}
+.navgrid{grid-template-columns:repeat(3,1fr)}
+.navgrid .navb:last-child:nth-child(odd){grid-column:auto;min-height:124px;flex-direction:column;align-items:flex-start;gap:0}
+.navgrid .navb:last-child:nth-child(odd) .nb-ic{margin-bottom:auto}
+.s-hero{height:132px}
+.cdgrid{gap:10px}
+.cdu{padding:16px 4px 12px}
+.mny-head span:nth-child(n+2),.mny-paid,.mny-due{min-width:124px}
+}
+@media(min-width:1080px){
+.wrap{max-width:980px;padding:0 30px}
+.dgrid{grid-template-columns:repeat(4,1fr)}
+.stays{grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+}
 </style>
 </head>
 <body>
