@@ -1,6 +1,6 @@
 /* Network-first for page loads, cache fallback so the app opens offline.
    Only intercepts navigations — Supabase and map-tile requests pass straight through. */
-const C = 'trip-v15';
+const C = 'trip-v16';
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(C).then(c => c.add('./')).catch(() => {}).then(() => self.skipWaiting()));
 });

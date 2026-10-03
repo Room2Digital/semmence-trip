@@ -3412,3 +3412,67 @@ a {
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   }
 }
+
+.bagbought {
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #6ede6e;
+  background: rgba(12, 163, 12, 0.1);
+  border: 1px solid rgba(12, 163, 12, 0.28);
+  border-radius: 9px;
+  padding: 7px 10px;
+}
+
+/* Plans: "By place" / "Everything" switch */
+.ptabs.pview {
+  margin-bottom: 14px;
+}
+
+/* Date headings in the chronological plans list */
+.daymark {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 22px 0 9px;
+  padding: 9px 13px;
+  border-radius: 11px;
+  background: var(--surface-2);
+  border: 1px solid var(--grid);
+  border-left: 3px solid var(--blue);
+}
+.daymark:first-of-type {
+  margin-top: 6px;
+}
+.daymark.now {
+  border-left-color: var(--good);
+  background: rgba(12, 163, 12, 0.1);
+}
+.daymark.past {
+  opacity: 0.62;
+  border-left-color: var(--baseline);
+}
+.dm-date {
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dm-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.daymark.now .dm-sub {
+  color: #6ede6e;
+}
+.dm-n {
+  flex: 0 0 auto;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--ring);
+  border-radius: 999px;
+  padding: 2px 9px;
+}

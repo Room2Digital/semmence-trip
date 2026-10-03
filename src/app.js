@@ -524,7 +524,7 @@ function bagChips(e) {
     : "";
 }
 const passCard = (e) =>
-    `<div class="pass tap ${e.who}${e.tbc ? " tbc" : ""}" onclick="tapOpen(event,'flight',${e._i})">\n  <div class="p-perf"></div><div class="p-perf r"></div>\n  <div class="p-date"><span>${fmtL(e.dep.slice(0, 10))}</span>\n    <span class="d2">${e.tbc ? "Not booked" : tm(e.dep) + " → " + tm(e.arr) + (e.arr.slice(0, 10) !== e.dep.slice(0, 10) ? " +1" : "")}</span></div>\n  ${e.cabinimg ? `<div class="c-hero nc"><img class="bl" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.remove()"><img class="fg" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.closest('.c-hero').remove()"><span class="scrim"></span><span class="cap">${esc(e.cabinname || e.cabin || "")}</span></div>` : '<div style="height:12px"></div>'}\n  <div class="p-top"><span style="display:flex;align-items:center;gap:7px"><img class="alogo" src="${logoFor(e)}" alt="" loading="lazy" onerror="this.remove()">${esc(e.airline)}</span><span>${esc(e.no)}</span></div>\n  <div class="p-route">\n    <div><div class="p-code">${esc(city(e.from).code)}</div><div class="p-city">${esc(city(e.from).name)}</div></div>\n    <div class="p-mid"><div class="p-line"><span class="l"></span>✈<span class="l"></span></div><div class="dur">${esc(e.dur || "TBC")}</div></div>\n    <div style="text-align:right"><div class="p-code">${esc(city(e.to).code)}</div><div class="p-city">${esc(city(e.to).name)}</div></div>\n  </div>\n  <div class="p-meta">\n    ${e.cabin ? `<span class="mchip ${"Business" === e.cabin ? "cabin-biz" : ""}">${esc(e.cabin)}</span>` : ""}\n    ${e.seat ? `<span class="mchip">${esc(e.seat)}</span>` : ""}\n    ${e.ref ? `<span class="mchip">${esc(e.ref)}</span>` : '<span class="mchip tbd">No ref</span>'}\n    ${whoChip(e.who)}\n  </div>\n  ${bagChips(e)}\n  ${e.plane ? `<div class="note-txt">${esc(e.plane)}${e.note ? " — " + esc(e.note) : ""}</div>` : e.note ? `<div class="note-txt">${esc(e.note)}</div>` : ""}\n</div>`,
+    `<div class="pass tap ${e.who}${e.tbc ? " tbc" : ""}" onclick="tapOpen(event,'flight',${e._i})">\n  <div class="p-perf"></div><div class="p-perf r"></div>\n  <div class="p-date"><span>${fmtL(e.dep.slice(0, 10))}</span>\n    <span class="d2">${e.tbc ? "Not booked" : tm(e.dep) + " → " + tm(e.arr) + (e.arr.slice(0, 10) !== e.dep.slice(0, 10) ? " +1" : "")}</span></div>\n  ${e.cabinimg ? `<div class="c-hero nc"><img class="bl" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.remove()"><img class="fg" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.closest('.c-hero').remove()"><span class="scrim"></span><span class="cap">${esc(e.cabinname || e.cabin || "")}</span></div>` : '<div style="height:12px"></div>'}\n  <div class="p-top"><span style="display:flex;align-items:center;gap:7px"><img class="alogo" src="${logoFor(e)}" alt="" loading="lazy" onerror="this.remove()">${esc(e.airline)}</span><span>${esc(e.no)}</span></div>\n  <div class="p-route">\n    <div><div class="p-code">${esc(city(e.from).code)}</div><div class="p-city">${esc(city(e.from).name)}</div></div>\n    <div class="p-mid"><div class="p-line"><span class="l"></span>✈<span class="l"></span></div><div class="dur">${esc(e.dur || "TBC")}</div></div>\n    <div style="text-align:right"><div class="p-code">${esc(city(e.to).code)}</div><div class="p-city">${esc(city(e.to).name)}</div></div>\n  </div>\n  <div class="p-meta">\n    ${e.cabin ? `<span class="mchip ${"Business" === e.cabin ? "cabin-biz" : ""}">${esc(e.cabin)}</span>` : ""}\n    ${e.seat ? `<span class="mchip">${esc(e.seat)}</span>` : ""}\n    ${e.ref ? `<span class="mchip">${esc(e.ref)}</span>` : '<span class="mchip tbd">No ref</span>'}\n    ${whoChip(e.who)}\n  </div>\n  ${bagChips(e)}\n  ${e.plane ? `<div class="note-txt">${esc(e.plane)}</div>` : ""}\n</div>`,
   trCard = (e) =>
     `<div class="card tap" style="padding:13px 16px${e.tbc ? ";border-style:dashed" : ""}" onclick="tapOpen(event,'transfer',${e._i})">\n  ${e.img ? `<div class="a-hero nc"><img class="bl" src="${esc(e.img)}" alt="" loading="lazy" onerror="this.remove()"><img class="fg" src="${esc(e.img)}" alt="" loading="lazy" onerror="this.closest('.a-hero').remove()"><span class="scrim"></span><span class="cap">${esc(e.kind)}</span></div>` : ""}\n  <div class="row"><h3 style="font-size:15px">${esc(e.kind)} · ${esc(e.label || city(e.from).name + " → " + city(e.to).name)}</h3>\n    <span class="dim">${fmt(e.date)}${e.time ? " · " + esc(e.time) : ""}</span></div>\n  <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">\n    ${e.tbc ? '<span class="mchip tbd">Not booked</span>' : e.included ? '<span class="mchip good">Included</span>' : '<span class="mchip good">Booked</span>'}\n    ${null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}</span>` : ""}\n    ${e.provider ? `<span class="mchip">${esc(e.provider)}</span>` : ""}${whoChip(e.who)}</div>\n  ${e.note ? `<div class="note-txt">${esc(e.note)}</div>` : ""}\n  ${e.geo ? mapLink(e.geo, e.label || e.kind) + wazeLink(e.geo) : ""}</div>`;
 function vStays() {
@@ -825,7 +825,7 @@ function sheetBody() {
       (e.seat ? kv("Seat", esc(e.seat)) : "") +
       (null != e.amount ? kv("Fare", money(e.amount, e.ccy) + (e.paid ? " · paid" : "")) : "") +
       (n.checked || n.cabin || n.personal
-        ? `<div class="br"><h4>Baggage</h4>\n        ${n.checked ? `<p><b>Checked</b> — ${esc(n.checked)}</p>` : ""}\n        ${n.cabin ? `<p style="margin-top:5px"><b>Cabin</b> — ${esc(n.cabin)}</p>` : ""}\n        ${n.personal ? `<p style="margin-top:5px"><b>Personal item</b> — ${esc(n.personal)}</p>` : ""}\n        ${n.note ? `<p style="margin-top:6px;color:var(--muted);font-size:12.5px">${esc(n.note)}</p>` : ""}</div>`
+        ? `<div class="br"><h4>Baggage</h4>\n        ${n.checked ? `<p><b>Checked</b> — ${esc(n.checked)}</p>` : ""}\n        ${n.bought ? `<p class="bagbought">✓ ${esc(n.bought)}</p>` : ""}\n        ${n.cabin ? `<p style="margin-top:5px"><b>Cabin</b> — ${esc(n.cabin)}</p>` : ""}\n        ${n.personal ? `<p style="margin-top:5px"><b>Personal item</b> — ${esc(n.personal)}</p>` : ""}\n        ${n.note ? `<p style="margin-top:6px;color:var(--muted);font-size:12.5px">${esc(n.note)}</p>` : ""}</div>`
         : "") +
       (e.note || e.cabinnote
         ? `<div class="br"><h4>Notes</h4>${e.note ? `<p>${esc(e.note)}</p>` : ""}\n        ${e.cabinnote ? `<p style="margin-top:5px;color:var(--muted);font-size:12.5px">${esc(e.cabinnote)}</p>` : ""}</div>`
@@ -913,6 +913,7 @@ let LEG = null,
   FORM = null,
   PLEG = null,
   PSIDE = "plans",
+  PVIEW = store.get("pview", "legs"),
   PDAY = null,
   CALOPEN = !1,
   PIMG = !1 !== store.get("pimg", !0);
@@ -1491,6 +1492,9 @@ function backDest() {
 function setPSide(e) {
   ((PSIDE = e), render());
 }
+function setPView(e) {
+  ((PVIEW = e), store.set("pview", e), (KEEPY = 0), render());
+}
 const kmApart = (e, t) => {
   const n = (e) => (e * Math.PI) / 180,
     s = n(t[0] - e[0]),
@@ -1687,15 +1691,62 @@ function stepDay(e) {
       (CAL = new Date(t.getFullYear(), t.getMonth(), 1)),
       render()));
 }
+const pviewBar = () =>
+  `<div class="ptabs pview">
+    <button class="${"legs" === PVIEW ? "on" : ""}" onclick="setPView('legs')">By place</button>
+    <button class="${"all" === PVIEW ? "on" : ""}" onclick="setPView('all')">Everything</button>
+  </div>`;
+
+// Every plan across the whole trip, in date order, grouped under a clear date heading.
+function vAllPlans() {
+  const acts = (T.activities || [])
+    .filter(mine)
+    .filter((a) => a.date)
+    .slice()
+    .sort((a, b) =>
+      (a.date + "T" + (a.start || "99:99")).localeCompare(b.date + "T" + (b.start || "99:99")),
+    );
+  if (!acts.length)
+    return `<section class="sec">${pviewBar()}<div class="note">Nothing planned yet.</div></section>`;
+
+  const byDate = {};
+  acts.forEach((a) => (byDate[a.date] = byDate[a.date] || []).push(a));
+  const dates = Object.keys(byDate).sort();
+  const todayISO = iso(today());
+
+  const body = dates
+    .map((d) => {
+      const where = whereOn(d),
+        n = byDate[d].length,
+        dt = D(d),
+        past = d < todayISO,
+        isToday = d === todayISO,
+        day = nDays(D(T.start), dt) + 1;
+      return `<div class="daymark${isToday ? " now" : ""}${past ? " past" : ""}">
+          <div class="dm-l">
+            <div class="dm-date">${DOW[dt.getDay()]} ${dt.getDate()} ${MON[dt.getMonth()]}</div>
+            <div class="dm-sub">${isToday ? "Today" : day > 0 ? "Day " + day : ""}${where ? (day > 0 || isToday ? " · " : "") + esc(where.name) : ""}</div>
+          </div>
+          <span class="dm-n">${n}</span>
+        </div>
+        ${byDate[d].map((a) => planCard(a, !0)).join("")}`;
+    })
+    .join("");
+
+  return `<section class="sec">${pviewBar()}
+    <div class="sg-head"><h2>Everything, in order</h2><span class="n">${acts.length} plans · ${dates.length} days</span></div>
+    ${body}</section>`;
+}
+
 function vDests() {
   const e = dests();
   return e.length
-    ? `<section class="sec">\n    <button class="card calbar" onclick="openCal()">\n      <svg viewBox="0 0 24 24"><path d="M8 3v4M16 3v4"/><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 11h18"/></svg>\n      <b>Go to a day</b>\n      <svg class="calgo" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n    </button>\n    <div class="sg-head"><h2>Where you're going</h2><span class="n">${e.length} places</span></div>\n    <div class="dgrid">${e.map((e) => `<button class="dtile${DIMG[e.city] ? "" : " noimg"}" onclick="openDest('${e.city}')">\n      ${DIMG[e.city] ? `<img src="${DIMG[e.city]}" alt="" loading="lazy" onerror="this.closest('.dtile').classList.add('noimg')">` : ""}\n      <span class="dt-scrim"></span>\n      <span class="dt-txt">\n        <b>${esc(e.name)}</b>\n        <i>${fmtS(e.from)} – ${fmtS(e.to)} · ${e.nights} nights</i>\n        <span class="dt-chips">\n          ${e.plans ? `<em class="good">${e.plans} planned</em>` : '<em class="dim">nothing yet</em>'}\n          ${e.ideas ? `<em>${e.ideas} ideas</em>` : ""}\n        </span>\n      </span></button>`).join("")}</div>\n  </section>`
+    ? `<section class="sec">${pviewBar()}\n    <button class="card calbar" onclick="openCal()">\n      <svg viewBox="0 0 24 24"><path d="M8 3v4M16 3v4"/><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 11h18"/></svg>\n      <b>Go to a day</b>\n      <svg class="calgo" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n    </button>\n    <div class="sg-head"><h2>Where you're going</h2><span class="n">${e.length} places</span></div>\n    <div class="dgrid">${e.map((e) => `<button class="dtile${DIMG[e.city] ? "" : " noimg"}" onclick="openDest('${e.city}')">\n      ${DIMG[e.city] ? `<img src="${DIMG[e.city]}" alt="" loading="lazy" onerror="this.closest('.dtile').classList.add('noimg')">` : ""}\n      <span class="dt-scrim"></span>\n      <span class="dt-txt">\n        <b>${esc(e.name)}</b>\n        <i>${fmtS(e.from)} – ${fmtS(e.to)} · ${e.nights} nights</i>\n        <span class="dt-chips">\n          ${e.plans ? `<em class="good">${e.plans} planned</em>` : '<em class="dim">nothing yet</em>'}\n          ${e.ideas ? `<em>${e.ideas} ideas</em>` : ""}\n        </span>\n      </span></button>`).join("")}</div>\n  </section>`
     : '<div class="center">Nothing for this traveller.</div>';
 }
 function vPlans() {
   if (PDAY) return vDay();
-  if (!PLEG) return vDests();
+  if (!PLEG) return "all" === PVIEW ? vAllPlans() : vDests();
   const e = destOf();
   if (!e) return ((PLEG = null), vDests());
   const t = sugAll().filter((t) => e.ids.has(t.leg)),

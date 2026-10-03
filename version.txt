@@ -1,4 +1,4 @@
-v32
+v33
 2026-10-03
-index.html 187287 bytes md5 4b02a8b9
-Tablet layout; built from readable src/ for the first time
+index.html 190514 bytes md5 bf9e4006
+Chronological "Everything" plans view; flight notes moved to detail; baggage purchases linked to flights
