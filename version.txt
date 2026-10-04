@@ -1,4 +1,4 @@
 v34
 2026-10-04
-index.html 190247 bytes md5 d9ad4e1c
-Removed the translucent glyph overlay from stay and activity hero images
+index.html 190669 bytes md5 ec471309
+Glyph overlay removed from hero images; meal times shown on stays that have them
