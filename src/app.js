@@ -624,7 +624,7 @@ const HUES = {
   phuket: "linear-gradient(135deg,#144a52,#081f23)",
 };
 function hero(e, t) {
-  return `<div class="s-hero" style="background:${HUES[e.city] || "linear-gradient(135deg,#2a2a27,#15150f)"}">\n    ${e.img ? `<img src="${esc(e.img)}" alt="" loading="lazy" onerror="this.remove()">` : ""}\n    <span class="glyph">${t}</span><span class="scrim"></span>\n    <span class="cap">${esc(city(e.city).name)}</span></div>`;
+  return `<div class="s-hero" style="background:${HUES[e.city] || "linear-gradient(135deg,#2a2a27,#15150f)"}">\n    ${e.img ? `<img src="${esc(e.img)}" alt="" loading="lazy" onerror="this.remove()">` : ""}\n    <span class="scrim"></span>\n    <span class="cap">${esc(city(e.city).name)}</span></div>`;
 }
 const kv = (e, t) =>
   `<div class="row" style="margin-top:5px"><span class="dim" style="flex:0 0 96px">${e}</span><span class="meta" style="flex:1;text-align:right">${t}</span></div>`;

@@ -2735,15 +2735,7 @@ gmp-place-details {
   height: 100%;
   object-fit: cover;
 }
-.s-hero .glyph {
-  position: absolute;
-  right: 8px;
-  top: 2px;
-  font-size: 52px;
-  opacity: 0.16;
-  line-height: 1;
-}
-.s-hero .cap {
+.s-hero .s-hero .cap {
   position: relative;
   font-size: 11px;
   font-weight: 700;

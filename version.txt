@@ -1,4 +1,4 @@
-v33
-2026-10-03
-index.html 190514 bytes md5 bf9e4006
-Chronological "Everything" plans view; flight notes moved to detail; baggage purchases linked to flights
+v34
+2026-10-04
+index.html 190370 bytes md5 949b159c
+Removed the translucent glyph overlay from stay and activity hero images
