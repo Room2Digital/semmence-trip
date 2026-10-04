@@ -1,4 +1,4 @@
-v62
+v63
 2026-10-04
-index.html 316168 bytes md5 d67e55ea
-Packing lists are names only; real Fern and Cold Nips photos
+index.html 315673 bytes md5 5280d59a
+Rottnest is its own place; TSA locks gone; plan locations tidied

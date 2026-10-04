@@ -142,8 +142,6 @@ it("cubes","Packing cubes","kit","CB",4,0,"always",
 it("sunglasses","Sunglasses — 4 pairs in a travel case","kit","L1",4,400,"store",
    "The travel case lives in the suitcase. Include the cheap pairs here — these are the ones for the water and the longtails.",True)
 it("sunglasses-daily","Sunglasses","kit","SL",1,120,"always","")
-it("locks","TSA padlocks","kit","CB",3,150,"always",
-   "Three bags go in the Jetstar hold and two sit in storage for 13 days.",True)
 it("scales","Luggage scales","kit","CB",1,100,"always",
    "You have a live 7 kg problem on TG206. Pays for itself once.",True)
 it("laundry-bag","Dirty laundry bags","kit","CB",2,110,"always",
