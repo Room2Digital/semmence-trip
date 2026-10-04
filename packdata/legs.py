@@ -184,7 +184,7 @@ LEGS = [
                     P("Nail clippers"),
                     P("5 decant bottles, 100 ml", "Filled in Phuket before the full-size goes into storage."),
                     P("Small medical pouch"),
-                    P("Motion sickness tablets", "You need these for the 06:00 Donsak ferry on 17 Jan, and this case is in Bangkok storage from the 10th. Move them to the mini washbag at the Phuket repack."),
+                    P("Motion sickness tablets", "You need these for the 06:00 Donsak ferry on 17 Jan, and this case is in Bangkok storage from the 10th. Move them into the mini washbag in Phuket, before the cases go into storage."),
                     P("Antihistamine"),
                     P("Antiseptic cream"),
                     P("Plasters and blister plasters", "Dragon Crest on 21 Jan. Same storage problem as the motion sickness tablets."),
@@ -238,7 +238,7 @@ LEGS = [
         ),
         do=[
             P("Pack the night of the 5th", "Not the morning of the 7th. The flight is at 07:25."),
-            P("Pre-pack the three cubes", "Cube 1 clothing, Cube 2 gym and footwear, Cube 3 kit. This is what makes the Phuket repack ten minutes instead of an hour."),
+            P("Pre-pack the three cubes", "Cube 1 clothing, Cube 2 gym and footwear, Cube 3 kit. Every leg involves some repacking; this is the one where there is most of it, and the cubes are what keep it to ten minutes."),
             P("Spend or leave the AUD", "Australia is behind you. Any Australian cash is dead weight from here."),
         ],
         bags=[

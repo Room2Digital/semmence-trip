@@ -24,7 +24,7 @@ it("tdac","Thailand Digital Arrival Card","docs","SL",1,0,"always",
 it("eta-aus","Australian ETA","docs","SL",1,0,"always",
    "Approved before you fly — the airline checks it at Gatwick.",True)
 it("licence","Driving licence — the physical card","docs","SL",1,10,"store",
-   "Avis from 29 Dec. No International Driving Permit needed, a UK licence is already in English — but hire firms will not accept a photo or a photocopy. Into the stored case at the Phuket repack; you don't drive again.",True)
+   "Avis from 29 Dec. No International Driving Permit needed, a UK licence is already in English — but hire firms will not accept a photo or a photocopy. Into the stored case in Phuket; you don't drive again.",True)
 it("insurance","Travel insurance — policy and 24hr number","docs","SL",1,10,"always",
    "Check the single-article limit before you fly. You are carrying roughly four thousand pounds of Apple hardware and most policies cap any one item at £300–500.",True)
 it("cards","Bank cards — two providers","docs","SL",2,20,"always",
@@ -50,10 +50,10 @@ it("phone","Phone","tech","SL",1,220,"always","",True)
 it("watch","Apple Watch","tech","WORN",1,50,"always","")
 it("airpods","AirPods Pro","tech","SL",1,60,"always","Your everyday set once the over-ears are parked.")
 it("sony","Sony over-ear headphones","tech","SL",1,250,"store",
-   "Earn their place over the 26 hours out. Into the stored case at the Phuket repack, collected on the 23rd for the flight home.")
+   "Earn their place over the 26 hours out. Into the stored case in Phuket, collected on the 23rd for the flight home.")
 it("ipad-air","iPad Air","tech","CB",1,460,"always","Reading and films. Comes everywhere.")
 it("mba","MacBook Air","tech","CB",1,1240,"store",
-   "You work from Perth and stop in Thailand. Into the stored case at the Phuket repack — it does not need to see Samui or the lake.",True)
+   "You work from Perth and stop in Thailand. Into the stored case in Phuket — it does not need to see Samui or the lake.",True)
 it("dongle","USB-C dongle","tech","CB",1,40,"store","Stores with the Air.")
 it("mouse","Mouse","tech","CB",1,80,"store","Seven weeks of work earns it. Stores with the Air.")
 it("hdmi","HDMI cable","tech","CB",1,90,"store","General purpose — hotel TVs, the MacBook. Stores at Phuket.")
@@ -84,13 +84,13 @@ it("snacks","Snacks for travel days","flight","SL",1,150,"always","")
 
 # ───────────────────────────── TOILETRIES ─────────────────────────────
 it("washbag-lg","Fold-out washbag — large","toiletries","L2",1,260,"store",
-   "Lives in the suitcase. Into storage at the Phuket repack.")
+   "Lives in the suitcase. Into storage from Phuket onwards.")
 it("washbag-mini","Mini washbags","toiletries","CB",2,80,"always",
    "The hand-luggage pair. These are what you actually use on travel days and at the lake.",True)
 it("liquids-bag","Clear 1L liquids bag","toiletries","CB",1,20,"always",
    "Re-cleared at Perth, Phuket, Bangkok and Krabi. Keep it reachable.",True)
 it("decant","Decant bottles, 100 ml","toiletries","L2",5,150,"always",
-   "Fill these at the Phuket repack. For the lake you really only need suncream and the basics — Hansar, Krabi La Playa and Theatre Residence all provide the rest.",True,inbag="washbag-lg")
+   "Fill these in Phuket, before the full-size goes into storage. For the lake you really only need suncream and the basics — Hansar, Krabi La Playa and Theatre Residence all provide the rest.",True,inbag="washbag-lg")
 it("suncream","Suncream — full size","toiletries","L2",1,200,"always",
    "Australian suncream is the best there is and cheap. Decant 100 ml for the onward leg.",True,inbag="washbag-lg")
 it("suncream-tr","Travel suncream","toiletries","L2",1,80,"always","For the plane and the first day before you buy properly.",inbag="washbag-lg")
@@ -151,8 +151,8 @@ it("towel-sm","Microfibre towel — mini","kit","CB",1,120,"always",
    "The one that matters onward — ferries, the lake, Krabi longtails.",True)
 it("drybag","Dry bag, small — TO BUY","kit","BP",1,120,"buy",
    "Not owned yet. Khao Sok arrives by boat, the ferry deck is wet and Krabi longtails soak everything. Phone, wallet and the Switch while you're on the water.",True)
-it("cubes","Packing cubes","kit","CB",4,220,"always",
-   "What makes the Phuket repack take twenty minutes instead of two hours.",True)
+it("cubes","Packing cubes","kit","CB",4,0,"always",
+   "Weigh nothing worth counting. They are what makes the Phuket changeover quick rather than an afternoon.",True)
 it("sunglasses","Sunglasses — 4 pairs in a travel case","kit","L1",4,400,"store",
    "The travel case lives in the suitcase. Include the cheap pairs here — these are the ones for the water and the longtails.",True)
 it("sunglasses-daily","Sunglasses — daily pair","kit","SL",1,120,"always",
