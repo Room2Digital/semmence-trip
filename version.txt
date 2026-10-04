@@ -1,4 +1,4 @@
-v44
+v45
 2026-10-04
-index.html 289747 bytes md5 929ffcdf
-Sling cut back to what you actually carry
+index.html 288947 bytes md5 dd60b2a1
+Three changes of clothes in the cabin bag; documents off the list

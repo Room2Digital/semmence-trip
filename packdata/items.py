@@ -21,8 +21,6 @@ it("passport","Passport","docs","SL",1,60,"always","",True)
 it("eta-aus","Australian ETA","docs","SL",1,0,"always",
    "Approved before you fly — the airline checks it at Gatwick.",True)
 it("licence","Driving licence","docs","SL",1,10,"store","",True)
-it("insurance","Travel insurance — policy and 24hr number","docs","SL",1,10,"always",
-   "Check the single-article limit before you fly. You are carrying roughly four thousand pounds of Apple hardware and most policies cap any one item at £300–500.",True)
 it("cards","Bank cards — two providers","docs","SL",2,20,"always",
    "Tracker card in the wallet. Split across two bags so one loss isn't total.",True)
 it("cash-thb","Cash — 25,000 THB","docs","SL",1,60,"always",
@@ -149,8 +147,6 @@ it("binbags","Bin bags","kit","CB",5,60,"always",
    "Wet swimwear, sandy shoes, the shirt you sweated through on the ferry. Weigh nothing and solve a problem every few days.")
 it("goggles","Swimming goggles","kit","CB",1,80,"buy",
    "Worth having — the Sebel and the office both have gyms, and there is a lot of sea between Scarborough, Samui and Krabi.")
-it("apps","Phone apps page","docs","SL",1,0,"always",
-   "Airlines, TripIt, Avios, Amex, Monzo, Booking.com, Grab, Uber, Uber Eats, Ticketmaster. Add WhatsApp — the Bangkok driver contacts you on it — plus Line, which is how Thai businesses actually communicate, and GetYourGuide for the Rottnest ferry booking.")
 it("notepad","Thai notepad","kit","L2",1,90,"always","")
 it("daypack","Lockable daypack","kit","CB",1,320,"always",
    "Rottnest, the ferries and Bangkok. Lockable zips and a slash-resistant strap.",True)
