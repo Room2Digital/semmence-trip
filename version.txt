@@ -1,4 +1,4 @@
-v54
+v55
 2026-10-04
-index.html 309477 bytes md5 e8e19b2e
-Bangkok changeover as its own leg; Samui and Krabi flights done
+index.html 310413 bytes md5 4a1d3132
+Part-quantities counted properly; cabin bag down to 12.3 kg

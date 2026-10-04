@@ -33,8 +33,13 @@ def P(n, note="", add=False, inside=None):
 
 
 def B(bag, mode, items, note="", ids=None):
-    """ids lists the items.py ids this bag accounts for on this leg.
-    build.py uses it to prove nothing in the inventory has been forgotten."""
+    """ids lists the items.py ids this bag accounts for on this leg, which is
+    how build.py proves nothing in the inventory has been forgotten.
+
+    An entry can also be ("tees", 8), meaning 8 of the 12 T-shirts are in this
+    bag. Weight is counted pro-rata. Without that, a bag carrying 8 of 12
+    shirts was being charged for all 12, which overstated the cabin bag by
+    more than two kilos."""
     d = dict(bag=bag, mode=mode, items=items, note=note)
     if ids:
         d["ids"] = ids
@@ -510,7 +515,6 @@ LEGS = [
                     P("Gym shorts"),
                     P("Gym socks", "2 of the 3."),
                     P("Running shoes", "The Dragon Crest hike on the 21st is a real climb."),
-                    P("Old trainers"),
                     P("Sandals"),
                     P("Sliders"),
                     P("Hats"),
@@ -523,9 +527,11 @@ LEGS = [
                     P("Bin bags"),
                 ]),
             ],
-               ids=["boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
-                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
-                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+               ids=[("boxers", 5), ("socks-white", 5), ("tees", 8), ("shirts-nice", 3),
+                    ("shorts", 3), "trousers", "swim", "belt", "pyjamas",
+                    ("gym-tops", 2), "gym-shorts", ("socks-gym", 2),
+                    "running", "sandals", "sliders", "hats", "hat-gym",
+                    "drybag", "goggles", "laundry-bag", "binbags"]),
 
             B("L2", "checked", [
                 P("THE STORAGE CASE", "Never opened at Bangkok. Straight from the belt to Smilelugg."),
@@ -552,10 +558,14 @@ LEGS = [
                     P("Shaver cable", "The shaver holds a charge for weeks."),
                 ]),
                 P("The clothing left behind", "3 boxers, 3 socks, 1 gym sock, 4 T-shirts, 5 nice shirts, 3 shorts, 1 gym top."),
+                P("Old trainers", "Two pairs of trainers for thirteen days is a pair too many, and shoes are what eat the space in a cabin case. The running shoes do the Dragon Crest hike."),
             ],
                ids=["mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence","eta-aus",
                     "cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses","notepad",
-                    "washbag-lg","suncream","eyecream","nail","deodorant-spare","cable-shaver"]),
+                    "washbag-lg","suncream","eyecream","nail","deodorant-spare","cable-shaver",
+                    "trainers-old",
+                    ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
+                    ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
             B("GONE", "left", [
                 P("MacBook Pro", "Handed over in Phuket, 7–10 Jan."),
@@ -609,9 +619,11 @@ LEGS = [
                     "decant","suncream-tr","mozzie",
                     "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","locks","cubes",
-                    "boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
-                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
-                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+                    ("boxers", 5), ("socks-white", 5), ("tees", 8), ("shirts-nice", 3),
+                    ("shorts", 3), "trousers", "swim", "belt", "pyjamas",
+                    ("gym-tops", 2), "gym-shorts", ("socks-gym", 2),
+                    "running", "sandals", "sliders", "hats", "hat-gym",
+                    "drybag", "goggles", "laundry-bag", "binbags"]),
 
             B("BP", "with", [
                 P("LOSES — the Nintendo Switch", "Into Suitcase 2."),
@@ -636,7 +648,9 @@ LEGS = [
                ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
-                    "cable-shaver"]),
+                    "cable-shaver","trainers-old",
+                    ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
+                    ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
             B("GONE", "left", [
                 P("MacBook Pro and iPad mini", "Handed over in Phuket."),
@@ -710,8 +724,8 @@ LEGS = [
                     P("2 gym tops"), P("2 gym shorts"), P("2 gym socks"),
                     P("3 hats"), P("Gym hat"), P("Qatar pyjamas"),
                 ]),
-                P("FOOTWEAR", inside=[
-                    P("Running shoes"), P("Old trainers"), P("Sandals"), P("Sliders"),
+                P("FOOTWEAR", "Three pairs, plus the nice trainers on your feet.", inside=[
+                    P("Running shoes"), P("Sandals"), P("Sliders"),
                 ]),
                 P("WASHBAG AND HEALTH KIT", inside=[
                     P("Travel facewash"), P("Electric shaver"), P("Electric toothbrush"),
@@ -734,16 +748,20 @@ LEGS = [
                     "decant","suncream-tr","mozzie",
                     "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","locks","cubes",
-                    "boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
-                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
-                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+                    ("boxers", 5), ("socks-white", 5), ("tees", 8), ("shirts-nice", 3),
+                    ("shorts", 3), "trousers", "swim", "belt", "pyjamas",
+                    ("gym-tops", 2), "gym-shorts", ("socks-gym", 2),
+                    "running", "sandals", "sliders", "hats", "hat-gym",
+                    "drybag", "goggles", "laundry-bag", "binbags"]),
 
             B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")], ids=[]),
             B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")],
                ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
-                    "cable-shaver"]),
+                    "cable-shaver","trainers-old",
+                    ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
+                    ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
             B("GONE", "left", [P("MacBook Pro and iPad mini", "Handed over in Phuket.")],
                ids=["mbp","ipad-mini"]),
@@ -814,8 +832,8 @@ LEGS = [
                     P("2 gym tops"), P("2 gym shorts"), P("2 gym socks"),
                     P("3 hats"), P("Gym hat"), P("Qatar pyjamas"),
                 ]),
-                P("FOOTWEAR", inside=[
-                    P("Running shoes"), P("Old trainers"), P("Sandals"), P("Sliders"),
+                P("FOOTWEAR", "Three pairs, plus the nice trainers on your feet.", inside=[
+                    P("Running shoes"), P("Sandals"), P("Sliders"),
                 ]),
                 P("WASHBAG AND HEALTH KIT", inside=[
                     P("Travel facewash"), P("Electric shaver"), P("Electric toothbrush"),
@@ -838,16 +856,20 @@ LEGS = [
                     "decant","suncream-tr","mozzie",
                     "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","locks","cubes",
-                    "boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
-                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
-                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+                    ("boxers", 5), ("socks-white", 5), ("tees", 8), ("shirts-nice", 3),
+                    ("shorts", 3), "trousers", "swim", "belt", "pyjamas",
+                    ("gym-tops", 2), "gym-shorts", ("socks-gym", 2),
+                    "running", "sandals", "sliders", "hats", "hat-gym",
+                    "drybag", "goggles", "laundry-bag", "binbags"]),
 
             B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")], ids=[]),
             B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")],
                ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
-                    "cable-shaver"]),
+                    "cable-shaver","trainers-old",
+                    ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
+                    ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
             B("GONE", "left", [P("MacBook Pro and iPad mini", "Handed over in Phuket.")],
                ids=["mbp","ipad-mini"]),

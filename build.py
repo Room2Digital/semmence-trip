@@ -56,7 +56,8 @@ def packcoverage(data) -> None:
     for leg in data["legs"]:
         claimed = set()
         for b in leg.get("bags", []):
-            claimed |= set(b.get("ids") or [])
+            for x in b.get("ids") or []:
+                claimed.add(x[0] if isinstance(x, (list, tuple)) else x)
         if not claimed:
             continue
         unknown = sorted(claimed - known)

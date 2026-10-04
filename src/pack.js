@@ -140,7 +140,9 @@ const PK = (function () {
   const placedOn = (legId) => {
     const s = new Set();
     const l = LEGS.find((x) => x.id === legId);
-    ((l.bags || []).forEach((b) => (b.ids || []).forEach((x) => s.add(x))),
+    ((l.bags || []).forEach((b) =>
+      (b.ids || []).forEach((x) => s.add(Array.isArray(x) ? x[0] : x)),
+    ),
       ITEMS.forEach((i) => i.legs && i.legs[legId] && s.add(i.id)));
     return s;
   };
@@ -205,9 +207,12 @@ const PK = (function () {
     if (b.ids && b.ids.length)
       return (
         extra +
-        b.ids.reduce((a, id) => {
-          const i = ITEMS.find((x) => x.id === id);
-          return a + (i ? i.g || 0 : 0);
+        b.ids.reduce((a, e) => {
+          const part = Array.isArray(e),
+            i = ITEMS.find((x) => x.id === (part ? e[0] : e));
+          if (!i) return a;
+          const g = i.g || 0;
+          return a + (part && i.qty ? (g * e[1]) / i.qty : g);
         }, 0)
       );
     return (
