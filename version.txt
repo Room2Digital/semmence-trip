@@ -1,4 +1,4 @@
 v34
 2026-10-04
-index.html 190370 bytes md5 949b159c
+index.html 190247 bytes md5 d9ad4e1c
 Removed the translucent glyph overlay from stay and activity hero images
