@@ -1,4 +1,4 @@
-v39
+v40
 2026-10-04
-index.html 291370 bytes md5 fe9fd431
-Hansar Samui and 500 Rai contacts; stay sheets show email and Line
+index.html 291685 bytes md5 e455381c
+Flight fares in; packing hidden on the Mum & Dad view; leg blurb removed

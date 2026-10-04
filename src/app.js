@@ -1898,6 +1898,14 @@ function ledger() {
     e
   );
 }
+function ensurePackTab() {
+  /* The packing lists are Robbie's own. On the Mum & Dad view the tab is
+     not just empty, it is irrelevant, so it goes away entirely. */
+  const e = document.querySelector('#tabs [data-t="pack"]');
+  if (!e) return;
+  const show = "P" !== WHO;
+  ((e.style.display = show ? "" : "none"), show || "pack" !== TAB || (TAB = "home"));
+}
 function totals() {
   const e = {};
   return (
@@ -2796,6 +2804,7 @@ function render() {
   if (!T) return;
   (grabX(),
     ensureIdeasTab(),
+    ensurePackTab(),
     ["flights", "transfers", "activities", "stays"].forEach((e) =>
       (T[e] || []).forEach((e, t) => (e._i = t)),
     ));

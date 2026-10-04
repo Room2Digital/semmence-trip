@@ -355,8 +355,7 @@ const PK = (function () {
         <div class="legwhere" style="margin-bottom:4px">${esc(l.where)}</div>
         ${l.via ? `<div class="legvia">${esc(l.via)}</div>` : ""}
         <div class="card" style="margin:11px 0 14px">
-          <div class="note">${esc(l.note)}</div>
-          <div class="bagtop" style="margin-top:13px">
+          <div class="bagtop">
             <span style="flex:1"><span class="bagname" style="display:block">${pr.d} of ${pr.t} done</span>
             <span class="bagmeta">Tick as you pack${(() => {
               const t = (l.bags || []).reduce((a, b) => a + gramsOf(l, b), 0);
