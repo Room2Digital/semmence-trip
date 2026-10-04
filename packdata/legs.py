@@ -391,7 +391,7 @@ LEGS = [
     ),
     dict(
         id="hkt-bkk",
-        allow=dict(checked="3 × 23 kg", cabin="7 kg"),
+        allow=dict(checked="2 × 23 kg", cabin="7 kg"),
         name="Phuket – Bangkok",
         dates="10 Jan",
         where="HKT → BKK",
@@ -399,19 +399,19 @@ LEGS = [
         key=1,
         stored=1,
         note=(
-            "Check all three bags. The cabin bag goes in the hold with the suitcases, which means "
-            "it can be packed properly for the thirteen days it is about to become your only "
-            "luggage, rather than squeezed under a 7 kg cabin limit. You walk on with the backpack "
-            "and sling. Land 13:20, collect all three, go to Smilelugg on B Floor, lock the two "
-            "suitcases and hand them over — ref 14XIWBX4, paid, 10–23 Jan — and keep the cabin bag."
+            "Two checked bags and ONE cabin piece at 7 kg, and the cabin bag is 2.8 kg empty — so "
+            "it flies light and everything it needs for the next thirteen days rides in Suitcase 1 "
+            "as three cubes, at the top, ready to lift. Land 13:20, Smilelugg on B Floor: open "
+            "Suitcase 1 only, three cubes out into the cabin bag, the Switch in, lock both cases, "
+            "hand them over. Ref 14XIWBX4, paid, 10–23 Jan. Ten minutes if the cubes are where "
+            "they should be."
         ),
         do=[
-            P("Buy the third checked bag", "Thai's included allowance is two pieces and you are checking three. Prepaid online it should be about what the second cost, £15. Do it before you get to the airport; at the desk it is several times that."),
-            P("Hand over the MacBook Pro and iPad mini", "Early in the three days, not on the morning you leave. Erased and signed out before you flew."),
+            P("Hand over the MacBook Pro and iPad mini", "Early in the three days, not on the morning you leave."),
             P("Fill the decant bottles", "From the full-size suncream, before that bottle goes into the case for a fortnight."),
-            P("Pack the cabin bag as your whole life for 13 days", "Bangkok, Samui, Khao Sok, Krabi. Hot, beach, one smart night, one hike. Nothing comes back out of the cases until the 23rd."),
-            P("Use the expander", "That middle zip is what makes this fit. Open it before you start, not halfway through."),
-            P("Photograph the Smilelugg receipt", "Your taxi waits 45 minutes, so there is no rush — but do it before you walk away."),
+            P("Pack the three cubes and put them at the TOP of Suitcase 1", "You are opening that case on a terminal floor with a taxi running. Nothing else in Suitcase 1 should need moving to reach them."),
+            P("Put everything being stored into Suitcase 2", "So that case is never opened at Bangkok at all. One case, one zip, three cubes."),
+            P("Weigh the cabin bag before you leave the Courtyard", "Under 7 kg with the scales that are in it. It should come out around 6."),
         ],
         bags=[
             B("SL", "cabin", [
@@ -420,14 +420,14 @@ LEGS = [
                 P("Cash — THB 25,000", "From here on this is the money."),
                 P("Phone"),
                 P("AirPods Pro"),
-                P("Power bank, small", "Cabin only — it is a spare battery, and those never go in the hold."),
+                P("Power bank, small", "A spare battery never goes in the hold."),
                 P("Sunglasses"),
             ],
                ids=["passport","cards","cash-thb","phone","airpods","brick-sm","sunglasses-daily"]),
 
             B("BP", "cabin", [
                 P("Book"),
-                P("Nintendo Switch", "Last outing. It goes into the case at Smilelugg this afternoon."),
+                P("Nintendo Switch", "GOES INTO SUITCASE 2 AT SMILELUGG. It is the one thing travelling the wrong way today — out of your bag and into storage until the 23rd."),
                 P("iPad Air"),
                 P("Extendable USB-C cable"),
                 P("Prescription medication"),
@@ -449,39 +449,16 @@ LEGS = [
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
-            B("CB", "checked", [
-                P("CLOTHES — thirteen days", "Laundry is cheap and everywhere in Thailand, so this is enough.", inside=[
-                    P("5 boxers", "Of the 8. The other 3 stay in the case."),
-                    P("5 white socks", "Of the 8."),
-                    P("2 gym socks", "Of the 3."),
-                    P("8 T-shirts", "Of the 12."),
-                    P("3 nice shirts", "Of the 8. Vertigo on the 11th needs one, and 500 Rai and Krabi have nice dinners."),
-                    P("3 shorts", "Of the 6."),
-                    P("1 trousers", "Long trousers are required at Vertigo."),
-                    P("2 swim shorts", "Samui, Khao Sok, Krabi. All beach or lake."),
-                    P("2 gym tops"),
-                    P("2 gym shorts"),
-                    P("Belt"),
-                    P("3 hats"),
-                    P("Gym hat"),
-                    P("Qatar pyjamas"),
-                ]),
-                P("FOOTWEAR", inside=[
-                    P("Running shoes", "The Dragon Crest hike on the 21st is a real climb."),
-                    P("Old trainers"),
-                    P("Sandals"),
-                    P("Sliders"),
-                ]),
-                P("WASHBAG", inside=[
+            B("CB", "cabin", [
+                P("TARGET: under 7 kg", "2.8 kg of that is the shell. What is listed here is about 2.8 kg, plus roughly 0.6 kg for the change of clothes below — call it 6.2 kg. The margin is real but small, so do not add to it."),
+                P("One change of clothes", "2 boxers, 2 socks, 2 T-shirts, 1 shorts, taken out of Cube 1 and packed here. If a suitcase goes astray between Phuket and Bangkok you are not buying clothes on day one."),
+                P("Two mini washbags", inside=[
                     P("Travel facewash"),
                     P("Electric shaver"),
                     P("Electric toothbrush"),
                     P("Moisturiser"),
-                    P("Decant bottles, filled"),
-                    P("Travel suncream"),
-                    P("Mosquito spray", "Khao Sok on the 17th. Buy stronger DEET in Bangkok."),
                 ]),
-                P("HEALTH KIT", "Moved out of the large washbag in Phuket.", inside=[
+                P("The health kit", "Moved out of the large washbag in Phuket, because that one is about to be locked in a case for thirteen days.", inside=[
                     P("Small medical pouch"),
                     P("Paracetamol"),
                     P("Ibuprofen"),
@@ -493,50 +470,65 @@ LEGS = [
                     P("Rehydration sachets"),
                     P("Athlete's foot cream"),
                 ]),
-                P("TECH", inside=[
-                    P("60W USB-C mains supply"),
-                    P("Fold-up 3-in-1 charger"),
-                    P("Travel keyboard — fold-up"),
-                    P("Mouse"),
-                    P("Universal travel adapter"),
-                ]),
-                P("KIT", inside=[
-                    P("Microfibre towel, mini"),
-                    P("Small dry bag", "Khao Sok arrives by boat and the Krabi longtails soak everything."),
-                    P("Swimming goggles"),
-                    P("Lockable daypack"),
-                    P("Dirty laundry bags"),
-                    P("Bin bags"),
-                    P("Packing cubes"),
-                    P("Compression socks"),
-                    P("Luggage scales"),
-                    P("3 TSA padlocks", "Two go on the suitcases at Smilelugg."),
-                ]),
+                P("Decant bottles, filled"),
+                P("Travel suncream"),
+                P("Mosquito spray", "Khao Sok on the 17th. Buy stronger DEET in Bangkok."),
+                P("60W USB-C mains supply"),
+                P("Fold-up 3-in-1 charger"),
+                P("Travel keyboard — fold-up"),
+                P("Mouse"),
+                P("Universal travel adapter"),
+                P("Microfibre towel, mini"),
+                P("Lockable daypack"),
+                P("Compression socks"),
+                P("Luggage scales", "The reason you can trust the number."),
+                P("3 TSA padlocks", "Two go on the cases at Smilelugg."),
+                P("The empty packing cubes", "Only if they are not already holding the clothes. They fill up this afternoon."),
             ],
-               ids=["boxers","socks-white","socks-gym","tees","shirts-nice","shorts","trousers",
-                    "swim","gym-tops","gym-shorts","belt","hats","hat-gym","pyjamas",
-                    "running","trainers-old","sandals","sliders",
-                    "washbag-mini","facewash","shaver","etoothbrush","moisturiser","decant",
-                    "suncream-tr","mozzie",
+               ids=["washbag-mini","facewash","shaver","etoothbrush","moisturiser",
                     "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
                     "antiseptic","plasters","rehydration","athletes",
+                    "decant","suncream-tr","mozzie",
                     "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
-                    "towel-sm","drybag","goggles","daypack","laundry-bag","binbags","cubes",
-                    "compression","scales","locks"]),
+                    "towel-sm","daypack","compression","scales","locks","cubes"]),
 
             B("L1", "checked", [
-                P("Into storage for 13 days", "Locked at Smilelugg and not opened until the 23rd."),
-                P("Hoodie"),
-                P("Tracksuit bottoms"),
-                P("Windbreaker"),
-                P("Microfibre towel, large"),
-                P("Sunglasses — 4 pairs in a travel case"),
-                P("The clothing you left behind", "3 boxers, 3 socks, 1 gym sock, 4 T-shirts, 5 nice shirts, 3 shorts."),
+                P("THE TRANSFER CASE", "The only one you open at Bangkok. Three cubes at the top, nothing on top of them."),
+                P("CUBE 1 — clothing", "Lift into the cabin bag at Smilelugg.", inside=[
+                    P("Boxers", "5 of the 8 come onward; the change of clothes in the cabin bag is 2 more."),
+                    P("White socks", "5 of the 8."),
+                    P("T-shirts", "8 of the 12."),
+                    P("Nice shirts", "3 of the 8. Vertigo on the 11th, and the good dinners at 500 Rai and Krabi."),
+                    P("Shorts", "3 of the 6."),
+                    P("Trousers", "Long trousers are required at Vertigo."),
+                    P("Swim shorts", "Samui, Khao Sok, Krabi — all water."),
+                    P("Belt"),
+                    P("Qatar pyjamas"),
+                ]),
+                P("CUBE 2 — gym and footwear", "Lift into the cabin bag. Shoes in a bin bag inside the cube.", inside=[
+                    P("Gym tops", "2 of the 3."),
+                    P("Gym shorts"),
+                    P("Gym socks", "2 of the 3."),
+                    P("Running shoes", "The Dragon Crest hike on the 21st is a real climb."),
+                    P("Old trainers"),
+                    P("Sandals"),
+                    P("Sliders"),
+                    P("Hats"),
+                    P("Gym hat"),
+                ]),
+                P("CUBE 3 — kit", "Lift into the cabin bag.", inside=[
+                    P("Small dry bag", "Khao Sok arrives by boat; the Krabi longtails soak everything."),
+                    P("Swimming goggles"),
+                    P("Dirty laundry bags"),
+                    P("Bin bags"),
+                ]),
             ],
-               ids=["hoodie","tracksuit","windbreaker","towel-lg","sunglasses"]),
+               ids=["boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
+                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
+                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
 
             B("L2", "checked", [
-                P("Into storage for 13 days"),
+                P("THE STORAGE CASE", "Never opened at Bangkok. Straight from the belt to Smilelugg."),
                 P("MacBook Air"),
                 P("USB-C dongle"),
                 P("HDMI cable"),
@@ -545,7 +537,12 @@ LEGS = [
                 P("Sony over-ear headphones", "Also back out on the 23rd."),
                 P("Driving licence", "You are done driving."),
                 P("Australian ETA", "Spent."),
-                P("Cash — AUD 200", "Whatever is left. No use until you are back."),
+                P("Cash — AUD 200", "Whatever is left. No use until you are home."),
+                P("Hoodie"),
+                P("Tracksuit bottoms"),
+                P("Windbreaker"),
+                P("Microfibre towel, large"),
+                P("Sunglasses — 4 pairs in a travel case"),
                 P("Thai notepad"),
                 P("Large fold-out washbag", inside=[
                     P("Suncream — full size", "The decants are with you."),
@@ -554,10 +551,11 @@ LEGS = [
                     P("Roll-on deodorant — 2 spare"),
                     P("Shaver cable", "The shaver holds a charge for weeks."),
                 ]),
+                P("The clothing left behind", "3 boxers, 3 socks, 1 gym sock, 4 T-shirts, 5 nice shirts, 3 shorts, 1 gym top."),
             ],
                ids=["mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence","eta-aus",
-                    "cash-aud","notepad","washbag-lg","suncream","eyecream","nail",
-                    "deodorant-spare","cable-shaver"]),
+                    "cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses","notepad",
+                    "washbag-lg","suncream","eyecream","nail","deodorant-spare","cable-shaver"]),
 
             B("GONE", "left", [
                 P("MacBook Pro", "Handed over in Phuket, 7–10 Jan."),
