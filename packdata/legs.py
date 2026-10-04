@@ -82,6 +82,7 @@ LEGS = [
 
             B("BP", "cabin", [
                 P("Book", "The one thing that works with the seatbelt sign on and the tray table up."),
+                P("Nintendo Switch", "With you until Bangkok, where it goes into the stored case and waits for the flight home."),
                 P("iPad Air", "The main one, not the one being handed over in Phuket."),
                 P("Sony over-ear headphones", "The flight you bought them for."),
                 P("Fold-up 3-in-1 charger", "Watch, phone and AirPods from one plug."),
@@ -92,7 +93,7 @@ LEGS = [
                 P("Compression socks", "Worth it on a 26-hour door to door."),
                 P("Larq bottle, empty", "Fill it after security."),
             ],
-               ids=["book","ipad-air","sony","compression","larq",
+               ids=["book","switch","ipad-air","sony","compression","larq",
                     "cable-ext","mouthtape","eyemask","earplugs"]),
 
             B("CB", "cabin", [
@@ -185,7 +186,6 @@ LEGS = [
                 ]),
                 P("MacBook Pro", "For the Phuket handover. In the case, not the cabin bag."),
                 P("iPad mini", "Same handover."),
-                P("Nintendo Switch"),
                 P("PS5 controller", "Remote play on the plane home. Starlink will cover you."),
                 P("Switch HDMI cable"),
                 P("Universal travel adapter with USB-C"),
@@ -202,7 +202,7 @@ LEGS = [
                ids=["washbag-lg","suncream","suncream-tr","deodorant-spare","cable-shaver",
                     "decant","mozzie","eyecream","nail",
                     "medkit","motion","antihistamine","antiseptic","plasters","rehydration","athletes",
-                    "mbp","ipad-mini","switch","ps5-pad","hdmi-switch","adapter-universal",
+                    "mbp","ipad-mini","ps5-pad","hdmi-switch","adapter-universal",
                     "locks","scales","cubes","daypack","notepad","laundry-bag","binbags","drybag","goggles"]),
 
             B("worn", "worn", [
@@ -256,6 +256,7 @@ LEGS = [
 
             B("BP", "cabin", [
                 P("Book", "The one thing that works with the seatbelt sign on and the tray table up."),
+                P("Nintendo Switch", "Last flight it travels with you — into the stored case at Bangkok on the 10th."),
                 P("iPad Air"),
                 P("Sony over-ear headphones", "Wear them through the gate if the bag is close to 7 kg."),
                 P("Extendable USB-C cable"),
@@ -274,7 +275,7 @@ LEGS = [
                 P("Compression socks"),
                 P("Larq bottle, empty"),
             ],
-               ids=["book","ipad-air","sony",
+               ids=["book","switch","ipad-air","sony",
                     "cable-ext","prescriptions","liquids-bag","toothpaste-mini","shave-foam",
                     "aftershave","deodorant","sanitiser","lipbalm","mouthtape","eyemask",
                     "earplugs","compression","larq"]),
@@ -342,12 +343,11 @@ LEGS = [
                 P("Old trainers"),
                 P("Microfibre towel, large"),
                 P("Sunglasses — 4 pairs in a travel case"),
-                P("Nintendo Switch"),
                 P("PS5 controller"),
                 P("Switch HDMI cable"),
             ],
                ids=["hoodie","tracksuit","trainers-old","towel-lg","sunglasses",
-                    "switch","ps5-pad","hdmi-switch"]),
+                    "ps5-pad","hdmi-switch"]),
 
             B("L2", "checked", [
                 P("MacBook Pro", "For the handover in Phuket."),
