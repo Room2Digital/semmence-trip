@@ -1,4 +1,4 @@
-v43
+v44
 2026-10-04
-index.html 292683 bytes md5 10b5f0ff
-Allowance chips use the flight icons; fixed a mangled media query
+index.html 289747 bytes md5 929ffcdf
+Sling cut back to what you actually carry

@@ -17,33 +17,18 @@ def it(id, name, cat, bag, qty=1, g=0, fate="always", note="", crit=False, inbag
     I.append(d)
 
 # ───────────────────────── DOCUMENTS & MONEY ─────────────────────────
-it("passport","Passport — trackable holder","docs","SL",1,60,"always",
-   "Six months' validity beyond 24 Jan 2027. The holder is tracked, so it shows in Find My.",True)
-it("tdac","Thailand Digital Arrival Card","docs","SL",1,0,"always",
-   "Mandatory for every foreign national. Complete it online 4–6 Jan, within 3 days of landing in Phuket on the 7th. Needs flight number, the Courtyard's address and a contact mobile. Save the QR offline.",True)
+it("passport","Passport","docs","SL",1,60,"always","",True)
 it("eta-aus","Australian ETA","docs","SL",1,0,"always",
    "Approved before you fly — the airline checks it at Gatwick.",True)
-it("licence","Driving licence — the physical card","docs","SL",1,10,"store",
-   "Avis from 29 Dec. No International Driving Permit needed, a UK licence is already in English — but hire firms will not accept a photo or a photocopy. Into the stored case in Phuket; you don't drive again.",True)
+it("licence","Driving licence","docs","SL",1,10,"store","",True)
 it("insurance","Travel insurance — policy and 24hr number","docs","SL",1,10,"always",
    "Check the single-article limit before you fly. You are carrying roughly four thousand pounds of Apple hardware and most policies cap any one item at £300–500.",True)
 it("cards","Bank cards — two providers","docs","SL",2,20,"always",
    "Tracker card in the wallet. Split across two bags so one loss isn't total.",True)
-it("cash-gbp","Cash — GBP float","docs","SL",1,20,"always","Gatwick, and the taxi home on the 24th.")
 it("cash-thb","Cash — 25,000 THB","docs","SL",1,60,"always",
    "Ordered and paid, ref STM30429677 — GBP 598.23 at 41.7898. Half the original plan and still comfortable, because most of Thailand is already covered: Khao Sok is fully prepaid apart from the THB 340 park and pier fee, and in Bangkok and Samui the rooms are paid and your parents are picking up most of the rest. So this is really Phuket and Ao Nang money — food, longtails, taxis, beach days. Top up from an ATM in Bangkok if it runs low. Well under Thailand's declaration threshold (USD 20,000 equivalent), so nothing to declare. Split it — some in the sling, some in a case, some in the hotel safe. Do not carry the lot in one place for 67 days.",True)
 it("cash-aud","Cash — 200 AUD","docs","SL",1,15,"always",
    "Ordered and paid, ref STM30429677 — GBP 109.07 at 1.8337. You said Australia is effectively cashless and you'd made that mistake before, so treat this as an emergency float, not spending money: a cab that won't take cards, a tip, Rottnest, a market stall at Fremantle. Keep a twenty on you and the rest in the case. It is dead weight after 7 Jan — spend it or give it away before you fly to Phuket.")
-it("flights-off","All 8 flight confirmations — offline","docs","SL",1,0,"always",
-   "Saved offline. Phuket and Khao Sok have patchy signal.",True)
-it("hotels-off","Accommodation confirmations — offline","docs","SL",1,0,"always",
-   "Theatre Residence and the 500 Rai transfer details especially.")
-it("bag-conf","Baggage receipts — JQ71 and TG206","docs","SL",1,0,"always",
-   "JQ71: 40 kg prepaid, GBP 72.27, ref DMF5N5. TG206: 2 × 23 kg, second bag GBP 15.05, PNR FV844G. Have both at the bag drops.",True)
-it("storage-receipt","Smilelugg receipt — 14XIWBX4","docs","SL",1,5,"always",
-   "Paid, GBP 90.26, two cases, 10–23 Jan. B Floor at Suvarnabhumi, the Airport Rail Link level. Without it you are not getting the cases back.",True)
-it("taxi-conf","Bangkok taxi — booking 911245279","docs","SL",1,0,"always",
-   "Driver contacts you on WhatsApp at +44 7951 592634. Check WhatsApp works on landing.",True)
 
 # ───────────────────────────── TECH ─────────────────────────────
 it("phone","Phone","tech","SL",1,220,"always","",True)
@@ -73,8 +58,6 @@ it("cable-shaver","Shaver cable","tech","L2",1,40,"always",
    "Not USB-C at both ends, so nothing else in the bag will charge it. The one cable with no substitute — pack it with the shaver, not loose.",True,inbag="washbag-lg")
 it("brick-sm","Power bank — small","tech","SL",1,200,"always",
    "The only one you are taking — the large one is out. Cabin baggage only, never checked.",True)
-it("esim","Global SIM — 2 months","tech","SL",1,0,"always",
-   "Already organised. Covers both countries for the whole trip, so no Australian or Thai eSIM needed on arrival.")
 
 # ─────────────────────────── SLEEP & FLIGHT ───────────────────────────
 it("mouthtape","Mouth tape","flight","BP",1,20,"always","")
@@ -155,8 +138,7 @@ it("cubes","Packing cubes","kit","CB",4,0,"always",
    "Weigh nothing worth counting. They are what makes the Phuket changeover quick rather than an afternoon.",True)
 it("sunglasses","Sunglasses — 4 pairs in a travel case","kit","L1",4,400,"store",
    "The travel case lives in the suitcase. Include the cheap pairs here — these are the ones for the water and the longtails.",True)
-it("sunglasses-daily","Sunglasses — daily pair","kit","SL",1,120,"always",
-   "On you, in a normal case. The only pair that travels past Bangkok.",True)
+it("sunglasses-daily","Sunglasses","kit","SL",1,120,"always","")
 it("locks","TSA padlocks","kit","CB",3,150,"always",
    "Three bags go in the Jetstar hold and two sit in storage for 13 days.",True)
 it("scales","Luggage scales","kit","CB",1,100,"always",
@@ -169,7 +151,7 @@ it("goggles","Swimming goggles","kit","CB",1,80,"buy",
    "Worth having — the Sebel and the office both have gyms, and there is a lot of sea between Scarborough, Samui and Krabi.")
 it("apps","Phone apps page","docs","SL",1,0,"always",
    "Airlines, TripIt, Avios, Amex, Monzo, Booking.com, Grab, Uber, Uber Eats, Ticketmaster. Add WhatsApp — the Bangkok driver contacts you on it — plus Line, which is how Thai businesses actually communicate, and GetYourGuide for the Rottnest ferry booking.")
-it("notepad","Thai notepad","kit","SL",1,90,"always","")
+it("notepad","Thai notepad","kit","L2",1,90,"always","")
 it("daypack","Lockable daypack","kit","CB",1,320,"always",
    "Rottnest, the ferries and Bangkok. Lockable zips and a slash-resistant strap.",True)
 

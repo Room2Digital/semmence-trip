@@ -65,32 +65,23 @@ LEGS = [
         ],
         bags=[
             B("SL", "cabin", [
-                P("Passport — trackable holder"),
-                P("Driving licence, physical card", "Needed for the Avis hire car on 29 Dec. Photos and photocopies are refused."),
+                P("Passport"),
+                P("Driving licence"),
                 P("Bank cards x2", "Two providers, so one being blocked is not the end of it."),
-                P("Cash — GBP float", "Gatwick, and the taxi home on the 24th."),
                 P("Cash — THB 25,000", "Ref STM30429677. Split it between here and a case — not 25,000 in one pocket."),
                 P("Cash — AUD 200", "Emergency float. Australia is effectively cashless."),
                 P("Phone"),
                 P("AirPods Pro"),
                 P("Power bank, small", "Cabin only, never checked."),
-                P("Global SIM — 2 months", "Already organised, covers both countries."),
-                P("Sunglasses — daily pair"),
+                P("Sunglasses"),
                 P("Snacks"),
-                P("Thai notepad"),
-                P("Thailand Digital Arrival Card", "Complete it online 4–6 Jan. Save the QR offline."),
                 P("Australian ETA"),
                 P("Travel insurance — policy and 24hr number"),
-                P("All 8 flight confirmations", "Saved offline."),
-                P("Accommodation confirmations", "Saved offline."),
-                P("Baggage receipts — JQ71 and TG206"),
-                P("Smilelugg receipt — 14XIWBX4"),
-                P("Bangkok taxi — booking 911245279"),
                 P("Phone apps page", "WhatsApp, Line, GetYourGuide, Bolt, Ticketmaster."),
             ],
-               ids=["passport","licence","cards","cash-gbp","cash-thb","cash-aud","phone",
-                    "airpods","brick-sm","esim","sunglasses-daily","snacks","notepad","tdac","eta-aus",
-                    "insurance","flights-off","hotels-off","bag-conf","storage-receipt","taxi-conf","apps"]),
+               ids=["passport","licence","cards","cash-thb","cash-aud","phone",
+                    "airpods","brick-sm","sunglasses-daily","snacks","eta-aus",
+                    "insurance","apps"]),
 
             B("BP", "cabin", [
                 P("iPad Air", "The main one, not the one being handed over in Phuket."),
@@ -201,6 +192,7 @@ LEGS = [
                 P("Luggage scales", "What gets the cabin bag under 7 kg in Phuket."),
                 P("4 packing cubes", "Pre-pack these: Cube 1 clothing, Cube 2 gym and footwear, Cube 3 kit."),
                 P("Lockable daypack"),
+                P("Thai notepad"),
                 P("2 dirty laundry bags"),
                 P("5 bin bags"),
                 P("Small dry bag", "Still to buy."),
@@ -210,7 +202,7 @@ LEGS = [
                     "decant","mozzie","eyecream","nail",
                     "medkit","motion","antihistamine","antiseptic","plasters","rehydration","athletes",
                     "mbp","ipad-mini","switch","ps5-pad","hdmi-switch","adapter-universal",
-                    "locks","scales","cubes","daypack","laundry-bag","binbags","drybag","goggles"]),
+                    "locks","scales","cubes","daypack","notepad","laundry-bag","binbags","drybag","goggles"]),
 
             B("worn", "worn", [
                 P("Apple Watch", "On your wrist on every leg. It never goes in a bag."),
@@ -240,6 +232,7 @@ LEGS = [
             P("Pack the night of the 5th", "Not the morning of the 7th. The flight is at 07:25."),
             P("Pre-pack the three cubes", "Cube 1 clothing, Cube 2 gym and footwear, Cube 3 kit. Every leg involves some repacking; this is the one where there is most of it, and the cubes are what keep it to ten minutes."),
             P("Spend or leave the AUD", "Australia is behind you. Any Australian cash is dead weight from here."),
+            P("Complete the Thailand Digital Arrival Card", "Online, within 3 days of landing in Phuket, so 4–6 Jan. Mandatory for every foreign national. Save the QR offline."),
         ],
         bags=[
             B("SL", "cabin", [
