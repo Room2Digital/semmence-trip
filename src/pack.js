@@ -199,7 +199,9 @@ const PK = (function () {
   }
   function gramsOf(l, b) {
     if ("left" === b.mode) return 0;
-    const extra = customFor(l.id, b.bag).reduce((a, i) => a + (i.g || 0), 0);
+    const extra =
+      customFor(l.id, b.bag).reduce((a, i) => a + (i.g || 0), 0) +
+      (bagMeta(b.bag).empty || 0);
     if (b.ids && b.ids.length)
       return (
         extra +
@@ -306,7 +308,7 @@ const PK = (function () {
             ${meta.img ? `<span class="bagph"><img src="${esc(meta.img)}" alt="" loading="lazy" onerror="this.closest('.bagph').classList.add('noimg')"></span>` : `<span class="bagic">${ICON[b.bag] || "👕"}</span>`}
             <span style="flex:1;min-width:0">
               <span class="sash ${m.cls}">${m.label}</span>
-              <span class="bagmeta" style="display:block;margin-top:5px">${d} of ${rows} packed${g ? " · " + (exact(b) ? "about " : "roughly ~") + kg(g) : ""}</span>
+              <span class="bagmeta" style="display:block;margin-top:5px">${d} of ${rows} packed${g ? " · " + (exact(b) ? "about " : "roughly ~") + kg(g) : ""}${bagMeta(b.bag).empty ? " · bag " + kg(bagMeta(b.bag).empty) : ""}</span>
             </span></div>
           <div class="fill" style="--bc:${COL[b.bag] || "var(--muted)"}"><i style="width:${rows ? (d / rows) * 100 : 0}%"></i></div>
         </div>

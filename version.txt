@@ -1,4 +1,4 @@
-v36
+v38
 2026-10-04
-index.html 202610 bytes md5 9081666c
-Money tab: full cost ledger, GBP total at stored rates, tap to mark paid, payer vs guest split
+index.html 291076 bytes md5 462df2aa
+Packing is a tab now; washbag split; real empty-bag weights; route block gone

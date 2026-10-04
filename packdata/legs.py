@@ -105,25 +105,22 @@ LEGS = [
                     "charger-3in1","cable-ext","mouthtape","eyemask","earplugs"]),
 
             B("CB", "cabin", [
-                P("Two mini washbags", "Everything you want on you. The rest is in the large washbag in Suitcase 2.", inside=[
+                P("Two mini washbags", "The non-liquids. Anything under 100 ml lives in the clear liquids bag below.", inside=[
                     P("Travel facewash"),
-                    P("Mini shaving foam", "Under 100 ml, so it travels in the clear liquids bag."),
-                    P("Electric shaver"),
-                    P("Shaver cable", "Not USB-C at both ends, so nothing else will charge it."),
-                    P("Roll-on deodorant x3", "One in the washbag, two spare."),
-                    P("Mini toothpaste"),
+                    P("Electric shaver", "The cable is in Suitcase 2 — it only needs charging every few days."),
                     P("Electric toothbrush"),
-                    P("Aftershave atomiser"),
                     P("Moisturiser", "Three sectors of dry cabin air, and a shave before landing."),
                     P("Paracetamol"),
                     P("Imodium"),
                     P("Ibuprofen"),
                 ]),
                 P("Clear 1L liquids bag", "Cleared twice, Gatwick and Doha. Pull it out before you join the queue.", inside=[
-                    P("Travel suncream"),
+                    P("Mini toothpaste"),
+                    P("Mini shaving foam"),
+                    P("Aftershave atomiser"),
+                    P("Roll-on deodorant", "The one you are using. Two spares are in Suitcase 2."),
                     P("Hand sanitiser"),
                     P("Lip balm with SPF"),
-                    P("Mini shaving foam", "Lives in the washbag, travels through security in here."),
                 ]),
                 P("Prescription medication", "Original packaging. Cabin, never the hold."),
                 P("MacBook Air", "You are working from Perth from 23 Nov."),
@@ -139,9 +136,10 @@ LEGS = [
                 P("Running shoes"),
                 P("Microfibre towel, mini"),
             ],
-               ids=["washbag-mini","etoothbrush","toothpaste-mini","facewash","deodorant","aftershave",
-                    "shaver","cable-shaver","shave-foam","moisturiser","paracetamol","imodium","ibuprofen",
-                    "liquids-bag","suncream-tr","sanitiser","lipbalm","prescriptions",
+               ids=["washbag-mini","facewash","shaver","etoothbrush","moisturiser",
+                    "paracetamol","imodium","ibuprofen",
+                    "liquids-bag","toothpaste-mini","shave-foam","aftershave","deodorant",
+                    "sanitiser","lipbalm","prescriptions",
                     "mba","mouse","plug-uk","running","towel-sm"]),
 
             B("L1", "checked", [
@@ -174,6 +172,9 @@ LEGS = [
             B("L2", "checked", [
                 P("Large fold-out washbag", "Everything that is not on you.", inside=[
                     P("Suncream — full size", "Buy the big Australian bottle on arrival as well."),
+                    P("Travel suncream", "All the suncream travels together in the case."),
+                    P("Roll-on deodorant — 2 spare"),
+                    P("Shaver cable", "Not USB-C at both ends, so nothing else will charge it. In the case, not on you."),
                     P("Mosquito spray", "Buy stronger DEET in Bangkok; this covers you until then."),
                     P("Eye cream"),
                     P("Nail clippers"),
@@ -201,7 +202,8 @@ LEGS = [
                 P("Small dry bag", "Still to buy."),
                 P("Swimming goggles", "Still to buy."),
             ],
-               ids=["washbag-lg","suncream","decant","mozzie","eyecream","nail",
+               ids=["washbag-lg","suncream","suncream-tr","deodorant-spare","cable-shaver",
+                    "decant","mozzie","eyecream","nail",
                     "medkit","motion","antihistamine","antiseptic","plasters","rehydration","athletes",
                     "mbp","ipad-mini","switch","ps5-pad","hdmi-switch","adapter-universal",
                     "locks","scales","cubes","daypack","laundry-bag","binbags","drybag","goggles"]),

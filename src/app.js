@@ -279,31 +279,7 @@ const infoBtn = () =>
   '<section class="sec"><button class="infob" onclick="setTab(\'info\')">\n  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>\n  <span><b>Trip info</b><i>Visas, money, to-do list, what to pack</i></span>\n  <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n</button></section>';
 function vPre(e) {
   const t = T.deadlines.filter(mine).sort((e, t) => e.date.localeCompare(t.date))[0];
-  return `\n  ${t ? `<section class="sec"><div class="note err"><b>${esc(t.title)}</b> — ${fmt(t.date)} at ${esc(t.time)}.<br>${esc(t.detail)}</div></section>` : ""}\n  ${"ALL" === WHO ? "" : `<section class="sec"><div class="sg-head"><h2>The route</h2></div>${routeList()}</section>`}`;
-}
-function routeList() {
-  return [
-    ...T.stays
-      .filter(mine)
-      .slice()
-      .sort((e, t) => e.in.localeCompare(t.in)),
-    ...T.gaps
-      .filter(mine)
-      .map((e) => ({
-        gap: !0,
-        in: e.from + "T00:00",
-        out: e.to + "T00:00",
-        city: e.city,
-        nights: e.nights,
-        name: "Nothing booked",
-      })),
-  ]
-    .sort((e, t) => e.in.localeCompare(t.in))
-    .map(
-      (e) =>
-        `\n    <div class="card" style="padding:12px 15px${e.gap ? ";border-style:dashed;border-color:var(--baseline)" : ""}">\n      <div class="row"><h3 style="font-size:15px">${esc(city(e.city).name)}</h3>\n        <span class="dim">${fmt(e.in)} → ${fmt(e.out)}</span></div>\n      <div class="${e.gap ? "dim" : "meta"}" style="margin-top:2px">${e.gap ? '<span class="mchip bad">not booked</span> ' : ""}${esc(e.gap ? e.nights + " nights" : e.name)} ${whoChip(e.who || "")}</div>\n    </div>`,
-    )
-    .join("");
+  return `\n  ${t ? `<section class="sec"><div class="note err"><b>${esc(t.title)}</b> — ${fmt(t.date)} at ${esc(t.time)}.<br>${esc(t.detail)}</div></section>` : ""}`;
 }
 const entryTitle = (e) =>
   "flight" === e.k

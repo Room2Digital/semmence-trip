@@ -69,8 +69,8 @@ it("adapter-universal","Travel adapter with USB-C","tech","CB",1,180,"always",
 it("charger-3in1","Fold-up 3-in-1 charger","tech","BP",1,180,"always",
    "Watch, phone and AirPods from one plug. The best single item in the sling.")
 it("cable-ext","Extendable USB-C cable","tech","BP",1,70,"always","")
-it("cable-shaver","Shaver cable","tech","CB",1,40,"always",
-   "Not USB-C at both ends, so nothing else in the bag will charge it. The one cable with no substitute — pack it with the shaver, not loose.",True,inbag="washbag-mini")
+it("cable-shaver","Shaver cable","tech","L2",1,40,"always",
+   "Not USB-C at both ends, so nothing else in the bag will charge it. The one cable with no substitute — pack it with the shaver, not loose.",True,inbag="washbag-lg")
 it("brick-sm","Power bank — small","tech","SL",1,200,"always",
    "The only one you are taking — the large one is out. Cabin baggage only, never checked.",True)
 it("esim","Global SIM — 2 months","tech","SL",1,0,"always",
@@ -93,7 +93,7 @@ it("decant","Decant bottles, 100 ml","toiletries","L2",5,150,"always",
    "Fill these at the Phuket repack. For the lake you really only need suncream and the basics — Hansar, Krabi La Playa and Theatre Residence all provide the rest.",True,inbag="washbag-lg")
 it("suncream","Suncream — full size","toiletries","L2",1,200,"always",
    "Australian suncream is the best there is and cheap. Decant 100 ml for the onward leg.",True,inbag="washbag-lg")
-it("suncream-tr","Travel suncream","toiletries","CB",1,80,"always","For the plane and the first day before you buy properly.",inbag="liquids-bag")
+it("suncream-tr","Travel suncream","toiletries","L2",1,80,"always","For the plane and the first day before you buy properly.",inbag="washbag-lg")
 it("facewash","Travel facewash","toiletries","CB",1,90,"always","",inbag="washbag-mini")
 it("moisturiser","Moisturiser","toiletries","CB",1,100,"always",
    "Cabin bag on both long-hauls. Three sectors of dry cabin air each way.",True,inbag="washbag-mini")
@@ -104,15 +104,17 @@ it("mozzie","Mosquito spray","toiletries","L2",1,120,"always",
 it("shaver","Electric shaver","toiletries","CB",1,220,"always",
    "Cabin bag on both long-hauls — you want a shave before landing in Perth and again before Heathrow. Lithium batteries belong in the cabin anyway, not the hold.",True,inbag="washbag-mini")
 it("shave-foam","Mini shaving foam","toiletries","CB",1,100,"always",
-   "Under 100 ml, so it lives in the clear liquids bag. Cabin bag on both long-hauls.",True,inbag="washbag-mini")
+   "Under 100 ml, so it lives in the clear liquids bag. Cabin bag on both long-hauls.",True,inbag="liquids-bag")
 it("toothpaste-mini","Mini toothpaste","toiletries","CB",1,40,"always",
-   "For the Gatwick night and the flight. Full size bought in Perth.",True,inbag="washbag-mini")
+   "For the Gatwick night and the flight. Full size bought in Perth.",True,inbag="liquids-bag")
 it("etoothbrush","Electric toothbrush","toiletries","CB",1,180,"always",
    "Toothpaste bought on arrival; Qatar give you a travel one for the flight. Check the charger — most are an inductive base with a fixed plug, which needs the travel adapter.",True,inbag="washbag-mini")
-it("deodorant","Roll-on deodorant","toiletries","CB",3,300,"always",
-   "One lives in the mini washbag for the flight; two spares in the main toiletries. Roll-on is not a liquid for cabin purposes and does not leak at altitude.",True,inbag="washbag-mini")
+it("deodorant","Roll-on deodorant","toiletries","CB",1,100,"always",
+   "The one you are using. Roll-on is not a liquid for cabin purposes and does not leak at altitude.",True,inbag="liquids-bag")
+it("deodorant-spare","Roll-on deodorant — 2 spare","toiletries","L2",2,200,"always",
+   "In the large washbag. 67 days is more than one stick.",False,inbag="washbag-lg")
 it("aftershave","Aftershave atomiser","toiletries","CB",1,60,"always",
-   "One small atomiser covers all 67 days and clears cabin liquids without a thought.",inbag="washbag-mini")
+   "One small atomiser covers all 67 days and clears cabin liquids without a thought.",inbag="liquids-bag")
 it("lipbalm","Lip balm with SPF","toiletries","CB",1,15,"always",
    "Six hours cycling at Rottnest, a lot of beach, and three long-haul sectors of dry cabin air.",inbag="liquids-bag")
 it("nail","Nail clippers","toiletries","L2",1,40,"always","Fine in checked. Cabin rules on clippers vary by airport.",inbag="washbag-lg")
