@@ -117,6 +117,7 @@ LEGS = [
                 P("MacBook Air", "You are working from Perth from 23 Nov."),
                 P("60W USB-C mains supply", "The one that charges the Air. The fold-up 3-in-1 will not."),
                 P("Fold-up 3-in-1 charger"),
+                P("Travel keyboard — fold-up"),
                 P("Mouse"),
                 P("USB-C dongle"),
                 P("HDMI cable"),
@@ -135,7 +136,7 @@ LEGS = [
                     "paracetamol","imodium","ibuprofen",
                     "liquids-bag","toothpaste-mini","shave-foam","aftershave","deodorant",
                     "sanitiser","lipbalm","prescriptions",
-                    "mba","mouse","dongle","hdmi","plug-uk","charger-3in1","running","towel-sm"]),
+                    "mba","mouse","keyboard","dongle","hdmi","plug-uk","charger-3in1","running","towel-sm"]),
 
             B("L1", "checked", [
                 P("8 nice shirts"),
@@ -317,6 +318,8 @@ LEGS = [
                 P("Luggage scales", "This is the bag that has to come under 7 kg at Phuket. Keep them with it."),
                 P("60W USB-C mains supply", "In here rather than a suitcase — the cases go into storage on the 10th and this is the only charger that will do the iPad."),
                 P("Fold-up 3-in-1 charger", "Same reason. Watch, phone and AirPods."),
+                P("Travel keyboard — fold-up", "With the iPad and the mouse this is a working setup from Bangkok onwards, which is the point of leaving the laptop behind."),
+                P("Mouse"),
                 P("Universal travel adapter"),
                 P("Qatar pyjamas"),
                 P("Belt"),
@@ -330,8 +333,8 @@ LEGS = [
                     "towel-sm","drybag","goggles","laundry-bag","binbags","daypack","locks",
                     "washbag-mini","facewash","shaver","etoothbrush","moisturiser",
                     "paracetamol","imodium","ibuprofen",
-                    "scales","plug-uk","charger-3in1","adapter-universal","pyjamas","belt",
-                    "hats","hat-gym","windbreaker","cubes"]),
+                    "scales","plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "pyjamas","belt","hats","hat-gym","windbreaker","cubes"]),
 
             B("L1", "checked", [
                 P("Hoodie"),
@@ -350,7 +353,6 @@ LEGS = [
                 P("MacBook Pro", "For the handover in Phuket."),
                 P("iPad mini", "Same handover."),
                 P("MacBook Air", "Legal in the hold — the battery is sealed in, so it only has to be fully off and packed so it cannot be crushed. Not sleeping: off."),
-                P("Mouse"),
                 P("USB-C dongle"),
                 P("HDMI cable"),
                 P("Large fold-out washbag", inside=[
@@ -373,7 +375,7 @@ LEGS = [
                 P("Thai notepad"),
                 P("The Perth surplus", "Whatever you bought and are keeping. This case has the room."),
             ],
-               ids=["mbp","ipad-mini","mba","mouse","dongle","hdmi",
+               ids=["mbp","ipad-mini","mba","dongle","hdmi",
                     "washbag-lg","suncream","suncream-tr","decant","mozzie",
                     "eyecream","nail","deodorant-spare","cable-shaver","medkit","motion",
                     "antihistamine","antiseptic","plasters","rehydration","athletes","notepad"]),

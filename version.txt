@@ -1,4 +1,4 @@
-v47
+v48
 2026-10-04
-index.html 293980 bytes md5 770b9907
-Backpack down to the flight itself; a book added
+index.html 294480 bytes md5 aeb50f62
+Travel keyboard added; the mouse comes with you after all
