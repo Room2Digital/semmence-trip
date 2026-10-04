@@ -1,4 +1,4 @@
-v59
+v60
 2026-10-04
-index.html 315477 bytes md5 07385cbb
-Bangkok to London done; all seven legs complete
+index.html 315732 bytes md5 aa0e562c
+The Samui cabin limit is not a constraint; all seven legs done
