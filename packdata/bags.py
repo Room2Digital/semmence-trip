@@ -18,6 +18,9 @@ BAGS = [
  dict(id="CB", name="Cabin bag",  img="img/bag-CB.jpg", airtag=1, empty=2800),
  dict(id="BP", name="Backpack",   img="img/bag-BP.jpg", airtag=1, empty=1200),
  dict(id="SL", name="Sling",      img="img/bag-SL.jpg", airtag=1, empty=300),
+ # Not a bag either. Things handed over or left behind, so that a leg can
+ # account for every item without pretending they are still with you.
+ dict(id="GONE", name="Handed over", empty=0),
  # Not a bag. Things that travel on your body, so they never count against a
  # cabin allowance and never need finding at a bag drop.
  dict(id="WORN", name="Worn", empty=0),
