@@ -1,4 +1,4 @@
-v55
+v56
 2026-10-04
-index.html 310413 bytes md5 4a1d3132
-Part-quantities counted properly; cabin bag down to 12.3 kg
+index.html 310961 bytes md5 c90d9591
+Old trainers come to Thailand, in the backpack

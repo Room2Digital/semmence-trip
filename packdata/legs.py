@@ -449,8 +449,9 @@ LEGS = [
                 P("Earplugs"),
                 P("Snacks"),
                 P("Larq bottle, empty"),
+                P("Old trainers", "They will not fit in the cabin case alongside everything else, and Dragon Crest on the 21st is a proper climb — not a running-shoe hike."),
             ],
-               ids=["book","switch","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","switch","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -558,12 +559,10 @@ LEGS = [
                     P("Shaver cable", "The shaver holds a charge for weeks."),
                 ]),
                 P("The clothing left behind", "3 boxers, 3 socks, 1 gym sock, 4 T-shirts, 5 nice shirts, 3 shorts, 1 gym top."),
-                P("Old trainers", "Two pairs of trainers for thirteen days is a pair too many, and shoes are what eat the space in a cabin case. The running shoes do the Dragon Crest hike."),
             ],
                ids=["mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence","eta-aus",
                     "cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses","notepad",
                     "washbag-lg","suncream","eyecream","nail","deodorant-spare","cable-shaver",
-                    "trainers-old",
                     ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
                     ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
@@ -627,9 +626,9 @@ LEGS = [
 
             B("BP", "with", [
                 P("LOSES — the Nintendo Switch", "Into Suitcase 2."),
-                P("KEEPS", "Book, iPad, cable, prescriptions, liquids bag, sleep kit, snacks, Larq."),
+                P("KEEPS", "Book, iPad, cable, prescriptions, liquids bag, sleep kit, snacks, Larq, old trainers."),
             ],
-               ids=["book","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -648,7 +647,7 @@ LEGS = [
                ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
-                    "cable-shaver","trainers-old",
+                    "cable-shaver",
                     ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
                     ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
@@ -678,6 +677,7 @@ LEGS = [
         ),
         do=[
             P("Leave Theatre Residence by 08:00", "Check-out is noon, the flight is 11:25. The hotel is on the wrong side of the river for a late start."),
+            P("WEAR THE OLD TRAINERS TO CHECK-IN", "Bangkok Airways allow 5 kg of cabin baggage and the backpack and sling come to 4.97 kg with the trainers in. They do weigh. Wearing them puts you at 4.2 kg and the question never comes up."),
             P("Buy DEET before you go", "Stronger and cheaper in Bangkok than anything you would have carried."),
             P("Nothing to repack", "The cabin bag goes in the hold as it is. This is the easy one."),
         ],
@@ -711,8 +711,9 @@ LEGS = [
                 P("Earplugs"),
                 P("Snacks"),
                 P("Larq bottle"),
+                P("Old trainers", "For Dragon Crest on the 21st. They live here, not in the case — there is no room for a fourth pair of shoes in there."),
             ],
-               ids=["book","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -759,7 +760,7 @@ LEGS = [
                ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
-                    "cable-shaver","trainers-old",
+                    "cable-shaver",
                     ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
                     ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
@@ -819,8 +820,9 @@ LEGS = [
                 P("Earplugs"),
                 P("Snacks"),
                 P("Larq bottle"),
+                P("Old trainers", "For Dragon Crest on the 21st. They live here, not in the case — there is no room for a fourth pair of shoes in there."),
             ],
-               ids=["book","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -867,7 +869,7 @@ LEGS = [
                ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
-                    "cable-shaver","trainers-old",
+                    "cable-shaver",
                     ("boxers", 3), ("socks-white", 3), ("tees", 4), ("shirts-nice", 5),
                     ("shorts", 3), ("gym-tops", 1), ("socks-gym", 1)]),
 
