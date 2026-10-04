@@ -62,6 +62,19 @@ def packcoverage(data) -> None:
             continue
         unknown = sorted(claimed - known)
         missing = sorted(known - claimed)
+        # part-quantities have to add back up to the whole item, or a leg is
+        # quietly carrying more or fewer T-shirts than exist.
+        counts = {}
+        for b in leg.get("bags", []):
+            for x in b.get("ids") or []:
+                if isinstance(x, (list, tuple)):
+                    counts[x[0]] = counts.get(x[0], 0) + x[1]
+        for iid, n in sorted(counts.items()):
+            item = next((i for i in data["items"] if i["id"] == iid), None)
+            if item and n != item.get("qty", 1):
+                print("  pack %s: %s split into %d but there are %d"
+                      % (leg["id"], iid, n, item.get("qty", 1)))
+
         if unknown:
             print("  pack %s: %d id(s) not in items.py — %s" % (leg["id"], len(unknown), ", ".join(unknown)))
         if missing:

@@ -1,4 +1,4 @@
-v56
+v57
 2026-10-04
-index.html 310961 bytes md5 c90d9591
-Old trainers come to Thailand, in the backpack
+index.html 311052 bytes md5 4d68e0e4
+Fewer clothes onward; build now checks split quantities add up
