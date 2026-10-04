@@ -4799,8 +4799,8 @@ function sheetBody() {
           ticket(e.ticket) +
           (e.note ? `<div class="br"><h4>The plan</h4><p>${esc(e.note)}</p></div>` : "") +
           briefHTML(e.brief) +
-          (e.phone || e.url
-            ? `<div class="br"><h4>Contact</h4>\n        ${e.phone ? `<p><a href="tel:${esc(e.phone.replace(/\s/g, ""))}">${esc(e.phone)}</a></p>` : ""}\n        ${e.url ? `<p style="margin-top:5px"><a href="${esc(e.url)}" target="_blank" rel="noopener">Open website</a></p>` : ""}</div>`
+          (e.phone || e.url || e.email || e.line
+            ? `<div class="br"><h4>Contact</h4>\n        ${e.phone ? `<p><a href="tel:${esc(e.phone.replace(/\s/g, ""))}">${esc(e.phone)}</a></p>` : ""}\n        ${e.email ? `<p style="margin-top:5px"><a href="mailto:${esc(e.email)}">${esc(e.email)}</a></p>` : ""}\n        ${e.line ? `<p style="margin-top:5px">Line <a href="https://line.me/R/ti/p/${esc(e.line)}" target="_blank" rel="noopener">${esc(e.line)}</a></p>` : ""}\n        ${e.url ? `<p style="margin-top:5px"><a href="${esc(e.url)}" target="_blank" rel="noopener">Open website</a></p>` : ""}</div>`
             : "") +
           `<div class="br"><button class="ibtn" onclick="editAct(${t})">Edit this plan</button></div>` +
           (e.geo
