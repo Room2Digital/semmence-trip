@@ -1,4 +1,4 @@
-v57
+v58
 2026-10-04
-index.html 311052 bytes md5 4d68e0e4
-Fewer clothes onward; build now checks split quantities add up
+index.html 311499 bytes md5 d19881df
+Washing at every Thai hotel, recorded where it explains the counts

@@ -500,7 +500,7 @@ LEGS = [
 
             B("L1", "checked", [
                 P("THE TRANSFER CASE", "The only one you open at Bangkok. Three cubes at the top, nothing on top of them."),
-                P("CUBE 1 — clothing", "Lift into the cabin bag at Smilelugg.", inside=[
+                P("CUBE 1 — clothing", "Lift into the cabin bag at Smilelugg. Every hotel from here has washing facilities, which is why this is as little as it is.", inside=[
                     P("Boxers", "5 of the 8 come onward; the change of clothes in the cabin bag is 2 more."),
                     P("White socks", "5 of the 8."),
                     P("T-shirts", "6 of the 12."),
@@ -719,7 +719,7 @@ LEGS = [
 
             B("CB", "checked", [
                 P("Everything else, packed as it is", "15.6 kg against a 20 kg allowance. It goes in the hold and comes back to you at Samui."),
-                P("CLOTHES", inside=[
+                P("CLOTHES", "Every hotel in Thailand has washing facilities, so this is deliberately lean. Wash rather than carry.", inside=[
                     P("5 boxers"), P("5 white socks"), P("6 T-shirts"), P("2 nice shirts"),
                     P("2 shorts"), P("1 trousers"), P("2 swim shorts"), P("Belt"),
                     P("2 gym tops"), P("2 gym shorts"), P("2 gym socks"),
@@ -828,7 +828,7 @@ LEGS = [
 
             B("CB", "checked", [
                 P("Everything else, packed as it is", "15.6 kg against a 20 kg allowance. Last flight before you have the suitcases back."),
-                P("CLOTHES", inside=[
+                P("CLOTHES", "Every hotel in Thailand has washing facilities, so this is deliberately lean. Wash rather than carry.", inside=[
                     P("5 boxers"), P("5 white socks"), P("6 T-shirts"), P("2 nice shirts"),
                     P("2 shorts"), P("1 trousers"), P("2 swim shorts"), P("Belt"),
                     P("2 gym tops"), P("2 gym shorts"), P("2 gym socks"),

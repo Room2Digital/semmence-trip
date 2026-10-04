@@ -168,7 +168,8 @@ it("sliders","Sliders","footwear","CB",1,280,"always","Beach, pool, hotel bathro
 
 # ───────────────────────────── CLOTHING ─────────────────────────────
 it("shirts-nice","Nice shirts","clothing","CB",8,1600,"always","Dinners, Christmas, Bangkok, and sun cover that still reads as clothing.")
-it("tees","T-shirts","clothing","CB",12,1800,"always","")
+it("tees","T-shirts","clothing","CB",12,1800,"always",
+   "6 come to Thailand, 6 wait in Bangkok. Every hotel from Phuket onwards has washing facilities, so the Thailand count is deliberately lean.")
 it("shorts","Shorts","clothing","CB",6,1200,"always","")
 it("trousers","Trousers","clothing","CB",1,450,"always",
    "For the two or three nights out — Vertigo, Blue Elephant, Christmas dinner. Elephant pants bought in Thailand cover the temples; shorts cover everything else.",True)
