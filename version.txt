@@ -1,4 +1,4 @@
-v61
+v62
 2026-10-04
-index.html 316291 bytes md5 66fb343d
-Toothpaste tracked across the trip; the two counts explained
+index.html 316168 bytes md5 d67e55ea
+Packing lists are names only; real Fern and Cold Nips photos

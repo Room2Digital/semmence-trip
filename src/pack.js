@@ -262,12 +262,12 @@ const PK = (function () {
     ("buy" === i.fate ? '<span class="pill buy">buy en route</span>' : "") +
     ("handover" === i.fate ? '<span class="pill hand">given away in Phuket</span>' : "");
 
-  const itemRow = (i, extra) =>
+  const itemRow = (i, extra, bare) =>
     `<div class="row${packed(i) ? " done" : ""}">
       <button class="tick${packed(i) ? " on" : ""}" onclick="PK.tick('${i.id}')" aria-label="packed">
         <svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></button>
       <div class="rbody"><div class="rname">${esc(i.name)}${i.qty > 1 ? ` <span class="qty">×${i.qty}</span>` : ""}${extra || ""}</div>
-        ${i.note ? `<div class="rnote">${esc(i.note)}</div>` : ""}
+        ${!bare && i.note ? `<div class="rnote">${esc(i.note)}</div>` : ""}
         <div class="rfoot">${pill(i)}</div></div></div>`;
 
   function listHTML(arr, pool) {
@@ -288,13 +288,14 @@ const PK = (function () {
       .join("");
   }
 
+  /* A packing list is for ticking, not reading. Item names only — the
+     reasoning still lives on the item in the full inventory. */
   const planRow = (l, b, x, n, k) => {
     const q = key(l, b, n, k);
     return `<div class="row${on(q) ? " done" : ""}" style="padding:10px 0">
       <button class="tick${on(q) ? " on" : ""}" onclick="PK.tick('${q}')" aria-label="packed">
         <svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></button>
-      <div class="rbody"><div class="rname">${esc(x.n)}</div>
-        ${x.note ? `<div class="rnote">${esc(x.note)}</div>` : ""}</div></div>`;
+      <div class="rbody"><div class="rname">${esc(x.n)}</div></div></div>`;
   };
 
   /* ---------- views ---------- */
@@ -322,7 +323,7 @@ const PK = (function () {
           .filter((x) => !x.inside || !x.inside.length)
           .map((x) => planRow(l, b, x, b.items.indexOf(x)))
           .join("")}
-        ${mine.map((i) => itemRow(i)).join("")}
+        ${mine.map((i) => itemRow(i, "", !0)).join("")}
         </div>
         ${b.items
           .map((x, n) => {
@@ -330,7 +331,6 @@ const PK = (function () {
             const d2 = x.inside.filter((y, k) => on(key(l, b, n, k))).length;
             return `<div class="label" style="margin-top:16px">${esc(x.n)}
                 <span class="inside">${d2}/${x.inside.length}</span></div>
-              ${x.note ? `<div class="subnote">${esc(x.note)}</div>` : ""}
               <div class="card">${x.inside.map((y, k) => planRow(l, b, y, n, k)).join("")}</div>`;
           })
           .join("")}
@@ -456,8 +456,7 @@ const PK = (function () {
           return `<div class="row${on(k) ? " done" : ""}" style="padding:10px 0">
           <button class="tick${on(k) ? " on" : ""}" onclick="PK.tick('${k}')" aria-label="packed">
             <svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></button>
-          <div class="rbody"><div class="rname">${esc(i.name)}${i.crit ? ' <span class="pill crit">don\'t skip</span>' : ""}</div>
-            ${i.note ? `<div class="rnote">${esc(i.note)}</div>` : ""}</div></div>`;
+          <div class="rbody"><div class="rname">${esc(i.name)}${i.crit ? ' <span class="pill crit">don\'t skip</span>' : ""}</div></div></div>`;
         })
         .join("")}</div></div>`;
   }
@@ -473,8 +472,7 @@ const PK = (function () {
           return `<div class="row${on(k) ? " done" : ""}" style="padding:10px 0">
           <button class="tick${on(k) ? " on" : ""}" onclick="PK.tick('${k}')" aria-label="bought">
             <svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></button>
-          <div class="rbody"><div class="rname">${esc(i.name)}${i.crit ? ' <span class="pill crit">don\'t skip</span>' : ""}</div>
-            ${i.note ? `<div class="rnote">${esc(i.note)}</div>` : ""}</div></div>`;
+          <div class="rbody"><div class="rname">${esc(i.name)}${i.crit ? ' <span class="pill crit">don\'t skip</span>' : ""}</div></div></div>`;
         })
         .join("")}</div></div>`;
   }
