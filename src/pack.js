@@ -313,7 +313,7 @@ const PK = (function () {
             ${meta.img ? `<span class="bagph"><img src="${esc(meta.img)}" alt="" loading="lazy" onerror="this.closest('.bagph').classList.add('noimg')"></span>` : `<span class="bagic">${ICON[b.bag] || "👕"}</span>`}
             <span style="flex:1;min-width:0">
               <span class="sash ${m.cls}">${m.label}</span>
-              <span class="bagmeta" style="display:block;margin-top:5px">${d} of ${rows} packed${g ? " · " + (exact(b) ? "about " : "roughly ~") + kg(g) : ""}${bagMeta(b.bag).empty ? " · bag " + kg(bagMeta(b.bag).empty) : ""}</span>
+              <span class="bagmeta" style="display:block;margin-top:5px">${d} of ${rows} ticked${g ? " · " + (exact(b) ? "about " : "roughly ~") + kg(g) : ""}${bagMeta(b.bag).empty ? " · bag " + kg(bagMeta(b.bag).empty) : ""}</span>
             </span></div>
           <div class="fill" style="--bc:${COL[b.bag] || "var(--muted)"}"><i style="width:${rows ? (d / rows) * 100 : 0}%"></i></div>
         </div>
@@ -361,13 +361,14 @@ const PK = (function () {
         ${l.via ? `<div class="legvia">${esc(l.via)}</div>` : ""}
         <div class="card" style="margin:11px 0 14px">
           <div class="bagtop">
-            <span style="flex:1"><span class="bagname" style="display:block">${pr.d} of ${pr.t} done</span>
+            <span style="flex:1"><span class="bagname" style="display:block">${pr.d} of ${pr.t} ticked</span>
             <span class="bagmeta">Tick as you pack${(() => {
               const t = (l.bags || []).reduce((a, b) => a + gramsOf(l, b), 0);
               return t ? " · about " + kg(t) + " all in" : "";
             })()}</span></span>
             <span class="bagpill${100 === pr.pc && pr.t ? " done" : ""}">${pr.pc}%</span></div>
           <div class="fill" style="--bc:var(--blue)"><i style="width:${pr.pc}%"></i></div>
+          <div class="counthint">${pr.t} things to tick on this leg, covering all ${ITEMS.length} items you own — a line like "Cube 1" is one tick for several things.</div>
           ${(() => {
             /* The allowance, as two icons and a figure. What you are actually
                carrying is right above it; the comparison is the whole point. */
@@ -387,7 +388,7 @@ const PK = (function () {
                 .slice(0, 14)
                 .map((i) => esc(i.name))
                 .join(", ")}${unplaced.length > 14 ? ", and " + (unplaced.length - 14) + " more" : ""}.</p></div>`
-            : `<div class="covered">✓ All ${ITEMS.length} items accounted for on this leg</div>`
+            : `<div class="covered">✓ All ${ITEMS.length} things you own are placed on this leg</div>`
         }
         ${
           (l.bags || []).some((b) => !exact(b))

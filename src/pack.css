@@ -229,3 +229,5 @@
 /* .bag is display:flex, so in a non-flex parent it would stretch to the full
    width. Pin it to its content and restore the padding the .pk * reset takes. */
 .pk .allow .bag{flex:0 0 auto;width:auto;padding:3px 10px 3px 8px}
+
+.pk .counthint{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:10px}

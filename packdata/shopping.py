@@ -10,19 +10,11 @@ SHOPPING = [
   where="Coles or Woolworths · Chemist Warehouse · any sports shop",
   note=("You have seven weeks here and a kitchen at the Sebel, so this is a proper shop, "
         "not a top-up. Chemist Warehouse is substantially cheaper than a supermarket for "
-        "suncream, toiletries and supplements — it's the one worth a dedicated trip."),
+        "toiletries and supplements — it's the one worth a dedicated trip."),
   items=[
-   dict(name="Suncream SPF50+, large — check it is reef-safe", crit=True,
-        note="Australian suncream is the best in the world and cheap here. Buy the big bottle "
-             "and a small one for the bag — this is also what you decant for Thailand. Check the "
-             "ingredients now: Thai marine national parks ban oxybenzone, octinoxate, "
-             "4-methylbenzylidene camphor and butylparaben, with fines up to 100,000 baht. "
-             "Khao Sok and the Krabi marine parks both count."),
    dict(name="Protein powder", crit=True,
         note="Chemist Warehouse or a sports shop beats the supermarket on price. Buy a tub "
              "sized for seven weeks — you won't be taking it to Thailand, so don't over-buy."),
-   dict(name="Toothpaste",
-        note="You're carrying the brush but not the paste."),
    dict(name="Shampoo, conditioner, body wash",
         note="Only if the toiletries waiting for you don't already cover it."),
    dict(name="Aftersun or aloe",

@@ -91,6 +91,8 @@ it("shave-foam","Mini shaving foam","toiletries","CB",1,100,"always",
    "Under 100 ml, so it lives in the clear liquids bag. Cabin bag on both long-hauls.",True,inbag="liquids-bag")
 it("toothpaste-mini","Mini toothpaste","toiletries","CB",1,40,"always",
    "For the Gatwick night and the flight. Full size bought in Perth.",True,inbag="liquids-bag")
+it("toothpaste","Toothpaste — full size","toiletries","L2",1,120,"always",
+   "In the case out to Australia and back. It comes into the cabin bag at Bangkok for the thirteen days the cases are in storage, then goes back in the case on the 23rd.",False,inbag="washbag-lg")
 it("etoothbrush","Electric toothbrush","toiletries","CB",1,180,"always",
    "Toothpaste bought on arrival; Qatar give you a travel one for the flight. Check the charger — most are an inductive base with a fixed plug, which needs the travel adapter.",True,inbag="washbag-mini")
 it("deodorant","Roll-on deodorant","toiletries","CB",1,100,"always",

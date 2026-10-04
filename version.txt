@@ -1,4 +1,4 @@
-v60
+v61
 2026-10-04
-index.html 315732 bytes md5 aa0e562c
-The Samui cabin limit is not a constraint; all seven legs done
+index.html 316291 bytes md5 66fb343d
+Toothpaste tracked across the trip; the two counts explained
