@@ -122,6 +122,8 @@ LEGS = [
                 P("Mouse"),
                 P("USB-C dongle"),
                 P("HDMI cable"),
+                P("PS5 controller", "Remote play. Starlink will cover you."),
+                P("Switch HDMI cable"),
                 P("3 boxers"),
                 P("3 white socks"),
                 P("3 T-shirts"),
@@ -137,7 +139,8 @@ LEGS = [
                     "paracetamol","imodium","ibuprofen",
                     "liquids-bag","toothpaste-mini","shave-foam","aftershave","deodorant",
                     "sanitiser","lipbalm","prescriptions",
-                    "mba","mouse","keyboard","dongle","hdmi","plug-uk","charger-3in1","running","towel-sm"]),
+                    "mba","mouse","keyboard","dongle","hdmi","ps5-pad","hdmi-switch",
+                    "plug-uk","charger-3in1","running","towel-sm"]),
 
             B("L1", "checked", [
                 P("8 nice shirts"),
@@ -186,8 +189,6 @@ LEGS = [
                 ]),
                 P("MacBook Pro", "For the Phuket handover. In the case, not the cabin bag."),
                 P("iPad mini", "Same handover."),
-                P("PS5 controller", "Remote play on the plane home. Starlink will cover you."),
-                P("Switch HDMI cable"),
                 P("Universal travel adapter with USB-C"),
                 P("3 TSA padlocks"),
                 P("Luggage scales", "What gets the cabin bag under 7 kg in Phuket."),
@@ -202,7 +203,7 @@ LEGS = [
                ids=["washbag-lg","suncream","suncream-tr","deodorant-spare","cable-shaver",
                     "decant","mozzie","eyecream","nail",
                     "medkit","motion","antihistamine","antiseptic","plasters","rehydration","athletes",
-                    "mbp","ipad-mini","ps5-pad","hdmi-switch","adapter-universal",
+                    "mbp","ipad-mini","adapter-universal",
                     "locks","scales","cubes","daypack","notepad","laundry-bag","binbags","drybag","goggles"]),
 
             B("worn", "worn", [
