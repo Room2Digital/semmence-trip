@@ -1,4 +1,4 @@
-v53
+v54
 2026-10-04
-index.html 299862 bytes md5 d3ba3818
-Phuket to Bangkok: light cabin bag, one transfer case
+index.html 309477 bytes md5 e8e19b2e
+Bangkok changeover as its own leg; Samui and Krabi flights done

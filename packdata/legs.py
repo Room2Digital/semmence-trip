@@ -569,33 +569,187 @@ LEGS = [
         ],
     ),
     dict(
+        id="bkk-swap",
+        name="Bangkok changeover",
+        dates="10 Jan, 13:20",
+        where="Suvarnabhumi → Smilelugg, B Floor",
+        via="Landside · taxi waiting · about 10 minutes",
+        key=1,
+        stored=1,
+        note=(
+            "Not a flight — the ten minutes that the last three weeks of packing were for. You "
+            "land 13:20, clear arrivals, collect all three bags. Smilelugg is on B Floor, the "
+            "Airport Rail Link level, about 50 m past the ticket kiosk from the SA City Line "
+            "entrance, and it is landside so you reach it before you meet your driver. The taxi "
+            "waits 45 minutes, so there is no need to rush — but there is also nothing to think "
+            "about if the cubes are where they should be."
+        ),
+        do=[
+            P("1. Find a bench or a clear bit of floor", "Not the belt. Walk to Smilelugg first and do it there — you need both hands and somewhere to put a case down."),
+            P("2. Open Suitcase 1 only", "Suitcase 2 does not get opened at all today."),
+            P("3. Three cubes out, into the cabin bag", "Cube 1 clothing, Cube 2 gym and footwear, Cube 3 kit. They go straight in; nothing needs unpacking."),
+            P("4. Nintendo Switch out of the backpack, into Suitcase 2", "The only thing going the other way. Do it now or you will be carrying it round Thailand for thirteen days."),
+            P("5. Zip and lock both cases", "TSA padlocks are in the cabin bag. Two of the three get used."),
+            P("6. Hand over, photograph the receipt", "Ref 14XIWBX4, paid, 10–23 Jan. Check the collection time on the receipt matches your 23rd."),
+            P("7. Check the cabin bag closes", "It has gone from about 6 kg to about 15.6 kg. Use the expander zip if it needs it — better now than on a hotel bed at 22:00."),
+        ],
+        bags=[
+            B("CB", "with", [
+                P("GAINS — the three cubes", "About 9.9 kg of clothes, footwear and kit, straight out of Suitcase 1.", inside=[
+                    P("Cube 1 — clothing"),
+                    P("Cube 2 — gym and footwear"),
+                    P("Cube 3 — kit"),
+                ]),
+                P("ALREADY IN IT", "Washbag, health kit, decants, suncream, mosquito spray, chargers, keyboard, mouse, adapter, towel, daypack, scales, padlocks, one change of clothes."),
+                P("RESULT: about 15.6 kg", "No weight limit applies to it again until the 23rd. This is your luggage now."),
+            ],
+               ids=["washbag-mini","facewash","shaver","etoothbrush","moisturiser",
+                    "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
+                    "antiseptic","plasters","rehydration","athletes",
+                    "decant","suncream-tr","mozzie",
+                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "towel-sm","daypack","compression","scales","locks","cubes",
+                    "boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
+                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
+                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+
+            B("BP", "with", [
+                P("LOSES — the Nintendo Switch", "Into Suitcase 2."),
+                P("KEEPS", "Book, iPad, cable, prescriptions, liquids bag, sleep kit, snacks, Larq."),
+            ],
+               ids=["book","ipad-air","cable-ext","prescriptions","liquids-bag",
+                    "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
+                    "mouthtape","eyemask","earplugs","snacks","larq"]),
+
+            B("SL", "with", [
+                P("Unchanged", "Passport, cards, baht, phone, AirPods, power bank, sunglasses."),
+            ],
+               ids=["passport","cards","cash-thb","phone","airpods","brick-sm","sunglasses-daily"]),
+
+            B("L1", "left", [
+                P("Emptied of the three cubes, then locked and handed over"),
+            ], ids=[]),
+
+            B("L2", "left", [
+                P("Handed over unopened, with the Switch added"),
+            ],
+               ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
+                    "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
+                    "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
+                    "cable-shaver"]),
+
+            B("GONE", "left", [
+                P("MacBook Pro and iPad mini", "Handed over in Phuket."),
+            ], ids=["mbp","ipad-mini"]),
+
+            B("worn", "worn", [
+                P("Apple Watch"),
+                P("Nice trainers"),
+            ], ids=["watch","trainers-nice"]),
+        ],
+    ),
+    dict(
         id="bkk-usm",
         allow=dict(checked="20 kg", cabin="5 kg"),
         name="Bangkok – Koh Samui",
         dates="13 Jan",
         where="BKK → USM",
-        via="PG 133 · Bangkok Airways",
+        via="PG 133 · Bangkok Airways · 11:25",
         stored=1,
         note=(
-            "Bangkok Airways allow only 5 kg in the cabin, but 20 kg checked is included — so "
-            "the cabin bag goes in the hold on this one and you keep the backpack and sling. "
-            "Leave Theatre Residence by 08:00: check-out is 12:00 but PG 133 does not wait."
+            "Bangkok Airways allow only 5 kg in the cabin but include 20 kg checked, so the cabin\n"
+            "bag goes in the hold and you keep the backpack and sling. Nothing is repacked — the bag\n"
+            "travels exactly as it came out of Suvarnabhumi. Leave Theatre Residence by 08:00:\n"
+            "check-out is 12:00 but PG 133 does not wait."
         ),
         do=[
-            P("Buy DEET before you leave Bangkok", "Stronger and cheaper here than anything you would have carried from home."),
-            P("BOOK THE DONSAK FERRY", "Still outstanding. 17 Jan, the 06:00 sailing — it docks 07:30 and leaves real margin; the 07:00 leaves you 25 minutes."),
-            P("Confirm the 500 Rai pick-up time", "Before you book the ferry, not after."),
-            P("Warn Hansar about the 17th", "You leave before any normal breakfast."),
-            P("Take a motion sickness tablet the night before the 17th", "1h30 of open water at 06:00. Easy to forget once you are on the beach."),
-            P("Dry bag ready for Khao Sok", "Everything after Samui is boats — the Donsak ferry, then an open longtail onto the lake and back off it. Pack the dry bag once and leave it packed; there is no repack between Samui, Khao Sok and Krabi."),
+            P("Leave Theatre Residence by 08:00", "Check-out is noon, the flight is 11:25. The hotel is on the wrong side of the river for a late start."),
+            P("Buy DEET before you go", "Stronger and cheaper in Bangkok than anything you would have carried."),
+            P("Nothing to repack", "The cabin bag goes in the hold as it is. This is the easy one."),
         ],
         bags=[
-            B("worn", "worn", [P("Apple Watch")]),
-            B("SL", "cabin", [P("As always")]),
-            B("BP", "cabin", [P("Day kit", "Dry bag, mini towel, daily sunglasses, suncream, Larq."), P("iPad and chargers", "The cabin bag is in the hold, so anything you want on the way travels here.")]),
-            B("CB", "checked", [P("Packed as it is", "5 kg cabin is not worth fighting. It goes in the hold and comes back to you at Samui.")]),
-            B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")]),
-            B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")]),
+            B("SL", "cabin", [
+                P("Passport"),
+                P("Bank cards x2"),
+                P("Cash — THB 25,000"),
+                P("Phone"),
+                P("AirPods Pro"),
+                P("Power bank, small", "A spare battery never goes in the hold."),
+                P("Sunglasses"),
+            ],
+               ids=["passport","cards","cash-thb","phone","airpods","brick-sm","sunglasses-daily"]),
+
+            B("BP", "cabin", [
+                P("Book"),
+                P("iPad Air"),
+                P("Extendable USB-C cable"),
+                P("Prescription medication"),
+                P("Clear 1L liquids bag", inside=[
+                    P("Mini toothpaste"),
+                    P("Mini shaving foam"),
+                    P("Aftershave atomiser"),
+                    P("Roll-on deodorant"),
+                    P("Hand sanitiser"),
+                    P("Lip balm with SPF"),
+                ]),
+                P("Mouth tape"),
+                P("Eye mask"),
+                P("Earplugs"),
+                P("Snacks"),
+                P("Larq bottle"),
+            ],
+               ids=["book","ipad-air","cable-ext","prescriptions","liquids-bag",
+                    "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
+                    "mouthtape","eyemask","earplugs","snacks","larq"]),
+
+            B("CB", "checked", [
+                P("Everything else, packed as it is", "15.6 kg against a 20 kg allowance. It goes in the hold and comes back to you at Samui."),
+                P("CLOTHES", inside=[
+                    P("5 boxers"), P("5 white socks"), P("8 T-shirts"), P("3 nice shirts"),
+                    P("3 shorts"), P("1 trousers"), P("2 swim shorts"), P("Belt"),
+                    P("2 gym tops"), P("2 gym shorts"), P("2 gym socks"),
+                    P("3 hats"), P("Gym hat"), P("Qatar pyjamas"),
+                ]),
+                P("FOOTWEAR", inside=[
+                    P("Running shoes"), P("Old trainers"), P("Sandals"), P("Sliders"),
+                ]),
+                P("WASHBAG AND HEALTH KIT", inside=[
+                    P("Travel facewash"), P("Electric shaver"), P("Electric toothbrush"),
+                    P("Moisturiser"), P("Decant bottles"), P("Travel suncream"),
+                    P("Mosquito spray"), P("Medical pouch and the full health kit"),
+                ]),
+                P("TECH", inside=[
+                    P("60W USB-C mains supply"), P("Fold-up 3-in-1 charger"),
+                    P("Travel keyboard"), P("Mouse"), P("Universal travel adapter"),
+                ]),
+                P("KIT", inside=[
+                    P("Microfibre towel, mini"), P("Dry bag"), P("Swimming goggles"),
+                    P("Lockable daypack"), P("Laundry and bin bags"), P("Packing cubes"),
+                    P("Compression socks"), P("Luggage scales"), P("TSA padlocks"),
+                ]),
+            ],
+               ids=["washbag-mini","facewash","shaver","etoothbrush","moisturiser",
+                    "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
+                    "antiseptic","plasters","rehydration","athletes",
+                    "decant","suncream-tr","mozzie",
+                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "towel-sm","daypack","compression","scales","locks","cubes",
+                    "boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
+                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
+                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+
+            B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")], ids=[]),
+            B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")],
+               ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
+                    "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
+                    "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
+                    "cable-shaver"]),
+
+            B("GONE", "left", [P("MacBook Pro and iPad mini", "Handed over in Phuket.")],
+               ids=["mbp","ipad-mini"]),
+
+            B("worn", "worn", [P("Apple Watch"), P("Nice trainers")],
+               ids=["watch","trainers-nice"]),
         ],
     ),
     dict(
@@ -607,21 +761,99 @@ LEGS = [
         via="TG 246 · Thai Airways · 12:45",
         stored=1,
         note=(
-            "Check-out is 12:00 and the flight is at 12:45, so leave Ao Nang around 10:00. "
-            "One checked bag included, which is the cabin bag — take the pressure off and put "
-            "it in the hold, because you are collecting two suitcases at the other end anyway."
+            "The same shape as the Samui flight: the cabin bag goes in the hold, you keep the\n"
+            "backpack and sling. Check-out is 12:00 and the flight is 12:45, so leave Ao Nang about\n"
+            "10:00. One checked bag is included and you are collecting two suitcases at the other\n"
+            "end anyway, so there is no reason to carry it."
         ),
         do=[
             P("Repack the night of the 22nd", "Storage collection and a long-haul on the same day. Do not start this at breakfast."),
-            P("Keep the Smilelugg ref to hand", "14XIWBX4. The counter is landside on B Floor, so you clear arrivals first."),
+            P("Leave Ao Nang by 10:00", "Check-out 12:00, flight 12:45. The airport is 40 minutes."),
+            P("Smilelugg ref to hand", "14XIWBX4. B Floor, landside, so you clear arrivals first. TG 246 lands 14:10 and QR 835 leaves 18:55 — 4h45 to collect, repack and re-check."),
         ],
         bags=[
-            B("worn", "worn", [P("Apple Watch")]),
-            B("SL", "cabin", [P("As always")]),
-            B("BP", "cabin", [P("iPad, chargers, Larq")]),
-            B("CB", "checked", [P("In the hold", "One checked bag is included and you have a 4h45 connection to use.")]),
-            B("L1", "left", [P("Collected at BKK", "Not on this flight — you pick it up at Smilelugg after you land.")]),
-            B("L2", "left", [P("Collected at BKK")]),
+            B("SL", "cabin", [
+                P("Passport"),
+                P("Bank cards x2"),
+                P("Cash — THB 25,000"),
+                P("Phone"),
+                P("AirPods Pro"),
+                P("Power bank, small", "A spare battery never goes in the hold."),
+                P("Sunglasses"),
+            ],
+               ids=["passport","cards","cash-thb","phone","airpods","brick-sm","sunglasses-daily"]),
+
+            B("BP", "cabin", [
+                P("Book"),
+                P("iPad Air"),
+                P("Extendable USB-C cable"),
+                P("Prescription medication"),
+                P("Clear 1L liquids bag", inside=[
+                    P("Mini toothpaste"),
+                    P("Mini shaving foam"),
+                    P("Aftershave atomiser"),
+                    P("Roll-on deodorant"),
+                    P("Hand sanitiser"),
+                    P("Lip balm with SPF"),
+                ]),
+                P("Mouth tape"),
+                P("Eye mask"),
+                P("Earplugs"),
+                P("Snacks"),
+                P("Larq bottle"),
+            ],
+               ids=["book","ipad-air","cable-ext","prescriptions","liquids-bag",
+                    "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
+                    "mouthtape","eyemask","earplugs","snacks","larq"]),
+
+            B("CB", "checked", [
+                P("Everything else, packed as it is", "15.6 kg against a 20 kg allowance. Last flight before you have the suitcases back."),
+                P("CLOTHES", inside=[
+                    P("5 boxers"), P("5 white socks"), P("8 T-shirts"), P("3 nice shirts"),
+                    P("3 shorts"), P("1 trousers"), P("2 swim shorts"), P("Belt"),
+                    P("2 gym tops"), P("2 gym shorts"), P("2 gym socks"),
+                    P("3 hats"), P("Gym hat"), P("Qatar pyjamas"),
+                ]),
+                P("FOOTWEAR", inside=[
+                    P("Running shoes"), P("Old trainers"), P("Sandals"), P("Sliders"),
+                ]),
+                P("WASHBAG AND HEALTH KIT", inside=[
+                    P("Travel facewash"), P("Electric shaver"), P("Electric toothbrush"),
+                    P("Moisturiser"), P("Decant bottles"), P("Travel suncream"),
+                    P("Mosquito spray"), P("Medical pouch and the full health kit"),
+                ]),
+                P("TECH", inside=[
+                    P("60W USB-C mains supply"), P("Fold-up 3-in-1 charger"),
+                    P("Travel keyboard"), P("Mouse"), P("Universal travel adapter"),
+                ]),
+                P("KIT", inside=[
+                    P("Microfibre towel, mini"), P("Dry bag"), P("Swimming goggles"),
+                    P("Lockable daypack"), P("Laundry and bin bags"), P("Packing cubes"),
+                    P("Compression socks"), P("Luggage scales"), P("TSA padlocks"),
+                ]),
+            ],
+               ids=["washbag-mini","facewash","shaver","etoothbrush","moisturiser",
+                    "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
+                    "antiseptic","plasters","rehydration","athletes",
+                    "decant","suncream-tr","mozzie",
+                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "towel-sm","daypack","compression","scales","locks","cubes",
+                    "boxers","socks-white","tees","shirts-nice","shorts","trousers","swim","belt",
+                    "pyjamas","gym-tops","gym-shorts","socks-gym","running","trainers-old",
+                    "sandals","sliders","hats","hat-gym","drybag","goggles","laundry-bag","binbags"]),
+
+            B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")], ids=[]),
+            B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")],
+               ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
+                    "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
+                    "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
+                    "cable-shaver"]),
+
+            B("GONE", "left", [P("MacBook Pro and iPad mini", "Handed over in Phuket.")],
+               ids=["mbp","ipad-mini"]),
+
+            B("worn", "worn", [P("Apple Watch"), P("Nice trainers")],
+               ids=["watch","trainers-nice"]),
         ],
     ),
     dict(
