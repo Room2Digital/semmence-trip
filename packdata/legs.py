@@ -11,6 +11,9 @@
 #   worn     on your body, not in a bag
 #   left     not on this leg at all (in storage, or handed over)
 #
+# allow     what the airline lets you take: checked and cabin. Shown on the
+#           leg as two icons and a figure, nothing else — it is there to be
+#           read at a glance against the weights the app works out.
 # key=1     a leg where the bags genuinely change hands
 # stored=1  the suitcases are in Smilelugg for this leg, so anything with
 #           fate="store" is filtered out of the available pool.
@@ -41,6 +44,7 @@ def B(bag, mode, items, note="", ids=None):
 LEGS = [
     dict(
         id="lon-per",
+        allow=dict(checked="40 kg", cabin="2 × 15 kg"),
         name="London – Perth",
         dates="19–20 Nov",
         where="LGW → DOH → PER",
@@ -220,6 +224,7 @@ LEGS = [
     ),
     dict(
         id="per-hkt",
+        allow=dict(checked="40 kg", cabin="7 kg"),
         name="Perth – Phuket",
         dates="7 Jan",
         where="PER → HKT",
@@ -256,6 +261,7 @@ LEGS = [
     ),
     dict(
         id="hkt-bkk",
+        allow=dict(checked="2 × 23 kg", cabin="7 kg"),
         name="Phuket – Bangkok",
         dates="10 Jan",
         where="HKT → BKK",
@@ -300,6 +306,7 @@ LEGS = [
     ),
     dict(
         id="bkk-usm",
+        allow=dict(checked="20 kg", cabin="5 kg"),
         name="Bangkok – Koh Samui",
         dates="13 Jan",
         where="BKK → USM",
@@ -329,6 +336,7 @@ LEGS = [
     ),
     dict(
         id="kbv-bkk",
+        allow=dict(checked="20 kg", cabin="7 kg"),
         name="Krabi – Bangkok",
         dates="23 Jan",
         where="KBV → BKK",
@@ -354,6 +362,7 @@ LEGS = [
     ),
     dict(
         id="bkk-lon",
+        allow=dict(checked="40 kg", cabin="2 × 15 kg"),
         name="Bangkok – London",
         dates="23–24 Jan",
         where="BKK → DOH → LHR",

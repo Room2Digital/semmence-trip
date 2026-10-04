@@ -363,6 +363,16 @@ const PK = (function () {
             })()}</span></span>
             <span class="bagpill${100 === pr.pc && pr.t ? " done" : ""}">${pr.pc}%</span></div>
           <div class="fill" style="--bc:var(--blue)"><i style="width:${pr.pc}%"></i></div>
+          ${(() => {
+            /* The allowance, as two icons and a figure. What you are actually
+               carrying is right above it; the comparison is the whole point. */
+            const a = l.allow;
+            if (!a) return "";
+            return `<div class="allow">
+              ${a.checked ? `<span>🧳 ${esc(a.checked)}</span>` : ""}
+              ${a.cabin ? `<span>🎒 ${esc(a.cabin)}</span>` : ""}
+            </div>`;
+          })()}
         </div>
         <div class="label">The bags</div>
         <div class="btiles">${tiles}</div>

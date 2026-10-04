@@ -824,7 +824,9 @@ function sheetBody() {
           `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">\n        ${e.tbc ? '<span class="mchip tbd">Not booked</span>' : e.included ? '<span class="mchip good">Included</span>' : '<span class="mchip good">Booked</span>'}\n        ${e.ref ? `<span class="mchip">${esc(e.ref)}</span>` : ""}${whoChip(e.who)}</div>` +
           (e.time ? kv("Time", esc(e.time)) : "") +
           (e.provider ? kv("Provider", esc(e.provider)) : "") +
-          (null != e.amount
+          (e.incl
+            ? kv("Price", esc(e.incl))
+            : null != e.amount
             ? kv("Price", money(e.amount, e.ccy) + (e.paid ? " · paid" : ""))
             : "") +
           (e.phone
@@ -845,7 +847,7 @@ function sheetBody() {
           esc(e.name),
           `${fmtL(e.date)}${e.start ? " · " + esc(e.start) : ""}${e.end ? "–" + esc(e.end) : ""}`,
         ) +
-          `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">\n        ${e.status ? `<span class="mchip ${"Idea" === e.status ? "idea" : "good"}">${esc(e.status)}</span>` : ""}<span class="mchip">${esc(e.type)}</span>\n        ${null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}${e.paid ? " paid" : ""}</span>` : ""}${whoChip(e.who)}</div>` +
+          `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">\n        ${e.status ? `<span class="mchip ${"Idea" === e.status ? "idea" : "good"}">${esc(e.status)}</span>` : ""}<span class="mchip">${esc(e.type)}</span>\n        ${e.incl ? '<span class="mchip good">Included</span>' : null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}${e.paid ? " paid" : ""}</span>` : ""}${whoChip(e.who)}</div>` +
           (e.loc ? kv("Where", esc(e.loc)) : "") +
           ticket(e.ticket) +
           (e.note ? `<div class="br"><h4>The plan</h4><p>${esc(e.note)}</p></div>` : "") +
@@ -1898,14 +1900,6 @@ function ledger() {
     e
   );
 }
-function ensurePackTab() {
-  /* The packing lists are Robbie's own. On the Mum & Dad view the tab is
-     not just empty, it is irrelevant, so it goes away entirely. */
-  const e = document.querySelector('#tabs [data-t="pack"]');
-  if (!e) return;
-  const show = "P" !== WHO;
-  ((e.style.display = show ? "" : "none"), show || "pack" !== TAB || (TAB = "home"));
-}
 function totals() {
   const e = {};
   return (
@@ -2804,7 +2798,6 @@ function render() {
   if (!T) return;
   (grabX(),
     ensureIdeasTab(),
-    ensurePackTab(),
     ["flights", "transfers", "activities", "stays"].forEach((e) =>
       (T[e] || []).forEach((e, t) => (e._i = t)),
     ));
@@ -2843,7 +2836,9 @@ function render() {
                 : "money" === TAB
                   ? vMoney()
                   : "pack" === TAB
-                    ? '<div class="pk">' + PK.view() + "</div>"
+                    ? "P" === WHO
+                      ? '<div class="center">The packing lists are Robbie\'s.</div>'
+                      : '<div class="pk">' + PK.view() + "</div>"
                     : vInfo())),
     KEEPA)
   ) {

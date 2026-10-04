@@ -222,3 +222,11 @@
 .pk .covered{margin-top:11px;font-size:12px;color:#7fe0ad;text-align:center;
   background:rgba(93,214,146,.1);border:1px solid rgba(93,214,146,.26);
   border-radius:10px;padding:8px 10px}
+
+/* ---------- baggage allowance, icons only ---------- */
+.pk .allow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;
+  font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.pk .allow span{display:inline-flex;align-items:center;gap:5px;
+  background:var(--surface-2);border:1px solid var(--grid);
+  border-radius:999px;padding:3px 10px}
+.pk .allow .dimmed{opacity:.45}

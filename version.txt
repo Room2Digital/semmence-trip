@@ -1,4 +1,4 @@
-v40
+v41
 2026-10-04
-index.html 291685 bytes md5 e455381c
-Flight fares in; packing hidden on the Mum & Dad view; leg blurb removed
+index.html 292672 bytes md5 a599a862
+Allowance on each leg, Jetstar fare, 500 Rai extras marked included
