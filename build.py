@@ -34,17 +34,64 @@ SRC = ROOT / "src"
 OUT = ROOT / "index.html"
 
 
+def packdata() -> dict:
+    """The packing lists, built from the modules in packdata/."""
+    sys.path.insert(0, str(ROOT / "packdata"))
+    import items, legs, bags, daybags, shopping
+
+    return {
+        "items": items.I,
+        "legs": legs.LEGS,
+        "bags": bags.BAGS,
+        "daybags": daybags.DAYBAGS,
+        "shopping": shopping.SHOPPING,
+    }
+
+
+def packcoverage(data) -> None:
+    """A leg whose bags carry `ids` is claiming to account for part of the
+    inventory. Say what it misses, so a leg meant to be complete cannot
+    quietly stop being complete."""
+    known = {i["id"] for i in data["items"]}
+    for leg in data["legs"]:
+        claimed = set()
+        for b in leg.get("bags", []):
+            claimed |= set(b.get("ids") or [])
+        if not claimed:
+            continue
+        unknown = sorted(claimed - known)
+        missing = sorted(known - claimed)
+        if unknown:
+            print("  pack %s: %d id(s) not in items.py — %s" % (leg["id"], len(unknown), ", ".join(unknown)))
+        if missing:
+            print("  pack %s: %d unplaced — %s" % (leg["id"], len(missing), ", ".join(missing)))
+        else:
+            print("  pack %s: all %d items accounted for." % (leg["id"], len(known)))
+
+
 def build() -> str:
     shell = (SRC / "shell.html").read_text(encoding="utf-8")
     for token, filename in (
         ("{{BASE_CSS}}", "base.css"),
         ("{{APP_CSS}}", "app.css"),
         ("{{APP_JS}}", "app.js"),
+        ("{{PACK_CSS}}", "pack.css"),
+        ("{{PACK_JS}}", "pack.js"),
     ):
         if token not in shell:
             sys.exit(f"shell.html is missing the {token} placeholder")
         shell = shell.replace(token, (SRC / filename).read_text(encoding="utf-8"))
+
+    data = packdata()
+    blob = json.dumps(data, ensure_ascii=True, separators=(",", ":")).replace("</", "<\\/")
+    if "{{PACK_DATA}}" not in shell:
+        sys.exit("shell.html is missing the {{PACK_DATA}} placeholder")
+    shell = shell.replace("{{PACK_DATA}}", blob)
+    PACK_SUMMARY.append(data)
     return shell
+
+
+PACK_SUMMARY = []
 
 
 def canon_css(text: str) -> str:
@@ -118,20 +165,28 @@ def main():
     new_css, new_js = parts(out)
 
     if len(old_css) != len(new_css) or len(old_js) != len(new_js):
-        print("! block count changed — check shell.html")
-        return
+        print("block count changed (%d→%d css, %d→%d js) — expected when a new"
+              % (len(old_css), len(new_css), len(old_js), len(new_js)))
+        print("style or script block is added to shell.html; otherwise check it.")
+    else:
+        for i, (a, b) in enumerate(zip(old_css, new_css)):
+            same = canon_css(a) == canon_css(b)
+            print(f"  css block {i}: {'unchanged' if same else 'CHANGED'}")
+        for i, (a, b) in enumerate(zip(old_js, new_js)):
+            same = js_same(a, b)
+            if same is None:
+                print(f"  js  block {i}: not checked (node/acorn unavailable)")
+            else:
+                print(f"  js  block {i}: {'unchanged' if same else 'CHANGED'}")
 
-    for i, (a, b) in enumerate(zip(old_css, new_css)):
-        same = canon_css(a) == canon_css(b)
-        print(f"  css block {i}: {'unchanged' if same else 'CHANGED'}")
-
-    for i, (a, b) in enumerate(zip(old_js, new_js)):
-        same = js_same(a, b)
-        if same is None:
-            print(f"  js  block {i}: not checked (node/acorn unavailable)")
-        else:
-            print(f"  js  block {i}: {'unchanged' if same else 'CHANGED'}")
-
+    print()
+    if PACK_SUMMARY:
+        d = PACK_SUMMARY[-1]
+        print()
+        print("packing: %d items, %d legs, %d bags, %.1f kg listed"
+              % (len(d["items"]), len(d["legs"]), len(d["bags"]),
+                 sum(i.get("g", 0) or 0 for i in d["items"]) / 1000.0))
+        packcoverage(d)
     print()
     print("'CHANGED' is expected once you start editing src/ — it means the")
     print("build picked your edits up. 'unchanged' means a pure reformat.")

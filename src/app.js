@@ -2857,7 +2857,9 @@ function render() {
                 ? vPlans()
                 : "money" === TAB
                   ? vMoney()
-                  : vInfo())),
+                  : "pack" === TAB
+                    ? '<div class="pk">' + PK.view() + "</div>"
+                    : vInfo())),
     KEEPA)
   ) {
     const e = KEEPA;
@@ -2875,7 +2877,10 @@ function setWho(e) {
   ((WHO = e), store.set("who", e), render());
 }
 function setTab(e) {
-  ("cal" === e && "cal" === TAB && ((PLEG = null), (PDAY = null)), (TAB = e), render());
+  ("cal" === e && "cal" === TAB && ((PLEG = null), (PDAY = null)),
+    "pack" === e && "pack" === TAB && PK.reset(),
+    (TAB = e),
+    render());
 }
 const HDRS = { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY };
 async function boot() {
@@ -2912,13 +2917,16 @@ async function boot() {
     T && (t && (T.suggest = t), n && (T.legs = n)),
     T
       ? (render(),
-        await Promise.all([loadPicks(), loadEdits(), loadSCon(), loadTodos(), loadMoney()]),
+        await Promise.all([
+          loadPicks(),
+          loadEdits(),
+          loadSCon(),
+          loadTodos(),
+          loadMoney(),
+          PK.load(),
+        ]),
         mergePicks(),
         render())
       : (document.getElementById("view").innerHTML =
           '<div class="center">Could not load the trip, and there is no saved copy on this device yet. Open it once with a connection.</div>'));
 }
-((document.getElementById("fxhost").innerHTML = fxBox()),
-  fxPaint(),
-  boot(),
-  "serviceWorker" in navigator && navigator.serviceWorker.register("sw.js").catch(() => {}));
