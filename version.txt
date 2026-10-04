@@ -1,4 +1,4 @@
 v34
 2026-10-04
-index.html 190669 bytes md5 ec471309
-Glyph overlay removed from hero images; meal times shown on stays that have them
+index.html 191279 bytes md5 4e4030db
+Glyph overlay removed; meal times and resort plan diagrams on stays

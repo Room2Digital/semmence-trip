@@ -3460,3 +3460,22 @@ a {
   border-radius: 999px;
   padding: 2px 9px;
 }
+
+.splan {
+  margin: 0 0 12px;
+}
+.splan:last-child {
+  margin-bottom: 0;
+}
+.splan img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  background: #fff;
+}
+.splan figcaption {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.45;
+}
