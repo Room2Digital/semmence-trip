@@ -369,8 +369,8 @@ const PK = (function () {
             const a = l.allow;
             if (!a) return "";
             return `<div class="allow">
-              ${a.checked ? `<span>🧳 ${esc(a.checked)}</span>` : ""}
-              ${a.cabin ? `<span>🎒 ${esc(a.cabin)}</span>` : ""}
+              ${a.checked ? bagChip("checked", a.checked) : ""}
+              ${a.cabin ? bagChip("cabin", a.cabin) : ""}
             </div>`;
           })()}
         </div>

@@ -69,6 +69,27 @@ def packcoverage(data) -> None:
             print("  pack %s: all %d items accounted for." % (leg["id"], len(known)))
 
 
+def css_sanity(path):
+    """The packing CSS was scoped from the old app by a script, and a mangled
+    @media once swallowed every rule after it without a word. Braces balanced
+    and no .pk @media is cheap to check and would have caught it."""
+    s = path.read_text(encoding="utf-8")
+    depth = 0
+    for ch in s:
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth < 0:
+                sys.exit("%s: a closing brace with nothing open." % path.name)
+    if depth:
+        sys.exit("%s: %d unclosed rule(s) — everything after the first one is dead."
+                 % (path.name, depth))
+    if ".pk @media" in s or ".pk @" in s:
+        sys.exit("%s: an at-rule got a .pk prefix, which makes it invalid and "
+                 "silently kills the rest of the stylesheet." % path.name)
+
+
 def build() -> str:
     shell = (SRC / "shell.html").read_text(encoding="utf-8")
     for token, filename in (
@@ -81,6 +102,9 @@ def build() -> str:
         if token not in shell:
             sys.exit(f"shell.html is missing the {token} placeholder")
         shell = shell.replace(token, (SRC / filename).read_text(encoding="utf-8"))
+
+    css_sanity(SRC / "pack.css")
+    css_sanity(SRC / "app.css")
 
     data = packdata()
     blob = json.dumps(data, ensure_ascii=True, separators=(",", ":")).replace("</", "<\\/")

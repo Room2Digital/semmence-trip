@@ -3886,14 +3886,14 @@ a {
   color:var(--ink);font:inherit;font-size:14px;padding:10px 12px}
 .pk .addrow button{background:var(--blue);border:0;color:#fff;font:inherit;font-size:14px;
   font-weight:700;border-radius:10px;padding:10px 17px;cursor:pointer}
-.pk @media(min-width:760px){.wrap{max-width:900px;padding:0 26px}
-.pk h2{font-size:19px}
-.pk .baggrid{grid-template-columns:1fr 1fr;gap:12px}
-.pk .split{grid-template-columns:1fr 1fr}
-.pk .tl{padding-left:30px}
-.pk }
-@media(min-width:1080px){.wrap{max-width:1020px}
-.pk .baggrid{grid-template-columns:repeat(3,1fr)}
+@media (min-width: 760px) {
+  .pk h2{font-size:19px}
+  .pk .baggrid{grid-template-columns:1fr 1fr;gap:12px}
+  .pk .tl{padding-left:30px}
+}
+@media (min-width: 1080px) {
+  .pk .baggrid{grid-template-columns:repeat(3,1fr)}
+}
 
 /* ---------- add an item: pick the bag ---------- */
 .pk .pickbags{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
@@ -3917,12 +3917,11 @@ a {
   border-radius:10px;padding:8px 10px}
 
 /* ---------- baggage allowance, icons only ---------- */
-.pk .allow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;
-  font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums}
-.pk .allow span{display:inline-flex;align-items:center;gap:5px;
-  background:var(--surface-2);border:1px solid var(--grid);
-  border-radius:999px;padding:3px 10px}
-.pk .allow .dimmed{opacity:.45}
+.pk .allow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:18px;
+  font-variant-numeric:tabular-nums}
+/* .bag is display:flex, so in a non-flex parent it would stretch to the full
+   width. Pin it to its content and restore the padding the .pk * reset takes. */
+.pk .allow .bag{flex:0 0 auto;width:auto;padding:3px 10px 3px 8px}
 </style>
 </head>
 <body>
@@ -7240,8 +7239,8 @@ const PK = (function () {
             const a = l.allow;
             if (!a) return "";
             return `<div class="allow">
-              ${a.checked ? `<span>🧳 ${esc(a.checked)}</span>` : ""}
-              ${a.cabin ? `<span>🎒 ${esc(a.cabin)}</span>` : ""}
+              ${a.checked ? bagChip("checked", a.checked) : ""}
+              ${a.cabin ? bagChip("cabin", a.cabin) : ""}
             </div>`;
           })()}
         </div>
