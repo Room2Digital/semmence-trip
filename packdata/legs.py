@@ -81,10 +81,9 @@ LEGS = [
                     "airpods","brick-sm","sunglasses-daily","snacks","eta-aus"]),
 
             B("BP", "cabin", [
+                P("Book", "The one thing that works with the seatbelt sign on and the tray table up."),
                 P("iPad Air", "The main one, not the one being handed over in Phuket."),
                 P("Sony over-ear headphones", "The flight you bought them for."),
-                P("USB-C dongle"),
-                P("HDMI cable"),
                 P("Fold-up 3-in-1 charger", "Watch, phone and AirPods from one plug."),
                 P("Extendable USB-C cable"),
                 P("Mouth tape"),
@@ -93,8 +92,8 @@ LEGS = [
                 P("Compression socks", "Worth it on a 26-hour door to door."),
                 P("Larq bottle, empty", "Fill it after security."),
             ],
-               ids=["ipad-air","sony","dongle","hdmi","compression","larq",
-                    "charger-3in1","cable-ext","mouthtape","eyemask","earplugs"]),
+               ids=["book","ipad-air","sony","compression","larq",
+                    "cable-ext","mouthtape","eyemask","earplugs"]),
 
             B("CB", "cabin", [
                 P("Two mini washbags", "The non-liquids. Anything under 100 ml lives in the clear liquids bag below.", inside=[
@@ -117,7 +116,10 @@ LEGS = [
                 P("Prescription medication", "Original packaging. Cabin, never the hold."),
                 P("MacBook Air", "You are working from Perth from 23 Nov."),
                 P("60W USB-C mains supply", "The one that charges the Air. The fold-up 3-in-1 will not."),
+                P("Fold-up 3-in-1 charger"),
                 P("Mouse"),
+                P("USB-C dongle"),
+                P("HDMI cable"),
                 P("3 boxers"),
                 P("3 white socks"),
                 P("3 T-shirts"),
@@ -133,7 +135,7 @@ LEGS = [
                     "paracetamol","imodium","ibuprofen",
                     "liquids-bag","toothpaste-mini","shave-foam","aftershave","deodorant",
                     "sanitiser","lipbalm","prescriptions",
-                    "mba","mouse","plug-uk","running","towel-sm"]),
+                    "mba","mouse","dongle","hdmi","plug-uk","charger-3in1","running","towel-sm"]),
 
             B("L1", "checked", [
                 P("8 nice shirts"),
@@ -252,14 +254,9 @@ LEGS = [
                     "airpods","brick-sm","sunglasses-daily","snacks"]),
 
             B("BP", "cabin", [
-                P("MacBook Air", "A laptop does not go in the hold. It comes out at Phuket and into the stored case."),
-                P("60W USB-C mains supply"),
-                P("USB-C dongle"),
-                P("Mouse"),
-                P("HDMI cable"),
+                P("Book", "The one thing that works with the seatbelt sign on and the tray table up."),
                 P("iPad Air"),
                 P("Sony over-ear headphones", "Wear them through the gate if the bag is close to 7 kg."),
-                P("Fold-up 3-in-1 charger"),
                 P("Extendable USB-C cable"),
                 P("Prescription medication", "Never the hold."),
                 P("Clear 1L liquids bag", "One security check today, at Perth.", inside=[
@@ -276,7 +273,7 @@ LEGS = [
                 P("Compression socks"),
                 P("Larq bottle, empty"),
             ],
-               ids=["mba","plug-uk","dongle","mouse","hdmi","ipad-air","sony","charger-3in1",
+               ids=["book","ipad-air","sony",
                     "cable-ext","prescriptions","liquids-bag","toothpaste-mini","shave-foam",
                     "aftershave","deodorant","sanitiser","lipbalm","mouthtape","eyemask",
                     "earplugs","compression","larq"]),
@@ -318,6 +315,8 @@ LEGS = [
                     P("Ibuprofen"),
                 ]),
                 P("Luggage scales", "This is the bag that has to come under 7 kg at Phuket. Keep them with it."),
+                P("60W USB-C mains supply", "In here rather than a suitcase — the cases go into storage on the 10th and this is the only charger that will do the iPad."),
+                P("Fold-up 3-in-1 charger", "Same reason. Watch, phone and AirPods."),
                 P("Universal travel adapter"),
                 P("Qatar pyjamas"),
                 P("Belt"),
@@ -331,8 +330,8 @@ LEGS = [
                     "towel-sm","drybag","goggles","laundry-bag","binbags","daypack","locks",
                     "washbag-mini","facewash","shaver","etoothbrush","moisturiser",
                     "paracetamol","imodium","ibuprofen",
-                    "scales","adapter-universal","pyjamas","belt","hats","hat-gym",
-                    "windbreaker","cubes"]),
+                    "scales","plug-uk","charger-3in1","adapter-universal","pyjamas","belt",
+                    "hats","hat-gym","windbreaker","cubes"]),
 
             B("L1", "checked", [
                 P("Hoodie"),
@@ -350,6 +349,10 @@ LEGS = [
             B("L2", "checked", [
                 P("MacBook Pro", "For the handover in Phuket."),
                 P("iPad mini", "Same handover."),
+                P("MacBook Air", "Legal in the hold — the battery is sealed in, so it only has to be fully off and packed so it cannot be crushed. Not sleeping: off."),
+                P("Mouse"),
+                P("USB-C dongle"),
+                P("HDMI cable"),
                 P("Large fold-out washbag", inside=[
                     P("Suncream — full size"),
                     P("Travel suncream"),
@@ -370,7 +373,8 @@ LEGS = [
                 P("Thai notepad"),
                 P("The Perth surplus", "Whatever you bought and are keeping. This case has the room."),
             ],
-               ids=["mbp","ipad-mini","washbag-lg","suncream","suncream-tr","decant","mozzie",
+               ids=["mbp","ipad-mini","mba","mouse","dongle","hdmi",
+                    "washbag-lg","suncream","suncream-tr","decant","mozzie",
                     "eyecream","nail","deodorant-spare","cable-shaver","medkit","motion",
                     "antihistamine","antiseptic","plasters","rehydration","athletes","notepad"]),
 

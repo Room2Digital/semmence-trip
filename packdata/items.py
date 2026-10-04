@@ -35,22 +35,22 @@ it("airpods","AirPods Pro","tech","SL",1,60,"always","Your everyday set once the
 it("sony","Sony over-ear headphones","tech","SL",1,250,"store",
    "Earn their place over the 26 hours out. Into the stored case in Phuket, collected on the 23rd for the flight home.")
 it("ipad-air","iPad Air","tech","CB",1,460,"always","Reading and films. Comes everywhere.")
-it("mba","MacBook Air","tech","CB",1,1240,"store",
+it("mba","MacBook Air","tech","L2",1,1240,"store",
    "You work from Perth and stop in Thailand. Into the stored case in Phuket — it does not need to see Samui or the lake.",True)
-it("dongle","USB-C dongle","tech","CB",1,40,"store","Stores with the Air.")
-it("mouse","Mouse","tech","CB",1,80,"store","Seven weeks of work earns it. Stores with the Air.")
-it("hdmi","HDMI cable","tech","CB",1,90,"store","General purpose — hotel TVs, the MacBook. Stores at Phuket.")
+it("dongle","USB-C dongle","tech","L2",1,40,"store","Stores with the Air.")
+it("mouse","Mouse","tech","L2",1,80,"store","Seven weeks of work earns it. Stores with the Air.")
+it("hdmi","HDMI cable","tech","L2",1,90,"store","General purpose — hotel TVs, the MacBook. Stores at Phuket.")
 it("hdmi-switch","Nintendo Switch HDMI cable","tech","L1",1,80,"store","Travels with the Switch.")
 it("ps5-pad","PS5 controller","tech","L1",1,280,"store",
    "For Remote Play. Qatar's Starlink should genuinely carry it — the bandwidth is there and satellite latency is usually workable. Worth testing on the Gatwick to Doha leg before you count on it for the 14 hours to Perth. Pairs natively with the iPad Air as the fallback.")
 it("switch","Nintendo Switch","tech","L1",1,400,"store",
    "Stays in the stored cases 10–23 Jan, then into the cabin bag at Bangkok for the flight home.")
 it("plug-uk","60W USB-C mains supply","tech","CB",1,90,"always",
-   "The one that charges the MacBook Air as well as everything else. The fold-up 3-in-1 will not.",True)
+   "Out of the backpack and into the hold — but the cabin bag, not a suitcase. The suitcases sit in Bangkok 10–23 Jan and this is the only charger that will do the iPad.",True)
 it("adapter-universal","Travel adapter with USB-C","tech","CB",1,180,"always",
    "UK Type G, Australia Type I, Thailand A/C. Check it is rated for the laptop charger, not just phones.",True)
-it("charger-3in1","Fold-up 3-in-1 charger","tech","BP",1,180,"always",
-   "Watch, phone and AirPods from one plug. The best single item in the sling.")
+it("charger-3in1","Fold-up 3-in-1 charger","tech","CB",1,180,"always",
+   "Watch, phone and AirPods from one plug. In the cabin bag rather than a suitcase for the same reason as the 60W — you need it in Thailand, and the cases are in storage.")
 it("cable-ext","Extendable USB-C cable","tech","BP",1,70,"always","")
 it("cable-shaver","Shaver cable","tech","L2",1,40,"always",
    "Not USB-C at both ends, so nothing else in the bag will charge it. The one cable with no substitute — pack it with the shaver, not loose.",True,inbag="washbag-lg")
@@ -148,6 +148,8 @@ it("binbags","Bin bags","kit","CB",5,60,"always",
 it("goggles","Swimming goggles","kit","CB",1,80,"buy",
    "Worth having — the Sebel and the office both have gyms, and there is a lot of sea between Scarborough, Samui and Krabi.")
 it("notepad","Thai notepad","kit","L2",1,90,"always","")
+it("book","Book","kit","BP",1,250,"always",
+   "In the backpack on every flight. The one thing that works with the seatbelt sign on and the tray table up.")
 it("daypack","Lockable daypack","kit","CB",1,320,"always",
    "Rottnest, the ferries and Bangkok. Lockable zips and a slash-resistant strap.",True)
 

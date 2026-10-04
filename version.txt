@@ -1,4 +1,4 @@
-v46
+v47
 2026-10-04
-index.html 293112 bytes md5 5387b641
-Perth to Phuket worked through item by item
+index.html 293980 bytes md5 770b9907
+Backpack down to the flight itself; a book added
