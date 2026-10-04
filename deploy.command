@@ -24,7 +24,9 @@ fi
 
 # Guard: the manifest references icon-512.png, so a deploy without it 404s.
 missing=""
-for f in index.html sw.js manifest.webmanifest config.js version.txt icon-180.png icon-512.png img/500rai-layout.png img/500rai-room.png; do
+for f in index.html sw.js manifest.webmanifest config.js version.txt icon-180.png icon-512.png \
+         img/500rai-layout.png img/500rai-room.png \
+         img/500rai-massage.jpg img/500rai-cooking.jpg img/500rai-lake.jpg; do
   [ -f "$f" ] || missing="$missing $f"
 done
 if [ -n "$missing" ]; then
@@ -38,7 +40,7 @@ if [ -n "$missing" ]; then
 fi
 
 echo "Files that will ship:"
-ls -1 index.html sw.js manifest.webmanifest config.js version.txt icon-*.png img/*.png 2>/dev/null | sed 's/^/  /'
+ls -1 index.html sw.js manifest.webmanifest config.js version.txt icon-*.png img/* 2>/dev/null | sed 's/^/  /'
 echo
 
 if [ ! -d .vercel ]; then

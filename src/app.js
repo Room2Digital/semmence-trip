@@ -93,7 +93,11 @@ const D = (e) => {
                 ? "A$"
                 : "QAR" === t
                   ? "QAR "
-                  : t + " ") + e.toLocaleString("en-GB", { maximumFractionDigits: 2 }),
+                  : t + " ") +
+        e.toLocaleString("en-GB", {
+          minimumFractionDigits: e % 1 ? 2 : 0,
+          maximumFractionDigits: 2,
+        }),
   mapURL = (e, t) =>
     e
       ? `https://maps.google.com/?q=${e}(${encodeURIComponent(t)})`
@@ -1775,17 +1779,157 @@ function ensureIdeasTab() {
     "ideas" === TAB && ((TAB = "cal"), (PLEG = null)),
     ideasOn() || "ideas" !== PSIDE || (PSIDE = "plans"));
 }
-function totals() {
-  const e = {},
-    t = (t, n, s) => {
-      null != t &&
-        n &&
-        ((e[n] = e[n] || { paid: 0, due: 0 }), s ? (e[n].paid += t) : (e[n].due += t));
+/* ───────────────────────────── MONEY ─────────────────────────────
+   One ledger, built from everything that carries a price: stays,
+   flights, activities, plus T.finance for the costs that do not
+   belong to any single record (baggage, storage, travel money).
+   A cost lives in exactly one of those places, so nothing is
+   counted twice. Paid/unpaid can be overridden per line and the
+   override syncs through money_state, same pattern as the to-dos. */
+const ledgerFX = () => (T.fx && T.fx.rates) || { GBP: 1 },
+  toGBP = (e, t) => {
+    if (null == e || !t || "points" === t) return null;
+    const n = ledgerFX()[t];
+    return n ? e / n : null;
+  },
+  gbp = (e) =>
+    null == e
+      ? "&mdash;"
+      : "£" + (Math.abs(e) < 100 ? e.toFixed(2) : Math.round(e).toLocaleString("en-GB"));
+let MPAID = store.get("moneyPaid", {});
+const paidOf = (e) => (e.id in MPAID ? !!MPAID[e.id] : !!e.paid);
+async function pushMoney(e, t) {
+  try {
+    await fetch(`${SB_URL}/rest/v1/money_state`, {
+      method: "POST",
+      headers: {
+        apikey: SB_KEY,
+        Authorization: "Bearer " + SB_KEY,
+        "Content-Type": "application/json",
+        Prefer: "resolution=merge-duplicates,return=minimal",
+      },
+      body: JSON.stringify({ key: e, paid: !!t }),
+    });
+  } catch (e) {}
+}
+async function loadMoney() {
+  let e = null;
+  try {
+    const t = await fetch(`${SB_URL}/rest/v1/money_state?select=*`, {
+      headers: HDRS,
+      cache: "no-store",
+    });
+    t.ok && (e = await t.json());
+  } catch (e) {}
+  if (e) {
+    const t = {};
+    (e.forEach((e) => (t[e.key] = !!e.paid)), (MPAID = t), store.set("moneyPaid", MPAID));
+  }
+}
+function togPaid(e) {
+  const t = ledger().find((t) => t.id === e);
+  if (!t) return;
+  const n = !paidOf(t);
+  ((MPAID[e] = n),
+    store.set("moneyPaid", MPAID),
+    pushMoney(e, n),
+    (KEEPY = window.scrollY),
+    render());
+}
+const MCATS = [
+  "Flights",
+  "Accommodation",
+  "Baggage",
+  "Storage",
+  "Activities",
+  "Work",
+  "Fees",
+  "Cash",
+];
+function ledger() {
+  const e = [],
+    t = (t) => {
+      null != t.amount && t.ccy && mine(t) && e.push(t);
     };
   return (
-    T.stays.filter(mine).forEach((e) => t(e.amount, e.ccy, !0 === e.paid)),
-    T.flights.filter(mine).forEach((e) => t(e.amount, e.ccy, !0 === e.paid)),
-    T.activities.filter(mine).forEach((e) => t(e.amount, e.ccy, !0 === e.paid)),
+    (T.stays || []).forEach((e, n) =>
+      t({
+        id: "stay:" + (e.ref || "") + ":" + (e.name || n),
+        label: e.name,
+        sub:
+          (e.via ? e.via + " · " : "") +
+          fmt(e.in) +
+          " – " +
+          fmt(e.out) +
+          (e.nights ? ", " + e.nights + (1 === e.nights ? " night" : " nights") : ""),
+        cat: "Accommodation",
+        who: e.payer || e.who,
+        guest: e.who,
+        amount: e.amount,
+        ccy: e.ccy,
+        paid: !0 === e.paid,
+        due: (e.in || "").slice(0, 10),
+        ref: e.ref,
+        note: e.cancel ? "Cancellation: " + e.cancel : "",
+      }),
+    ),
+    (T.flights || []).forEach((e, n) =>
+      t({
+        id: "flight:" + (e.no || n) + ":" + (e.dep || "").slice(0, 10) + ":" + (e.who || ""),
+        label: e.no + " " + city(e.from).code + " → " + city(e.to).code,
+        sub: (e.airline || "") + (e.cabin ? " · " + e.cabin : ""),
+        cat: "Flights",
+        who: e.payer || e.who,
+        amount: e.amount,
+        ccy: e.ccy,
+        paid: !0 === e.paid,
+        due: (e.dep || "").slice(0, 10),
+        ref: e.ref,
+        note: "",
+      }),
+    ),
+    (T.activities || []).forEach((e, n) =>
+      t({
+        id: "act:" + (e.pid || n),
+        label: e.name,
+        sub: (e.type || "") + (e.loc ? " · " + e.loc : ""),
+        cat: "Fee" === e.type ? "Fees" : "Work" === e.type ? "Work" : "Activities",
+        who: e.payer || e.who,
+        amount: e.amount,
+        ccy: e.ccy,
+        paid: !0 === e.paid,
+        due: e.date,
+        ref: "",
+        note: "",
+      }),
+    ),
+    (T.finance || []).forEach((e) =>
+      t({
+        id: e.id,
+        label: e.label,
+        sub: e.src || e.method || "",
+        cat: e.cat || "Fees",
+        who: e.payer || e.who,
+        amount: e.amount,
+        ccy: e.ccy,
+        paid: !0 === e.paid,
+        due: e.due || e.on,
+        ref: e.ref,
+        note: e.note || "",
+      }),
+    ),
+    e.sort((e, t) => (e.due || "9").localeCompare(t.due || "9")),
+    e
+  );
+}
+function totals() {
+  const e = {};
+  return (
+    ledger().forEach((t) => {
+      const n = t.ccy;
+      ((e[n] = e[n] || { paid: 0, due: 0 }),
+        paidOf(t) ? (e[n].paid += t.amount) : (e[n].due += t.amount));
+    }),
     e
   );
 }
@@ -1797,17 +1941,94 @@ function outstanding() {
     .map(([e, t]) => money(t.due, e))
     .join(" · ");
 }
+const mRow = (e) => {
+    const t = paidOf(e),
+      n = toGBP(e.amount, e.ccy),
+      s = "points" === e.ccy;
+    return `<div class="led${t ? " on" : ""}" onclick="togPaid(${JSON.stringify(e.id)})">
+    <div class="led-box${t ? " on" : ""}"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+    <div class="led-txt">
+      <b>${esc(e.label)}</b>
+      ${e.sub ? `<i>${esc(e.sub)}</i>` : ""}
+      <span class="led-meta">${e.due ? fmtS(e.due) : ""}${e.ref ? (e.due ? " · " : "") + "ref " + esc(e.ref) : ""}${e.guest && e.guest !== e.who ? " · " + ("R" === e.guest ? "Robbie's room" : "Mum &amp; Dad's room") : ""}${whoChip(e.who)}</span>
+      ${e.note ? `<span class="led-note">${esc(e.note)}</span>` : ""}
+    </div>
+    <div class="led-amt">
+      <b>${s ? e.amount.toLocaleString("en-GB") + " pts" : money(e.amount, e.ccy)}</b>
+      ${!s && "GBP" !== e.ccy && null != n ? `<i>${gbp(n)}</i>` : ""}
+    </div></div>`;
+  },
+  mBar = (e, t) => {
+    const n = e + t;
+    return n
+      ? `<div class="mbar"><span style="width:${Math.round((e / n) * 100)}%"></span></div>`
+      : "";
+  };
+function vMoney() {
+  const e = ledger(),
+    t = totals(),
+    n = e.filter((e) => !paidOf(e)),
+    s = e.filter((e) => paidOf(e)),
+    a = (e) => e.reduce((e, t) => e + (toGBP(t.amount, t.ccy) || 0), 0),
+    i = a(s),
+    o = a(n),
+    l = T.fx || {},
+    r = Object.entries(t).filter(([e]) => "points" !== e),
+    c = t.points ? t.points.paid + t.points.due : 0,
+    d = {};
+  e.forEach((e) => {
+    const t = e.cat || "Other";
+    ((d[t] = d[t] || { paid: 0, due: 0 }),
+      paidOf(e)
+        ? (d[t].paid += toGBP(e.amount, e.ccy) || 0)
+        : (d[t].due += toGBP(e.amount, e.ccy) || 0));
+  });
+  const u = MCATS.filter((e) => d[e]).concat(Object.keys(d).filter((e) => !MCATS.includes(e)));
+  return `
+  <section class="sec">
+    <div class="mhero">
+      <div class="mhero-k">The trip so far${"ALL" === WHO ? "" : ", " + ("R" === WHO ? "yours" : "Mum &amp; Dad's")}</div>
+      <div class="mhero-v">${gbp(i + o)}</div>
+      <div class="mhero-sp"><span class="mh-paid">${gbp(i)} paid</span><span class="mh-due${o ? "" : " nil"}">${o ? gbp(o) + " to pay" : "nothing outstanding"}</span></div>
+      ${mBar(i, o)}
+      <div class="mhero-n">Converted at ${esc(l.src || "stored rates")}${l.on ? ", " + fmtS(l.on) : ""}. ${Object.entries(ledgerFX()).filter(([e]) => "GBP" !== e).map(([e, t]) => e + " " + t).join(" · ")}.</div>
+    </div>
+  </section>
+
+  <section class="sec"><div class="sg-head"><h2>By currency</h2><span class="n">as actually billed</span></div>
+    <div class="card">
+      <div class="mny-head"><span></span><span>Paid</span><span>To pay</span></div>
+      ${r.map(([e, t]) => `<div class="mny-row"><span class="mny-ccy">${e}</span><span class="mny-paid${t.paid ? "" : " mny-zero"}">${t.paid ? money(t.paid, e) : "&mdash;"}</span><span class="mny-due${t.due ? "" : " mny-zero"}">${t.due ? money(t.due, e) : "&mdash;"}</span></div>`).join("")}
+      ${c ? `<div class="mny-pts">Plus ${c.toLocaleString("en-GB")} points redeemed — the Courtyard in Phuket, and Avios against the Qatar tickets. Not counted in the pound figures above.</div>` : ""}
+    </div></section>
+
+  <section class="sec"><div class="sg-head"><h2>Where it goes</h2><span class="n">in pounds</span></div>
+    <div class="card">
+      ${u.map((e) => {
+        const t = d[e],
+          n = t.paid + t.due;
+        return `<div class="mcat"><div class="mcat-r"><span>${esc(e)}</span><b>${gbp(n)}</b></div>
+          ${mBar(t.paid, t.due)}
+          ${t.due ? `<i>${gbp(t.due)} still to pay</i>` : ""}</div>`;
+      }).join("")}
+    </div></section>
+
+  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Still to pay</h2><span class="n">${n.length}</span></div>
+    <div class="card">${n.map(mRow).join("")}</div>
+    <div class="dim" style="text-align:center;font-size:11px;margin-top:8px">Tap a line when you have paid it — it syncs across your devices</div></section>` : ""}
+
+  ${s.length ? `<section class="sec"><div class="sg-head"><h2>Already paid</h2><span class="n">${s.length}</span></div>
+    <div class="card">${s.map(mRow).join("")}</div></section>` : ""}
+
+  <section class="sec"><div class="card"><div class="note-txt">Only bookings with a price recorded appear here. Hansar Samui, Basildene Manor, the Scarborough house and several flights had no cost on the confirmation, so the real total is higher than the figure at the top.</div></div></section>`;
+}
 function vInfo() {
   const e = totals(),
     t = T.todo.filter(mine),
     n = T.deadlines.filter(mine);
   Math.max(1, ...Object.values(e).flatMap((e) => [e.paid + e.due]));
-  return `\n  <section class="sec"><div class="sg-head"><h2>Money</h2><span class="n">what is recorded</span></div>\n    <div class="card">\n      ${(() => {
-    const P = Object.entries(e).filter(([c]) => c !== "points"),
-      PT = e.points ? e.points.paid + e.points.due : 0,
-      D = P.filter(([, v]) => v.due > 0);
-    return `${D.length ? `<div class="mny-top"><span class="mny-top-l">Still to pay</span><span class="mny-top-v">${D.map(([c, v]) => money(v.due, c)).join(" &middot; ")}</span></div>` : `<div class="mny-top ok"><span class="mny-top-l">Nothing outstanding</span></div>`}<div class="mny-head"><span></span><span>Paid</span><span>To pay</span></div>${P.map(([c, v]) => `<div class="mny-row"><span class="mny-ccy">${c}</span><span class="mny-paid${v.paid ? "" : " mny-zero"}">${v.paid ? money(v.paid, c) : "&mdash;"}</span><span class="mny-due${v.due ? "" : " mny-zero"}">${v.due ? money(v.due, c) : "&mdash;"}</span></div>`).join("")}${PT ? `<div class="mny-pts">Plus ${PT.toLocaleString("en-GB")} points already redeemed.</div>` : ""}`;
-  })()}\n      <div class="note-txt">Only bookings with a price recorded appear here. Hansar Samui, Basildene Manor, the Scarborough house and most flights had no cost in the confirmations.</div>\n    </div></section>\n\n  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Deadlines</h2></div>\n    ${n.map((e) => `<div class="card err" style="padding:13px 16px"><div class="dl-row"><h3 style="font-size:15px">${esc(e.title)}</h3>\n      <span class="mchip bad">${fmt(e.date)} ${esc(e.time)}</span></div>\n      <div class="note-txt">${esc(e.detail)} ${whoChip(e.who)}</div></div>`).join("")}</section>` : ""}\n\n  <section class="sec"><div class="sg-head"><h2>To do</h2><span class="n">${t.filter((e) => !isDone(e.text)).length} open</span></div>\n    <div class="card">${t
+  const D = Object.entries(e).filter(([c, v]) => "points" !== c && v.due > 0);
+  return `\n  <section class="sec"><button class="infob" onclick="setTab('money')">\n    <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>\n    <span><b>Money</b><i>${D.length ? "Still to pay " + D.map(([c, v]) => money(v.due, c)).join(" · ") : "Nothing outstanding"}</i></span>\n    <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </button></section>\n\n  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Deadlines</h2></div>\n    ${n.map((e) => `<div class="card err" style="padding:13px 16px"><div class="dl-row"><h3 style="font-size:15px">${esc(e.title)}</h3>\n      <span class="mchip bad">${fmt(e.date)} ${esc(e.time)}</span></div>\n      <div class="note-txt">${esc(e.detail)} ${whoChip(e.who)}</div></div>`).join("")}</section>` : ""}\n\n  <section class="sec"><div class="sg-head"><h2>To do</h2><span class="n">${t.filter((e) => !isDone(e.text)).length} open</span></div>\n    <div class="card">${t
     .map((e) => {
       const t = isDone(e.text);
       return `<div class="chk${t ? " done" : ""}" onclick='tog(this,${JSON.stringify(e.text)})'>\n        <div class="box${t ? " on" : ""}"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>\n        <div class="tx">${esc(e.text)} ${e.urgent ? '<span class="mchip bad">soon</span> ' : ""}${whoChip(e.who)}</div></div>`;
@@ -2634,7 +2855,9 @@ function render() {
               ? vStay()
               : "cal" === TAB
                 ? vPlans()
-                : vInfo())),
+                : "money" === TAB
+                  ? vMoney()
+                  : vInfo())),
     KEEPA)
   ) {
     const e = KEEPA;
@@ -2689,7 +2912,7 @@ async function boot() {
     T && (t && (T.suggest = t), n && (T.legs = n)),
     T
       ? (render(),
-        await Promise.all([loadPicks(), loadEdits(), loadSCon(), loadTodos()]),
+        await Promise.all([loadPicks(), loadEdits(), loadSCon(), loadTodos(), loadMoney()]),
         mergePicks(),
         render())
       : (document.getElementById("view").innerHTML =

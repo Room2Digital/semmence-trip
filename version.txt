@@ -1,4 +1,4 @@
-v34
+v36
 2026-10-04
-index.html 191279 bytes md5 4e4030db
-Glyph overlay removed; meal times and resort plan diagrams on stays
+index.html 202610 bytes md5 9081666c
+Money tab: full cost ledger, GBP total at stored rates, tap to mark paid, payer vs guest split

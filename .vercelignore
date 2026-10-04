@@ -1,0 +1,6 @@
+src/
+build.py
+deploy.command
+node_modules/
+package*.json
+.build-tmp/
