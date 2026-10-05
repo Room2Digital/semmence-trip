@@ -2123,7 +2123,7 @@ function vInfo() {
     })
     .join(
       "",
-    )}</div>\n    <div class="dim" style="text-align:center;font-size:11px">Ticks sync across your devices. Paid lines move to the Money page, where you can untick them.</div>\n    <div class="dim" style="text-align:center;font-size:10.5px;margin-top:6px" id="bver">Build ${window.BUILD || "\u2014"}</div></section>\n\n  <section class="sec"><div class="sg-head"><h2>Emergency</h2><span class="n">works offline</span></div>\n    ${T.emergency.map((e) => `<div class="card" style="padding:13px 16px"><div class="label" style="margin:0 0 6px">${esc(e.place)}</div>\n      ${e.items.map((e) => `<div class="row" style="margin-top:5px"><span class="meta">${esc(e.label)}</span>\n        <span class="meta">${e.value ? `<a href="tel:${esc(e.value.replace(/\s/g, ""))}">${esc(e.value)}</a>` : '<span class="dim">to add</span>'}</span></div>`).join("")}\n    </div>`).join("")}</section>\n  ${STALE ? '<div class="note" style="margin-bottom:18px">Showing a saved copy — no connection when this loaded.</div>' : ""}`;
+    )}</div>\n    <div class="dim" style="text-align:center;font-size:11px">Ticks sync across your devices. Paid lines move to the Money page, where you can untick them.</div>\n    <div class="dim" style="text-align:center;font-size:10.5px;margin-top:6px" id="bver">Build ${window.BUILD || "\u2014"}</div>\n    <div class="dim" style="text-align:center;font-size:10px;margin-top:4px;line-height:1.5" id="sdiag"></div></section>\n\n  <section class="sec"><div class="sg-head"><h2>Emergency</h2><span class="n">works offline</span></div>\n    ${T.emergency.map((e) => `<div class="card" style="padding:13px 16px"><div class="label" style="margin:0 0 6px">${esc(e.place)}</div>\n      ${e.items.map((e) => `<div class="row" style="margin-top:5px"><span class="meta">${esc(e.label)}</span>\n        <span class="meta">${e.value ? `<a href="tel:${esc(e.value.replace(/\s/g, ""))}">${esc(e.value)}</a>` : '<span class="dim">to add</span>'}</span></div>`).join("")}\n    </div>`).join("")}</section>\n  ${STALE ? '<div class="note" style="margin-bottom:18px">Showing a saved copy — no connection when this loaded.</div>' : ""}`;
 }
 function tog(e, t) {
   const n = !isDone(t);
@@ -2132,6 +2132,40 @@ function tog(e, t) {
     pushTodo(t, n),
     e.classList.toggle("done", n),
     e.querySelector(".box").classList.toggle("on", n));
+}
+/* Read out, on the device itself, anything in the ancestry of the plans list
+   that is known to break position:sticky. Beats guessing from a desktop. */
+function stickyDiag() {
+  const e = document.getElementById("sdiag");
+  if (!e) return;
+  const t = document.getElementById("view");
+  if (!t) return;
+  const n = [];
+  let s = t;
+  for (; s && s !== document.documentElement.parentNode; s = s.parentElement) {
+    const a = getComputedStyle(s),
+      i = [];
+    ("visible" === a.overflow && "visible" === a.overflowX && "visible" === a.overflowY) ||
+      i.push("overflow " + a.overflowX + "/" + a.overflowY);
+    "none" !== a.transform && i.push("transform");
+    "none" !== a.filter && i.push("filter");
+    a.backdropFilter && "none" !== a.backdropFilter && i.push("backdrop-filter");
+    "none" !== a.contain && a.contain && i.push("contain " + a.contain);
+    a.willChange && "auto" !== a.willChange && i.push("will-change " + a.willChange);
+    i.length &&
+      n.push(
+        (s.tagName.toLowerCase() + (s.id ? "#" + s.id : "")).slice(0, 18) + ": " + i.join(", "),
+      );
+  }
+  const a = document.querySelector(".dayhd"),
+    i = a ? getComputedStyle(a).position : "none on screen";
+  e.textContent =
+    "sticky support " +
+    (CSS.supports("position", "sticky") ? "yes" : "NO") +
+    " · .dayhd position " +
+    i +
+    " · " +
+    (n.length ? n.join(" | ") : "ancestry clear");
 }
 let timer = null;
 function ticks() {
@@ -2961,7 +2995,7 @@ function render() {
     const e = KEEPY;
     ((KEEPY = null), window.scrollTo(0, e));
   }
-  (restoreX(), ticks(), nfBadge());
+  (restoreX(), ticks(), nfBadge(), stickyDiag());
 }
 function setWho(e) {
   ((WHO = e), store.set("who", e), render());

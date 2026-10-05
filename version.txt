@@ -1,4 +1,4 @@
-v82
+v83
 2026-10-05
-index.html 332237 bytes md5 1df057cc
-Pay to-dos come from the ledger; sticky headers un-collapsed
+index.html 333995 bytes md5 9a0ce882
+body clips with hidden, plus an on-device sticky readout

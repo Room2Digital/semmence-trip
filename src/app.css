@@ -55,7 +55,10 @@ body {
   touch-action: pan-x pan-y;
   width: 100%;
   max-width: 100%;
-  overflow-x: clip;
+  /* hidden, not clip: the body-to-viewport propagation that keeps body itself
+     a normal block (and therefore keeps position:sticky working inside it) is
+     long-established for hidden and unreliable on iOS for clip. */
+  overflow-x: hidden;
 }
 header,
 nav {
