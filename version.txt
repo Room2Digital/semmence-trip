@@ -1,4 +1,4 @@
-v73
+v74
 2026-10-05
-index.html 328372 bytes md5 bacf929f
-A banner instead of the wordmark, and one header row
+index.html 326000 bytes md5 a280f447
+Perth across the Swan as the page header
