@@ -1,4 +1,4 @@
-v81
+v82
 2026-10-05
-index.html 330566 bytes md5 2af02cc4
-Only body clips sideways, so sticky survives on iOS
+index.html 332237 bytes md5 1df057cc
+Pay to-dos come from the ledger; sticky headers un-collapsed

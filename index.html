@@ -4067,6 +4067,11 @@ main.onwater::before {
    its own day is on screen, and the next day's header pushes it out. */
 .daygrp {
   position: relative;
+  /* flow-root, not plain block: if the sticky header's top margin collapses
+     out of this box, Safari computes the wrong sticky range and the header
+     never pins. The margin lives here instead. */
+  display: flow-root;
+  margin-top: 16px;
 }
 .dayhd {
   position: sticky;
@@ -4075,7 +4080,7 @@ main.onwater::before {
   display: flex;
   align-items: baseline;
   gap: 9px;
-  margin: 16px 0 10px;
+  margin: 0 0 10px;
   padding: 9px 13px;
   border-radius: 12px;
   border: 1px solid var(--ring);
@@ -6335,6 +6340,12 @@ function togPaid(e) {
     (KEEPY = window.scrollY),
     render());
 }
+/* Payment to-dos are not stored anywhere of their own: they ARE the unpaid
+   lines of the ledger. Ticking one calls the same togPaid the Money page
+   uses, so the two lists cannot drift apart. */
+const payTodos = () => ledger().filter((e) => !paidOf(e)),
+  payRow = (e) =>
+    `<div class="chk pay" onclick="togPaid(this.dataset.id)" data-id="${esc(e.id)}">\n      <div class="box"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>\n      <div class="tx">Pay ${esc(e.label)} <span class="mchip">${money(e.amount, e.ccy)}</span> ${whoChip(e.who)}</div></div>`;
 const MCATS = [
   "Flights",
   "Accommodation",
@@ -6524,17 +6535,18 @@ function vMoney() {
 function vInfo() {
   const e = totals(),
     t = T.todo.filter(mine),
+    PAYT = payTodos(),
     n = T.deadlines.filter(mine);
   Math.max(1, ...Object.values(e).flatMap((e) => [e.paid + e.due]));
   const D = Object.entries(e).filter(([c, v]) => "points" !== c && v.due > 0);
-  return `\n  <section class="sec"><button class="infob" onclick="setTab('money')">\n    <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>\n    <span><b>Money</b><i>${D.length ? "Still to pay " + D.map(([c, v]) => money(v.due, c)).join(" · ") : "Nothing outstanding"}</i></span>\n    <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </button></section>\n\n  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Deadlines</h2></div>\n    ${n.map((e) => `<div class="card err" style="padding:13px 16px"><div class="dl-row"><h3 style="font-size:15px">${esc(e.title)}</h3>\n      <span class="mchip bad">${fmt(e.date)} ${esc(e.time)}</span></div>\n      <div class="note-txt">${esc(e.detail)} ${whoChip(e.who)}</div></div>`).join("")}</section>` : ""}\n\n  <section class="sec"><div class="sg-head"><h2>To do</h2><span class="n">${t.filter((e) => !isDone(e.text)).length} open</span></div>\n    <div class="card">${t
+  return `\n  <section class="sec"><button class="infob" onclick="setTab('money')">\n    <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>\n    <span><b>Money</b><i>${D.length ? "Still to pay " + D.map(([c, v]) => money(v.due, c)).join(" · ") : "Nothing outstanding"}</i></span>\n    <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </button></section>\n\n  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Deadlines</h2></div>\n    ${n.map((e) => `<div class="card err" style="padding:13px 16px"><div class="dl-row"><h3 style="font-size:15px">${esc(e.title)}</h3>\n      <span class="mchip bad">${fmt(e.date)} ${esc(e.time)}</span></div>\n      <div class="note-txt">${esc(e.detail)} ${whoChip(e.who)}</div></div>`).join("")}</section>` : ""}\n\n  <section class="sec"><div class="sg-head"><h2>To do</h2><span class="n">${PAYT.length + t.filter((e) => !isDone(e.text)).length} open</span></div>\n    ${PAYT.length ? `<div class="label" style="margin:0 0 8px">Still to pay</div>\n    <div class="card">${PAYT.map(payRow).join("")}</div>\n    <div class="label" style="margin:16px 0 8px">Everything else</div>` : ""}\n    <div class="card">${t
     .map((e) => {
       const t = isDone(e.text);
       return `<div class="chk${t ? " done" : ""}" onclick='tog(this,${JSON.stringify(e.text)})'>\n        <div class="box${t ? " on" : ""}"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>\n        <div class="tx">${esc(e.text)} ${e.urgent ? '<span class="mchip bad">soon</span> ' : ""}${whoChip(e.who)}</div></div>`;
     })
     .join(
       "",
-    )}</div>\n    <div class="dim" style="text-align:center;font-size:11px">Ticks sync across your devices</div></section>\n\n  <section class="sec"><div class="sg-head"><h2>Emergency</h2><span class="n">works offline</span></div>\n    ${T.emergency.map((e) => `<div class="card" style="padding:13px 16px"><div class="label" style="margin:0 0 6px">${esc(e.place)}</div>\n      ${e.items.map((e) => `<div class="row" style="margin-top:5px"><span class="meta">${esc(e.label)}</span>\n        <span class="meta">${e.value ? `<a href="tel:${esc(e.value.replace(/\s/g, ""))}">${esc(e.value)}</a>` : '<span class="dim">to add</span>'}</span></div>`).join("")}\n    </div>`).join("")}</section>\n  ${STALE ? '<div class="note" style="margin-bottom:18px">Showing a saved copy — no connection when this loaded.</div>' : ""}`;
+    )}</div>\n    <div class="dim" style="text-align:center;font-size:11px">Ticks sync across your devices. Paid lines move to the Money page, where you can untick them.</div>\n    <div class="dim" style="text-align:center;font-size:10.5px;margin-top:6px" id="bver">Build ${window.BUILD || "\u2014"}</div></section>\n\n  <section class="sec"><div class="sg-head"><h2>Emergency</h2><span class="n">works offline</span></div>\n    ${T.emergency.map((e) => `<div class="card" style="padding:13px 16px"><div class="label" style="margin:0 0 6px">${esc(e.place)}</div>\n      ${e.items.map((e) => `<div class="row" style="margin-top:5px"><span class="meta">${esc(e.label)}</span>\n        <span class="meta">${e.value ? `<a href="tel:${esc(e.value.replace(/\s/g, ""))}">${esc(e.value)}</a>` : '<span class="dim">to add</span>'}</span></div>`).join("")}\n    </div>`).join("")}</section>\n  ${STALE ? '<div class="note" style="margin-bottom:18px">Showing a saved copy — no connection when this loaded.</div>' : ""}`;
 }
 function tog(e, t) {
   const n = !isDone(t);
@@ -8032,6 +8044,16 @@ const headH = () => {
 };
 headH();
 addEventListener("resize", headH);
+/* Which build is actually on screen. Worth having when a phone is quietly
+   serving an older copy and the fix "did not work". */
+fetch("version.txt?t=" + Date.now(), { cache: "no-store" })
+  .then((r) => r.text())
+  .then((t) => {
+    window.BUILD = t.split("\n")[0].trim();
+    const e = document.getElementById("bver");
+    e && (e.textContent = "Build " + window.BUILD);
+  })
+  .catch(() => {});
 addEventListener("orientationchange", () => setTimeout(headH, 250));
 
 ((document.getElementById("fxhost").innerHTML = fxBox()),

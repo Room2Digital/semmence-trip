@@ -4043,6 +4043,11 @@ main.onwater::before {
    its own day is on screen, and the next day's header pushes it out. */
 .daygrp {
   position: relative;
+  /* flow-root, not plain block: if the sticky header's top margin collapses
+     out of this box, Safari computes the wrong sticky range and the header
+     never pins. The margin lives here instead. */
+  display: flow-root;
+  margin-top: 16px;
 }
 .dayhd {
   position: sticky;
@@ -4051,7 +4056,7 @@ main.onwater::before {
   display: flex;
   align-items: baseline;
   gap: 9px;
-  margin: 16px 0 10px;
+  margin: 0 0 10px;
   padding: 9px 13px;
   border-radius: 12px;
   border: 1px solid var(--ring);

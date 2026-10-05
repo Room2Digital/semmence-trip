@@ -72,6 +72,16 @@ const headH = () => {
 };
 headH();
 addEventListener("resize", headH);
+/* Which build is actually on screen. Worth having when a phone is quietly
+   serving an older copy and the fix "did not work". */
+fetch("version.txt?t=" + Date.now(), { cache: "no-store" })
+  .then((r) => r.text())
+  .then((t) => {
+    window.BUILD = t.split("\n")[0].trim();
+    const e = document.getElementById("bver");
+    e && (e.textContent = "Build " + window.BUILD);
+  })
+  .catch(() => {});
 addEventListener("orientationchange", () => setTimeout(headH, 250));
 
 ((document.getElementById("fxhost").innerHTML = fxBox()),
