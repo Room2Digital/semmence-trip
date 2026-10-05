@@ -1,4 +1,4 @@
-v75
+v76
 2026-10-05
-index.html 326049 bytes md5 ce2fb9fe
-The page was hiding behind a class name clash
+index.html 326662 bytes md5 5464c82f
+The skyline holds while the page rides up over it

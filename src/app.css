@@ -3894,7 +3894,12 @@ a {
 /* Perth across the Swan as the page header. The skyline is never covered:
    the content sheet only begins once the water does. */
 .hero {
-  position: relative;
+  /* Pinned under the header so the sheet rides up over it. Once the sheet
+     covers it the pin is invisible, so it reads as the page picking the
+     image up and carrying it away. */
+  position: sticky;
+  top: var(--headH, 61px);
+  z-index: 1;
   width: 100%;
   height: var(--heroH);
   overflow: hidden;
