@@ -988,6 +988,7 @@ let LEG = null,
   PLEG = null,
   PSIDE = "plans",
   PVIEW = store.get("pview", "legs"),
+  PSORT = store.get("psort", "soon"),
   PDAY = null,
   CALOPEN = !1,
   PIMG = !1 !== store.get("pimg", !0);
@@ -1687,14 +1688,18 @@ function plansBody(e) {
     l = { building: "🏢", house: "🏡", hotel: "🏨", resort: "🏝️" };
   return `${o.length ? `<div class="dgroup">Where you're staying<b>${o.length}</b></div>\n    <div class="stays in-dest">${o.map((e) => `<div class="stay-card tapc" onclick="openStay(${e._i})">\n      ${PIMG ? hero(e, l[e.icon] || "🏨") : ""}\n      <div class="row" style="align-items:flex-start"><h3 style="margin-top:0;flex:1">${esc(e.name)}</h3>\n        <svg class="nb-arw" style="position:static;opacity:.5;margin-top:3px" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div>\n      <div class="s-dates">${fmt(e.in)} → ${fmt(e.out)} · ${e.nights} nights</div>\n      <div style="margin-top:9px">${whoChip(e.who)}</div></div>`).join("")}</div>` : ""}\n    ${
     a.length
-      ? a
-          .map(
-            (e) =>
-              `<div class="dgroup">${fmtL(e)}<b>${s[e].length}</b></div>\n        ${s[e]
+      ? sortBar() +
+        dateOrder(a)
+          .map((e) =>
+            dayGroup(
+              e,
+              s[e]
                 .slice()
                 .sort((e, t) => (e.start || "99:99").localeCompare(t.start || "99:99"))
                 .map((e) => planCard(e, !0))
-                .join("")}`,
+                .join(""),
+              s[e].length,
+            ),
           )
           .join("")
       : `<div class="note">${e.acts.length ? "Nothing here in this area." : "Nothing planned here yet — the Ideas tab is where to start."}</div>`
@@ -1770,6 +1775,27 @@ const pviewBar = () =>
     <button class="${"legs" === PVIEW ? "on" : ""}" onclick="setPView('legs')">By place</button>
     <button class="${"all" === PVIEW ? "on" : ""}" onclick="setPView('all')">Everything</button>
   </div>`;
+function setPSort(e) {
+  ((PSORT = e), store.set("psort", e), (KEEPY = 0), render());
+}
+/* Soonest first by default; the other way round is for looking ahead at the
+   far end of the trip without scrolling through everything before it. */
+const sortBar = () =>
+  `<div class="sortbar">\n    <button class="${"soon" === PSORT ? "on" : ""}" onclick="setPSort('soon')">Soonest first</button>\n    <button class="${"far" === PSORT ? "on" : ""}" onclick="setPSort('far')">Furthest ahead</button>\n  </div>`;
+const dateOrder = (e) => ("far" === PSORT ? e.slice().reverse() : e);
+/* One date header for every plans list, pinned while its own day is on
+   screen and released as the next day arrives. */
+function dayHead(e, t) {
+  const n = D(e),
+    s = iso(today()),
+    a = e === s,
+    i = e < s,
+    o = whereOn(e),
+    l = nDays(D(T.start), n) + 1,
+    c = a ? "Today" : l > 0 ? "Day " + l : "";
+  return `<div class="dayhd${a ? " now" : ""}${i ? " past" : ""}">\n    <span class="dhd-d">${DOW[n.getDay()]} ${n.getDate()} ${MON[n.getMonth()]}</span>\n    <span class="dhd-s">${c}${o ? (c ? " · " : "") + esc(o.name) : ""}</span>\n    <span class="dhd-n">${t}</span></div>`;
+}
+const dayGroup = (e, t, n) => `<div class="daygrp">${dayHead(e, n)}${t}</div>`;
 
 // Every plan across the whole trip, in date order, grouped under a clear date heading.
 function vAllPlans() {
@@ -1785,30 +1811,15 @@ function vAllPlans() {
 
   const byDate = {};
   acts.forEach((a) => (byDate[a.date] = byDate[a.date] || []).push(a));
-  const dates = Object.keys(byDate).sort();
-  const todayISO = iso(today());
+  const dates = dateOrder(Object.keys(byDate).sort());
 
   const body = dates
-    .map((d) => {
-      const where = whereOn(d),
-        n = byDate[d].length,
-        dt = D(d),
-        past = d < todayISO,
-        isToday = d === todayISO,
-        day = nDays(D(T.start), dt) + 1;
-      return `<div class="daymark${isToday ? " now" : ""}${past ? " past" : ""}">
-          <div class="dm-l">
-            <div class="dm-date">${DOW[dt.getDay()]} ${dt.getDate()} ${MON[dt.getMonth()]}</div>
-            <div class="dm-sub">${isToday ? "Today" : day > 0 ? "Day " + day : ""}${where ? (day > 0 || isToday ? " · " : "") + esc(where.name) : ""}</div>
-          </div>
-          <span class="dm-n">${n}</span>
-        </div>
-        ${byDate[d].map((a) => planCard(a, !0)).join("")}`;
-    })
+    .map((d) => dayGroup(d, byDate[d].map((a) => planCard(a, !0)).join(""), byDate[d].length))
     .join("");
 
   return `<section class="sec">${pviewBar()}
     <div class="sg-head"><h2>Everything, in order</h2><span class="n">${acts.length} plans · ${dates.length} days</span></div>
+    ${sortBar()}
     ${body}</section>`;
 }
 

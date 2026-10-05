@@ -4021,3 +4021,79 @@ main.onwater {
 .card.dayh.tmr .kicker {
   color: rgba(144, 133, 233, 0.95);
 }
+
+/* One date header for every plans list. It pins under the app header while
+   its own day is on screen, and the next day's header pushes it out. */
+.daygrp {
+  position: relative;
+}
+.dayhd {
+  position: sticky;
+  top: calc(var(--headH, 61px) + 6px);
+  z-index: 3;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin: 16px 0 10px;
+  padding: 9px 13px;
+  border-radius: 12px;
+  border: 1px solid var(--ring);
+  background: rgba(24, 24, 23, 0.9);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}
+.dhd-d {
+  font-size: 13.5px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.dhd-s {
+  flex: 1;
+  min-width: 0;
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dhd-n {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-2);
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.dayhd.now {
+  border-color: rgba(57, 135, 229, 0.42);
+}
+.dayhd.now .dhd-d {
+  color: var(--blue);
+}
+.dayhd.past {
+  opacity: 0.58;
+}
+
+/* Soonest first / furthest ahead */
+.sortbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.sortbar button {
+  flex: 0 0 auto;
+  border: 1px solid var(--ring);
+  background: var(--surface);
+  color: var(--muted);
+  font: 600 11.5px var(--font);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.sortbar button.on {
+  background: var(--surface-2);
+  color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.18);
+}

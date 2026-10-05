@@ -1,4 +1,4 @@
-v78
+v79
 2026-10-05
-index.html 327521 bytes md5 541654c5
-Cards wear the colour of the button they belong to
+index.html 329755 bytes md5 a8b25427
+One date header for both plans views, pinned while its day lasts
