@@ -3883,3 +3883,9 @@ a {
 .nfbox .nfrow:first-child {
   margin-top: 0;
 }
+
+/* The grid sits first in the section now, so it owns the gap below it, not above */
+.navgrid.tight {
+  margin-top: 0;
+  margin-bottom: 13px;
+}
