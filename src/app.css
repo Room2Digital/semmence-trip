@@ -31,7 +31,11 @@
   padding: 0;
 }
 html {
-  overflow-x: clip;
+  /* No overflow here on purpose. When html and body BOTH set an overflow,
+     body stops propagating to the viewport and becomes a scroll container
+     of its own — and iOS Safari then resolves every position:sticky inside
+     it against that box, which never scrolls. Setting it on body alone
+     propagates up and still clips sideways. */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   min-height: 100%;

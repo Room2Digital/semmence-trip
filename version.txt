@@ -1,4 +1,4 @@
-v80
+v81
 2026-10-05
-index.html 330238 bytes md5 d0084df9
-Sticky date headers now work on iOS
+index.html 330566 bytes md5 2af02cc4
+Only body clips sideways, so sticky survives on iOS
