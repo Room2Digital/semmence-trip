@@ -478,8 +478,8 @@ LEGS = [
                     P("Athlete's foot cream"),
                 ]),
                 P("Decant bottles, filled"),
-                P("Face suncream"),
-                P("Mini shower gel"),
+                P("Face suncream", "Out of the large washbag in Phuket — Suitcase 2 is never opened at Bangkok."),
+                P("Mini shower gel", "Same."),
                 P("Toothpaste — full size", "Out of the large washbag in Phuket. Thirteen days without the case."),
                 P("Travel suncream"),
                 P("Mosquito spray", "Khao Sok on the 17th. Buy stronger DEET in Bangkok."),
@@ -631,7 +631,6 @@ LEGS = [
 
             B("BP", "with", [
                 P("LOSES — the Nintendo Switch", "Into Suitcase 2."),
-                P("GAINS — face suncream and shower gel", "Out of the large washbag before the cases are locked."),
                 P("GAINS — the travel keyboard", "Out of Cube 3. With the iPad and the mouse that is a working setup for the rest of the trip."),
                 P("KEEPS", "Book, iPad, cable, prescriptions, liquids bag, sleep kit, snacks, Larq, old trainers."),
             ],
