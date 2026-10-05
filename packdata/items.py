@@ -78,6 +78,8 @@ it("decant","Decant bottles, 100 ml","toiletries","L2",5,150,"always",
 it("suncream","Suncream — full size","toiletries","L2",1,200,"always",
    "Australian suncream is the best there is and cheap. Decant 100 ml for the onward leg.",True,inbag="washbag-lg")
 it("suncream-tr","Travel suncream","toiletries","L2",1,80,"always","For the plane and the first day before you buy properly.",inbag="washbag-lg")
+it("suncream-face","Face suncream","toiletries","CB",1,50,"always","",False,inbag="washbag-mini")
+it("showergel","Mini shower gel","toiletries","CB",1,60,"always","",False,inbag="washbag-mini")
 it("facewash","Travel facewash","toiletries","CB",1,90,"always","",inbag="washbag-mini")
 it("moisturiser","Moisturiser","toiletries","CB",1,100,"always",
    "Cabin bag on both long-hauls. Three sectors of dry cabin air each way.",True,inbag="washbag-mini")
@@ -130,7 +132,8 @@ it("ipad-mini","iPad mini — for handover","tech","L2",1,300,"handover",
 # ─────────────────────────────── KIT ───────────────────────────────
 it("larq","Larq bottle, 1L","kit","BP",1,500,"always",
    "Self-cleaning, so it earns itself in Thailand. Empty through security, fill after.",True)
-it("towel-lg","Microfibre towel — large","kit","L1",1,300,"store","Beach days in Perth. Stores at Phuket.")
+it("towel-lg","Microfibre towels — large","kit","L1",2,680,"store",
+   "Both stay in the stored case through Thailand — every hotel from Phuket onwards provides towels.")
 it("towel-sm","Microfibre towel — mini","kit","CB",1,120,"always",
    "The one that matters onward — ferries, the lake, Krabi longtails.",True)
 it("drybag","Dry bag, small — TO BUY","kit","BP",1,120,"buy",

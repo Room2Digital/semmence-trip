@@ -104,6 +104,17 @@ def css_sanity(path):
                  "silently kills the rest of the stylesheet." % path.name)
 
 
+def daybagrefs(data) -> None:
+    """A day bag line can reference an inventory item. If that id stops
+    existing the line still renders, it just quietly stops being linked —
+    which is how four dead references survived in the Rottnest bag."""
+    known = {i["id"] for i in data["items"]}
+    for d in data["daybags"]:
+        bad = [i["name"] for i in d["items"] if i.get("ref") and i["ref"] not in known]
+        if bad:
+            print("  pack %s: %d dead ref(s) — %s" % (d["id"], len(bad), ", ".join(bad)))
+
+
 def build() -> str:
     shell = (SRC / "shell.html").read_text(encoding="utf-8")
     for token, filename in (
@@ -225,6 +236,7 @@ def main():
               % (len(d["items"]), len(d["legs"]), len(d["bags"]),
                  sum(i.get("g", 0) or 0 for i in d["items"]) / 1000.0))
         packcoverage(d)
+        daybagrefs(d)
     print()
     print("'CHANGED' is expected once you start editing src/ — it means the")
     print("build picked your edits up. 'unchanged' means a pure reformat.")
