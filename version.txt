@@ -1,4 +1,4 @@
-v77
+v78
 2026-10-05
-index.html 326881 bytes md5 8a237013
-Pills sized to their own labels
+index.html 327521 bytes md5 541654c5
+Cards wear the colour of the button they belong to

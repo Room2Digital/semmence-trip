@@ -3994,3 +3994,30 @@ main.onwater {
   flex: 1 1 auto;
   padding: 7px 10px;
 }
+
+/* Each card wears the colour of the button that leads to the same place:
+   next stay matches Accommodation, tomorrow matches Plans. */
+.card.nxs {
+  background: linear-gradient(
+    160deg,
+    rgba(25, 158, 112, 0.16),
+    rgba(25, 158, 112, 0.04) 58%,
+    var(--surface)
+  );
+  border-color: rgba(25, 158, 112, 0.24);
+}
+.card.nxs .kicker {
+  color: rgba(25, 158, 112, 0.95);
+}
+.card.dayh.tmr {
+  background: linear-gradient(
+    160deg,
+    rgba(144, 133, 233, 0.16),
+    rgba(144, 133, 233, 0.04) 58%,
+    var(--surface)
+  );
+  border-color: rgba(144, 133, 233, 0.24);
+}
+.card.dayh.tmr .kicker {
+  color: rgba(144, 133, 233, 0.95);
+}
