@@ -185,7 +185,7 @@ LEGS = [
                     P("Nail clippers"),
                     P("5 decant bottles, 100 ml", "Filled in Phuket before the full-size goes into storage."),
                     P("Small medical pouch"),
-                    P("Motion sickness tablets", "You need these for the 06:00 Donsak ferry on 17 Jan, and this case is in Bangkok storage from the 10th. Move them into the mini washbag in Phuket, before the cases go into storage."),
+                    P("Motion sickness tablets", "You need these for the 07:00 Donsak ferry on 17 Jan, and this case is in Bangkok storage from the 10th. Move them into the mini washbag in Phuket, before the cases go into storage."),
                     P("Antihistamine"),
                     P("Antiseptic cream"),
                     P("Plasters and blister plasters", "Dragon Crest on 21 Jan. Same storage problem as the motion sickness tablets."),
@@ -468,7 +468,7 @@ LEGS = [
                     P("Paracetamol"),
                     P("Ibuprofen"),
                     P("Imodium"),
-                    P("Motion sickness tablets", "The 06:00 Donsak ferry on the 17th."),
+                    P("Motion sickness tablets", "The 07:00 Donsak ferry on the 17th. Take one before boarding, not when you feel it."),
                     P("Antihistamine"),
                     P("Antiseptic cream"),
                     P("Plasters and blister plasters"),
@@ -680,6 +680,8 @@ LEGS = [
             P("If they weigh the backpack, the trainers go in the cabin bag", "Bangkok Airways allow 5 kg and the backpack and sling come to 4.97 with the old trainers in. Not a problem — the cabin bag is being checked anyway, so they go in there at the desk and you are at 4.2 kg. Worth knowing before you are asked, not after."),
             P("Buy DEET before you go", "Stronger and cheaper in Bangkok than anything you would have carried."),
             P("Nothing to repack", "The cabin bag goes in the hold as it is. This is the easy one."),
+            P("Book the Lipa Noi taxi for the 17th", "Raja ferry departs 07:00, ref DFPV201439454, and Lipa Noi is 35 to 45 minutes from Bophut. Leave by 05:50. Ask Hansar reception to arrange it rather than hoping at 05:30."),
+            P("Motion sickness tablet the night before the 17th", "1h30 of open water at 07:00."),
         ],
         bags=[
             B("SL", "cabin", [

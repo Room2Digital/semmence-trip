@@ -108,7 +108,7 @@ it("nail","Nail clippers","toiletries","L2",1,40,"always","Fine in checked. Cabi
 # ────────────────────────────── HEALTH ──────────────────────────────
 it("medkit","Small medical pouch","health","L2",1,60,"always","",inbag="washbag-lg")
 it("imodium","Imodium","health","CB",1,20,"always",
-   "The 06:00 ferry on the 17th, then 2h15 by road to the lake. You cannot buy this at 5am on a pier.",True,inbag="washbag-mini")
+   "The 07:00 ferry on the 17th, then 2h15 by road to the lake. You cannot buy this at 6am on a pier.",True,inbag="washbag-mini")
 it("motion","Motion sickness tablets","health","L2",1,20,"always",
    "Samui to Donsak is 1h30 of open water. Take one before boarding, not when you feel it.",True,inbag="washbag-lg")
 it("paracetamol","Paracetamol","health","CB",1,40,"always","",inbag="washbag-mini")
@@ -183,7 +183,7 @@ it("gym-tops","Gym tops","clothing","CB",3,300,"always","")
 it("gym-shorts","Gym shorts","clothing","CB",2,300,"always","")
 it("belt","Belt","clothing","CB",1,150,"always","")
 it("hoodie","Hoodie","clothing","L1",1,520,"store",
-   "Suitcase, not worn. Note the consequence: the cases sit in Bangkok storage 10–23 Jan, so you have no warm layer for the 06:00 Donsak ferry or nights on the lake. You collect it on the 23rd in time for the flight home.",True)
+   "Suitcase, not worn. Note the consequence: the cases sit in Bangkok storage 10–23 Jan, so you have no warm layer for the 07:00 Donsak ferry or nights on the lake. You collect it on the 23rd in time for the flight home.",True)
 it("windbreaker","Windbreaker","clothing","CB",1,280,"always",
    "Packs to nothing. The one thing between you and a British 06:35 landing on 24 January.",True)
 it("tracksuit","Tracksuit bottoms","clothing","L1",1,420,"store",
