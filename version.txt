@@ -1,4 +1,4 @@
-v72
+v73
 2026-10-05
-index.html 324088 bytes md5 6be4611e
-Breathing room under the nav buttons
+index.html 328372 bytes md5 bacf929f
+A banner instead of the wordmark, and one header row
