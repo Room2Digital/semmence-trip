@@ -109,8 +109,6 @@ it("nail","Nail clippers","toiletries","L2",1,40,"always","Fine in checked. Cabi
 it("medkit","Small medical pouch","health","L2",1,60,"always","",inbag="washbag-lg")
 it("imodium","Imodium","health","CB",1,20,"always",
    "The 07:00 ferry on the 17th, then 2h15 by road to the lake. You cannot buy this at 6am on a pier.",True,inbag="washbag-mini")
-it("motion","Motion sickness tablets","health","L2",1,20,"always",
-   "Samui to Donsak is 1h30 of open water. Take one before boarding, not when you feel it.",True,inbag="washbag-lg")
 it("paracetamol","Paracetamol","health","CB",1,40,"always","",inbag="washbag-mini")
 it("ibuprofen","Ibuprofen","health","CB",1,40,"always","",inbag="washbag-mini")
 it("antihistamine","Antihistamine","health","L2",1,20,"always","Bites, heat rash, unfamiliar food.",inbag="washbag-lg")

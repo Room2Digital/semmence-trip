@@ -1,4 +1,4 @@
-v65
+v66
 2026-10-05
-index.html 316285 bytes md5 7092ef5c
-Donsak ferry booked — Raja, Lipa Noi, 07:00
+index.html 315374 bytes md5 ed100d04
+Ferry cost recorded; motion sickness tablets dropped
