@@ -554,6 +554,13 @@ const PK = (function () {
   return {
     view: view,
     load: load,
+    /* For the home screen: how far through the leg you are currently packing. */
+    progress: function () {
+      const l = legOf();
+      if (!l) return null;
+      const p = progress(l);
+      return { name: l.name, t: p.t, d: p.d, pc: p.pc };
+    },
     tick: tick,
     setAddBag: setAddBag,
     addSave: addSave,

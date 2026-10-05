@@ -233,6 +233,14 @@ function stayNext() {
   const t = e.in.slice(0, 10) <= iso(today()) ? "Where you are" : "Next stay";
   return `<div class="card nxs tapc" onclick="openStay(${e._i})">\n    <div class="nxs-head"><span class="kicker">${t}</span>\n      <span class="nxs-n">${e.nights} night${1 === e.nights ? "" : "s"}</span></div>\n    ${hero(e, "")}\n    <div class="nxs-body">\n      <h3 class="nxs-name">${esc(e.name)}</h3>\n      <div class="nxs-when">${fmtL(e.in.slice(0, 10))} &rarr; ${fmtL(e.out.slice(0, 10))}</div>\n      <div class="nxs-chips">${whoChip(e.who)}</div>\n    </div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
 }
+/* Packing ticks are already stored per leg; this just shows the number on the
+   home screen so the progress is visible without opening the tab. */
+function packCard() {
+  if ("P" === WHO || "object" != typeof PK || !PK.progress) return "";
+  const e = PK.progress();
+  if (!e || !e.t) return "";
+  return `<div class="card pkc tapc" onclick="setTab('pack')">\n    <div class="pkc-head"><span class="kicker">Packing &middot; ${esc(e.name)}</span>\n      <span class="pkc-pc">${e.pc}%</span></div>\n    <div class="pkc-bar"><span style="width:${e.pc}%"></span></div>\n    <div class="pkc-sub">${e.d} of ${e.t} packed${e.d < e.t ? " &middot; " + (e.t - e.d) + " to go" : " &middot; all done"}</div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
+}
 const NAVI = {
   flights:
     '<path d="M21 15.5 3 10V6.6l2 .7 1.6 2.3 5.1 1.6L9.2 3h2.6l5.4 7.9 3.4 1c.9.3 1.4.9 1.4 1.8v1.8z"/><path d="M3 19.5h18"/>',
@@ -277,10 +285,10 @@ function vHome() {
   if (e > n) return vPost();
   const a = iso(new Date(e.getTime() + 864e5));
   if (e < t)
-    return `<section class="sec">${navGrid()}${flightCD()}${stayNext()}${dayHero(a, "Tomorrow")}</section>`;
+    return `<section class="sec">${navGrid()}${flightCD()}${stayNext()}${dayHero(a, "Tomorrow")}${packCard()}</section>`;
   const s = iso(e);
   return (
-    `<section class="sec">\n    ${navGrid()}\n    ${flightSoon(3) ? flightCD() : ""}\n    ${stayNext()}\n    ${dayHero(s, "Today")}\n    ${a <= iso(n) ? dayHero(a, "Tomorrow") : ""}\n  </section>` +
+    `<section class="sec">\n    ${navGrid()}\n    ${flightSoon(3) ? flightCD() : ""}\n    ${stayNext()}\n    ${dayHero(s, "Today")}\n    ${a <= iso(n) ? dayHero(a, "Tomorrow") : ""}\n    ${packCard()}\n  </section>` +
     vToday(e)
   );
 }
@@ -939,7 +947,8 @@ function sheetBody() {
           esc(e.name),
           `${fmtL(e.date)}${e.start ? " · " + esc(e.start) : ""}${e.end ? "–" + esc(e.end) : ""}`,
         ) +
-          `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">\n        ${e.status ? `<span class="mchip ${"Idea" === e.status ? "idea" : "good"}">${esc(e.status)}</span>` : ""}<span class="mchip">${esc(e.type)}</span>\n        ${e.incl ? '<span class="mchip good">Included</span>' : null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}${e.paid ? " paid" : ""}</span>` : ""}${whoChip(e.who)}</div>` +
+          `<div class="fld actst"><label>Status</label><div class="pick3">${PSTAT.map((n) => `<button class="${e.status === n ? "on" : ""}" onclick="setActStatus(${t},'${n}')">${n}</button>`).join("")}</div></div>` +
+          `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">\n        <span class="mchip">${esc(e.type)}</span>\n        ${e.incl ? '<span class="mchip good">Included</span>' : null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}${e.paid ? " paid" : ""}</span>` : ""}${whoChip(e.who)}</div>` +
           (e.loc ? kv("Where", esc(e.loc)) : "") +
           ticket(e.ticket) +
           (e.note ? `<div class="br"><h4>The plan</h4><p>${esc(e.note)}</p></div>` : "") +
@@ -1166,6 +1175,35 @@ async function putEdit(e, t) {
       body: JSON.stringify({ key: e, data: t }),
     });
   } catch (e) {}
+}
+/* Idea / Planned / Booked straight from the plan, no edit form. Picks keep
+   their status in the picks table, everything else in plan_edit. */
+async function setActStatus(e, t) {
+  const n = T.activities[e];
+  if (!n || n.status === t) return;
+  if (n.sid && PICKS[n.sid]) {
+    const e = Object.assign({}, PICKS[n.sid], { status: t, booked: "Booked" === t });
+    try {
+      await fetch(`${SB_URL}/rest/v1/picks`, {
+        method: "POST",
+        headers: {
+          apikey: SB_KEY,
+          Authorization: "Bearer " + SB_KEY,
+          "Content-Type": "application/json",
+          Prefer: "resolution=merge-duplicates,return=minimal",
+        },
+        body: JSON.stringify(e),
+      });
+    } catch (e) {}
+    ((PICKS[n.sid] = e), store.set("picks", Object.values(PICKS)));
+  } else {
+    if (!n.ekey) return;
+    await putEdit(
+      n.ekey,
+      Object.assign({}, (PEDIT[n.ekey] || {}).data || {}, { status: t }),
+    );
+  }
+  ((KEEPY = window.scrollY), mergePicks(), render(), paintSheet());
 }
 async function dropEdit(e) {
   (delete PEDIT[e], store.set("pedit", Object.values(PEDIT)));

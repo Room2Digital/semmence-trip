@@ -4122,3 +4122,62 @@ main.onwater::before {
   color: var(--ink);
   border-color: rgba(255, 255, 255, 0.18);
 }
+
+/* Status switch sitting on the plan itself rather than in the edit form */
+.fld.actst {
+  margin: 0 0 12px;
+}
+.fld.actst label {
+  margin-bottom: 6px;
+}
+
+/* Packing progress on the home screen */
+.card.pkc {
+  position: relative;
+  padding: 13px 15px 14px;
+  background: linear-gradient(
+    160deg,
+    rgba(201, 133, 0, 0.15),
+    rgba(201, 133, 0, 0.04) 58%,
+    var(--surface)
+  );
+  border-color: rgba(201, 133, 0, 0.24);
+}
+.pkc-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-right: 22px;
+}
+.card.pkc .kicker {
+  color: rgba(201, 133, 0, 0.95);
+}
+.pkc-pc {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.pkc-bar {
+  margin-top: 9px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.pkc-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--yellow);
+  transition: width 0.3s;
+}
+.pkc-sub {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.card.pkc .nb-arw {
+  top: 15px;
+  right: 14px;
+}
