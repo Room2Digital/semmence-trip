@@ -23,10 +23,16 @@
       <div class="kicker" id="kicker">Itinerary</div>
       <h1 class="title"><span class="au">Australia</span> <span class="amp">&amp;</span> <span class="th">Thailand</span></h1>
     </div>
-    <button class="fxbtn" onclick="openFX()" aria-label="Currency converter">
-      <svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg>
-      <span>£</span>
-    </button>
+    <div class="hbtns">
+      <button class="fxbtn bellbtn" onclick="openNF()" aria-label="Notifications">
+        <svg viewBox="0 0 24 24"><path d="M18 16V11a6 6 0 1 0-12 0v5l-1.6 2.2h15.2z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg>
+        <span class="nfdotn" id="nfCount">0</span>
+      </button>
+      <button class="fxbtn" onclick="openFX()" aria-label="Currency converter">
+        <svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg>
+        <span>£</span>
+      </button>
+    </div>
   </div>
   <div class="toggle" id="trav">
     <button data-w="R" onclick="setWho('R')"><span class="tdot" style="background:var(--blue)"></span>Robbie</button>
@@ -37,6 +43,7 @@
 
 <main class="wrap" id="view"><div class="center">Loading…</div></main>
 <div id="fxhost"></div>
+<div id="nfhost"></div>
 <div id="sehost"></div>
 
 <nav class="tabs" id="tabs">
@@ -53,6 +60,7 @@
 /* Started here rather than at the end of app.js so the packing module is
    defined before the first render reaches for it. */
 ((document.getElementById("fxhost").innerHTML = fxBox()),
+  (document.getElementById("nfhost").innerHTML = notifBox()),
   fxPaint(),
   boot(),
   "serviceWorker" in navigator && navigator.serviceWorker.register("sw.js").catch(() => {}));

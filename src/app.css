@@ -3666,3 +3666,198 @@ a {
   margin-top: 6px;
   line-height: 1.45;
 }
+
+/* Header buttons — bell beside the converter */
+.hbtns {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+}
+.bellbtn {
+  position: relative;
+}
+.bellbtn svg {
+  width: 20px;
+  height: 20px;
+}
+.nfdotn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 9.5px;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  background: var(--orange, #e0693a);
+  border: 1.5px solid var(--surface);
+}
+.nfdotn.on {
+  display: flex;
+}
+.bellbtn span.nfdotn {
+  color: #fff;
+}
+
+/* Notifications sheet */
+.nfbox {
+  max-width: 360px;
+}
+.nfrow {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  margin-top: 9px;
+  padding: 11px 12px;
+  border-radius: 13px;
+  border: 1px solid var(--ring);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-family: var(--font);
+  cursor: pointer;
+}
+.nfrow:active {
+  filter: brightness(1.18);
+}
+.nfdot {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--yellow, #e3b341);
+}
+.nfrow.late .nfdot {
+  background: var(--orange, #e0693a);
+}
+.nftx {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nftx b {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.nftx i {
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--yellow, #e3b341);
+}
+.nfrow.late .nftx i {
+  color: var(--orange, #e0693a);
+}
+.nftx em {
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.nfnone {
+  margin-top: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  border: 1px dashed var(--ring);
+  border-radius: 13px;
+}
+
+/* Next stay card */
+.card.nxs {
+  position: relative;
+  padding: 13px 14px 14px;
+}
+.nxs-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+  padding-right: 22px;
+}
+.nxs-n {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.card.nxs .s-hero {
+  height: 116px;
+  margin: 0 0 11px;
+  border-radius: 13px;
+}
+.nxs-name {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.nxs-when {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.nxs-chips {
+  margin-top: 9px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.card.nxs .nb-arw {
+  top: 15px;
+  right: 14px;
+}
+
+/* Three nav buttons, one row, smaller */
+.navgrid.tight {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.navgrid.tight .navb {
+  min-height: 0;
+  padding: 10px 10px 11px;
+  border-radius: 15px;
+}
+.navgrid.tight .nb-ic {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  margin-bottom: 0;
+}
+.navgrid.tight .nb-ic svg {
+  width: 15px;
+  height: 15px;
+}
+.navgrid.tight .navb b {
+  margin-top: 9px;
+  font-size: 12.5px;
+}
+.navgrid.tight .navb i {
+  margin-top: 3px;
+  font-size: 10px;
+}
+.navgrid.tight .nb-arw {
+  display: none;
+}
+.navgrid.tight .navb:last-child:nth-child(odd) {
+  grid-column: auto;
+  min-height: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+.navgrid.tight .navb:last-child:nth-child(odd) .nb-ic {
+  margin-bottom: 0;
+}

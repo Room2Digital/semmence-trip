@@ -212,6 +212,27 @@ function nextFlight() {
 function flightCD() {
   return '<div class="card cdw">\n    <div class="cd-top"><span class="cd-dot"></span><span class="kicker">Next flight</span></div>\n    <div class="cd-route" id="cdRoute">&mdash;</div>\n    <div class="cdgrid">\n      <div class="cdu"><b id="cd-d">--</b><i>days</i></div>\n      <div class="cdu"><b id="cd-h">--</b><i>hrs</i></div>\n      <div class="cdu"><b id="cd-m">--</b><i>min</i></div>\n      <div class="cdu"><b id="cd-s">--</b><i>sec</i></div>\n    </div>\n    <div class="cd-when" id="cdWhen"></div>\n  </div>';
 }
+/* The stay you are in today, or the next one to start. No countdown — knowing
+   which bed is next is the useful part, not how many seconds away it is. */
+function nextStay() {
+  if (!T || !T.stays) return null;
+  const e = iso(today()),
+    t = T.stays
+      .filter(mine)
+      .slice()
+      .sort((e, t) => e.in.localeCompare(t.in));
+  return (
+    t.find((t) => t.in.slice(0, 10) <= e && e < t.out.slice(0, 10)) ||
+    t.find((t) => t.in.slice(0, 10) > e) ||
+    null
+  );
+}
+function stayNext() {
+  const e = nextStay();
+  if (!e) return "";
+  const t = e.in.slice(0, 10) <= iso(today()) ? "Where you are" : "Next stay";
+  return `<div class="card nxs tapc" onclick="openStay(${e._i})">\n    <div class="nxs-head"><span class="kicker">${t}</span>\n      <span class="nxs-n">${e.nights} night${1 === e.nights ? "" : "s"}</span></div>\n    ${hero(e, "")}\n    <div class="nxs-body">\n      <h3 class="nxs-name">${esc(e.name)}</h3>\n      <div class="nxs-when">${fmtL(e.in.slice(0, 10))} &rarr; ${fmtL(e.out.slice(0, 10))}</div>\n      <div class="nxs-chips">${e.kind ? `<span class="mchip">${esc(e.kind)}</span>` : ""}${e.room ? `<span class="mchip">${esc(e.room)}</span>` : ""}${whoChip(e.who)}</div>\n    </div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
+}
 const NAVI = {
   flights:
     '<path d="M21 15.5 3 10V6.6l2 .7 1.6 2.3 5.1 1.6L9.2 3h2.6l5.4 7.9 3.4 1c.9.3 1.4.9 1.4 1.8v1.8z"/><path d="M3 19.5h18"/>',
@@ -237,7 +258,7 @@ function navGrid() {
     o = "function" == typeof sugAll ? sugAll().filter((e) => i.includes(e.leg)) : [],
     l = o.filter((e) => PICKS[e.id]).length,
     c = (e) => `<em class="nb-warn">${e}</em>`;
-  return `<div class="navgrid">\n    ${navBtn("flights", "57,135,229", "Flights", `${e.length - t} booked${t ? " · " + c(t + " to book") : ""}`, "travel", "sec-flights")}\n    ${navBtn("stays", "25,158,112", "Accommodation", `${n.length} stay${1 === n.length ? "" : "s"}${s ? " · " + c(s + " night" + (1 === s ? "" : "s") + " open") : ""}`, "stays")}\n    ${navBtn("plans", "144,133,233", ideasOn() ? "Plans &amp; ideas" : "Plans", `${a} planned${ideasOn() ? ` · ${o.length} ideas` : ""}${l ? ` · ${l} chosen` : ""}`, "cal")}\n  </div>`;
+  return `<div class="navgrid tight">\n    ${navBtn("flights", "57,135,229", "Flights", `${e.length - t} booked${t ? " · " + c(t + " to book") : ""}`, "travel", "sec-flights")}\n    ${navBtn("stays", "25,158,112", "Accommodation", `${n.length} stay${1 === n.length ? "" : "s"}${s ? " · " + c(s + " night" + (1 === s ? "" : "s") + " open") : ""}`, "stays")}\n    ${navBtn("plans", "144,133,233", ideasOn() ? "Plans &amp; ideas" : "Plans", `${a} planned${ideasOn() ? ` · ${o.length} ideas` : ""}${l ? ` · ${l} chosen` : ""}`, "cal")}\n  </div>`;
 }
 function go(e, t) {
   ("cal" === e && ((PLEG = null), (PDAY = null)),
@@ -263,23 +284,101 @@ function vHome() {
     t = D(T.start),
     n = D(T.end);
   if (e > n) return vPost();
+  const a = iso(new Date(e.getTime() + 864e5));
   if (e < t)
     return (
-      `<section class="sec">${flightCD()}${navGrid()}</section>` + vPre(nDays(e, t)) + infoBtn()
+      `<section class="sec">${flightCD()}${stayNext()}${dayHero(a, "Tomorrow")}${navGrid()}</section>` +
+      infoBtn()
     );
-  const s = iso(e),
-    a = iso(new Date(e.getTime() + 864e5));
+  const s = iso(e);
   return (
-    `<section class="sec">\n    ${flightSoon(3) ? flightCD() : ""}\n    ${dayHero(s, "Today")}\n    ${a <= iso(n) ? dayHero(a, "Tomorrow") : ""}\n    ${navGrid()}\n  </section>` +
+    `<section class="sec">\n    ${flightSoon(3) ? flightCD() : ""}\n    ${stayNext()}\n    ${dayHero(s, "Today")}\n    ${a <= iso(n) ? dayHero(a, "Tomorrow") : ""}\n    ${navGrid()}\n  </section>` +
     vToday(e) +
     infoBtn()
   );
 }
 const infoBtn = () =>
   '<section class="sec"><button class="infob" onclick="setTab(\'info\')">\n  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>\n  <span><b>Trip info</b><i>Visas, money, to-do list, what to pack</i></span>\n  <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n</button></section>';
-function vPre(e) {
-  const t = T.deadlines.filter(mine).sort((e, t) => e.date.localeCompare(t.date))[0];
-  return `\n  ${t ? `<section class="sec"><div class="note err"><b>${esc(t.title)}</b> — ${fmt(t.date)} at ${esc(t.time)}.<br>${esc(t.detail)}</div></section>` : ""}`;
+/* Deadlines and open bookings used to sit as a red note on the homepage. They
+   live behind the bell in the header now, so the homepage stays calm. */
+function notifs() {
+  if (!T) return [];
+  const e = iso(today()),
+    t = [];
+  return (
+    (T.deadlines || [])
+      .filter(mine)
+      .slice()
+      .sort((e, t) => e.date.localeCompare(t.date))
+      .forEach((n) => {
+        t.push({
+          tone: n.date < e ? "late" : "due",
+          title: n.title,
+          when: fmt(n.date) + (n.time ? " at " + n.time : ""),
+          detail: n.detail || "",
+          go: "info",
+        });
+      }),
+    (T.flights || [])
+      .filter(mine)
+      .filter((e) => e.tbc)
+      .slice()
+      .sort((e, t) => e.dep.localeCompare(t.dep))
+      .forEach((e) => {
+        t.push({
+          tone: "due",
+          title: "Flight not booked",
+          when: fmt(e.dep.slice(0, 10)),
+          detail: city(e.from).name + " → " + city(e.to).name,
+          go: "travel",
+        });
+      }),
+    (T.gaps || [])
+      .filter(mine)
+      .slice()
+      .sort((e, t) => e.from.localeCompare(t.from))
+      .forEach((e) => {
+        t.push({
+          tone: "late",
+          title: "No accommodation booked",
+          when: fmt(e.from) + " → " + fmt(e.to),
+          detail: city(e.city).name + " · " + e.nights + " night" + (1 === e.nights ? "" : "s"),
+          go: "stays",
+        });
+      }),
+    t
+  );
+}
+function notifBox() {
+  return '<div class="modal" id="nf" onclick="if(event.target===this)closeNF()">\n    <div class="mbox nfbox" role="dialog" aria-modal="true" aria-label="Notifications">\n      <button class="mx" onclick="closeNF()" aria-label="Close">&times;</button>\n      <div class="kicker">Notifications</div>\n      <div id="nfList"></div>\n    </div></div>';
+}
+function openNF() {
+  (nfPaint(), document.getElementById("nf").classList.add("open"), syncLock());
+}
+function closeNF() {
+  (document.getElementById("nf").classList.remove("open"), syncLock());
+}
+function nfGo(e) {
+  (closeNF(), setTab(e));
+}
+function nfPaint() {
+  const e = document.getElementById("nfList");
+  if (!e) return;
+  const t = notifs();
+  e.innerHTML = t.length
+    ? t
+        .map(
+          (e) =>
+            `<button class="nfrow ${e.tone}" onclick="nfGo('${e.go}')">\n      <span class="nfdot"></span>\n      <span class="nftx"><b>${esc(e.title)}</b><i>${esc(e.when)}</i>${e.detail ? `<em>${esc(e.detail)}</em>` : ""}</span>\n      <svg class="nb-arw" style="position:static;opacity:.45" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>`,
+        )
+        .join("")
+    : '<div class="nfnone">Nothing needs you right now.</div>';
+}
+function nfBadge() {
+  const e = document.getElementById("nfCount");
+  if (!e) return;
+  const t = notifs().length;
+  ((e.textContent = t > 9 ? "9+" : t), e.classList.toggle("on", t > 0));
 }
 const entryTitle = (e) =>
   "flight" === e.k
@@ -763,7 +862,15 @@ function closeSheet() {
 }
 function syncLock() {
   const e = document.getElementById("fx"),
-    t = !!(MAPV || SHEET || SEDIT || CALOPEN || (e && e.classList.contains("open")));
+    n = document.getElementById("nf"),
+    t = !!(
+      MAPV ||
+      SHEET ||
+      SEDIT ||
+      CALOPEN ||
+      (e && e.classList.contains("open")) ||
+      (n && n.classList.contains("open"))
+    );
   document.body.style.overflow = t ? "hidden" : "";
 }
 function paintSheet() {
@@ -2851,7 +2958,7 @@ function render() {
     const e = KEEPY;
     ((KEEPY = null), window.scrollTo(0, e));
   }
-  (restoreX(), ticks());
+  (restoreX(), ticks(), nfBadge());
 }
 function setWho(e) {
   ((WHO = e), store.set("who", e), render());
