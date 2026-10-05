@@ -78,8 +78,10 @@ it("decant","Decant bottles, 100 ml","toiletries","L2",5,150,"always",
 it("suncream","Suncream — full size","toiletries","L2",1,200,"always",
    "Australian suncream is the best there is and cheap. Decant 100 ml for the onward leg.",True,inbag="washbag-lg")
 it("suncream-tr","Travel suncream","toiletries","L2",1,80,"always","For the plane and the first day before you buy properly.",inbag="washbag-lg")
-it("suncream-face","Face suncream","toiletries","CB",1,50,"always","",False,inbag="washbag-mini")
-it("showergel","Mini shower gel","toiletries","CB",1,60,"always","",False,inbag="washbag-mini")
+it("suncream-face","Face suncream","toiletries","L2",1,50,"store",
+   "Day one in Perth and the Rottnest day, both before Thailand — so it lives in the case and stays in Bangkok.",False,inbag="washbag-lg")
+it("showergel","Mini shower gel","toiletries","L2",1,60,"store",
+   "Day one in Perth and the Rottnest day. Every hotel after that provides it.",False,inbag="washbag-lg")
 it("facewash","Travel facewash","toiletries","CB",1,90,"always","",inbag="washbag-mini")
 it("moisturiser","Moisturiser","toiletries","CB",1,100,"always",
    "Cabin bag on both long-hauls. Three sectors of dry cabin air each way.",True,inbag="washbag-mini")
