@@ -1,4 +1,4 @@
-v70
+v71
 2026-10-05
-index.html 324538 bytes md5 9ba0a514
-Next stay, a tomorrow card, tighter nav buttons, and a notifications bell
+index.html 323943 bytes md5 4a1f6ca1
+Nav buttons first, trip info in the header, a leaner stay tile

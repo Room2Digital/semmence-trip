@@ -3861,3 +3861,25 @@ a {
 .navgrid.tight .navb:last-child:nth-child(odd) .nb-ic {
   margin-bottom: 0;
 }
+
+/* Three header buttons now, so trim them a touch to leave room for the title */
+.hbtns .fxbtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+.hbtns .fxbtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Keep the first notification clear of the close button */
+.nfbox > .kicker {
+  padding-right: 36px;
+}
+.nfbox #nfList {
+  margin-top: 16px;
+}
+.nfbox .nfrow:first-child {
+  margin-top: 0;
+}

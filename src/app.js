@@ -231,7 +231,7 @@ function stayNext() {
   const e = nextStay();
   if (!e) return "";
   const t = e.in.slice(0, 10) <= iso(today()) ? "Where you are" : "Next stay";
-  return `<div class="card nxs tapc" onclick="openStay(${e._i})">\n    <div class="nxs-head"><span class="kicker">${t}</span>\n      <span class="nxs-n">${e.nights} night${1 === e.nights ? "" : "s"}</span></div>\n    ${hero(e, "")}\n    <div class="nxs-body">\n      <h3 class="nxs-name">${esc(e.name)}</h3>\n      <div class="nxs-when">${fmtL(e.in.slice(0, 10))} &rarr; ${fmtL(e.out.slice(0, 10))}</div>\n      <div class="nxs-chips">${e.kind ? `<span class="mchip">${esc(e.kind)}</span>` : ""}${e.room ? `<span class="mchip">${esc(e.room)}</span>` : ""}${whoChip(e.who)}</div>\n    </div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
+  return `<div class="card nxs tapc" onclick="openStay(${e._i})">\n    <div class="nxs-head"><span class="kicker">${t}</span>\n      <span class="nxs-n">${e.nights} night${1 === e.nights ? "" : "s"}</span></div>\n    ${hero(e, "")}\n    <div class="nxs-body">\n      <h3 class="nxs-name">${esc(e.name)}</h3>\n      <div class="nxs-when">${fmtL(e.in.slice(0, 10))} &rarr; ${fmtL(e.out.slice(0, 10))}</div>\n      <div class="nxs-chips">${whoChip(e.who)}</div>\n    </div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
 }
 const NAVI = {
   flights:
@@ -244,21 +244,12 @@ const NAVI = {
   map: '<path d="m9 4-6 2.5v13L9 17l6 3 6-2.5v-13L15 7z"/><path d="M9 4v13"/><path d="M15 7v13"/>',
 };
 function navBtn(e, t, n, s, a, i, o) {
-  return `<button class="navb${o ? " wide" : ""}" onclick="${o || `go('${a}'${i ? ",'" + i + "'" : ""})`}"\n    style="background:linear-gradient(160deg,rgba(${t},.16),rgba(${t},.04) 58%,var(--surface));border-color:rgba(${t},.24)">\n    <span class="nb-ic" style="background:rgba(${t},.20)">\n      <svg viewBox="0 0 24 24" style="stroke:rgb(${t})">${NAVI[e]}</svg></span>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n    <span class="nb-txt"><b>${n}</b><i>${s}</i></span></button>`;
+  return `<button class="navb${o ? " wide" : ""}" onclick="${o || `go('${a}'${i ? ",'" + i + "'" : ""})`}"\n    style="background:linear-gradient(160deg,rgba(${t},.16),rgba(${t},.04) 58%,var(--surface));border-color:rgba(${t},.24)">\n    <span class="nb-ic" style="background:rgba(${t},.20)">\n      <svg viewBox="0 0 24 24" style="stroke:rgb(${t})">${NAVI[e]}</svg></span>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n    <span class="nb-txt"><b>${n}</b>${s ? `<i>${s}</i>` : ""}</span></button>`;
 }
+/* Just three doors. The counts that used to sit under each label were a
+   preview nobody needed — the section itself is one tap away. */
 function navGrid() {
-  const e = T.flights.filter(mine),
-    t = e.filter((e) => e.tbc).length,
-    n = T.stays.filter(mine),
-    s = T.gaps.filter(mine).reduce((e, t) => e + (t.nights || 0), 0),
-    a = T.activities.filter(mine).length,
-    i = (T.legs || [])
-      .filter((e) => "ALL" === WHO || "RP" === e.who || e.who === WHO)
-      .map((e) => e.id),
-    o = "function" == typeof sugAll ? sugAll().filter((e) => i.includes(e.leg)) : [],
-    l = o.filter((e) => PICKS[e.id]).length,
-    c = (e) => `<em class="nb-warn">${e}</em>`;
-  return `<div class="navgrid tight">\n    ${navBtn("flights", "57,135,229", "Flights", `${e.length - t} booked${t ? " · " + c(t + " to book") : ""}`, "travel", "sec-flights")}\n    ${navBtn("stays", "25,158,112", "Accommodation", `${n.length} stay${1 === n.length ? "" : "s"}${s ? " · " + c(s + " night" + (1 === s ? "" : "s") + " open") : ""}`, "stays")}\n    ${navBtn("plans", "144,133,233", ideasOn() ? "Plans &amp; ideas" : "Plans", `${a} planned${ideasOn() ? ` · ${o.length} ideas` : ""}${l ? ` · ${l} chosen` : ""}`, "cal")}\n  </div>`;
+  return `<div class="navgrid tight">\n    ${navBtn("flights", "57,135,229", "Flights", "", "travel", "sec-flights")}\n    ${navBtn("stays", "25,158,112", "Accommodation", "", "stays")}\n    ${navBtn("plans", "144,133,233", ideasOn() ? "Plans &amp; ideas" : "Plans", "", "cal")}\n  </div>`;
 }
 function go(e, t) {
   ("cal" === e && ((PLEG = null), (PDAY = null)),
@@ -286,19 +277,13 @@ function vHome() {
   if (e > n) return vPost();
   const a = iso(new Date(e.getTime() + 864e5));
   if (e < t)
-    return (
-      `<section class="sec">${flightCD()}${stayNext()}${dayHero(a, "Tomorrow")}${navGrid()}</section>` +
-      infoBtn()
-    );
+    return `<section class="sec">${navGrid()}${flightCD()}${stayNext()}${dayHero(a, "Tomorrow")}</section>`;
   const s = iso(e);
   return (
-    `<section class="sec">\n    ${flightSoon(3) ? flightCD() : ""}\n    ${stayNext()}\n    ${dayHero(s, "Today")}\n    ${a <= iso(n) ? dayHero(a, "Tomorrow") : ""}\n    ${navGrid()}\n  </section>` +
-    vToday(e) +
-    infoBtn()
+    `<section class="sec">\n    ${navGrid()}\n    ${flightSoon(3) ? flightCD() : ""}\n    ${stayNext()}\n    ${dayHero(s, "Today")}\n    ${a <= iso(n) ? dayHero(a, "Tomorrow") : ""}\n  </section>` +
+    vToday(e)
   );
 }
-const infoBtn = () =>
-  '<section class="sec"><button class="infob" onclick="setTab(\'info\')">\n  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>\n  <span><b>Trip info</b><i>Visas, money, to-do list, what to pack</i></span>\n  <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n</button></section>';
 /* Deadlines and open bookings used to sit as a red note on the homepage. They
    live behind the bell in the header now, so the homepage stays calm. */
 function notifs() {
