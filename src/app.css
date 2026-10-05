@@ -53,11 +53,16 @@ body {
   max-width: 100%;
   overflow-x: clip;
 }
-#view,
 header,
 nav {
   max-width: 100%;
   overflow-x: clip;
+}
+/* #view deliberately has no overflow of its own: iOS Safari turns a clipped
+   axis into a scroll container, which stops position:sticky working for
+   anything inside it. html and body already clip horizontally. */
+#view {
+  max-width: 100%;
 }
 .cal-day,
 .cal-grid,
@@ -3941,6 +3946,14 @@ main.onwater {
   z-index: 2;
   margin-top: calc(var(--heroH) * -0.4);
   padding-top: 14px;
+}
+/* The translucent sheet lives on a pseudo-element rather than on #view, so
+   that no backdrop-filter sits in the ancestry of the sticky date headers. */
+main.onwater::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   border-radius: 24px 24px 0 0;
   background: linear-gradient(
     180deg,

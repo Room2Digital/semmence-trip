@@ -1,4 +1,4 @@
-v79
+v80
 2026-10-05
-index.html 329755 bytes md5 a8b25427
-One date header for both plans views, pinned while its day lasts
+index.html 330238 bytes md5 d0084df9
+Sticky date headers now work on iOS
