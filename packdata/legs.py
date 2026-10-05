@@ -123,7 +123,6 @@ LEGS = [
                 P("MacBook Air", "You are working from Perth from 23 Nov."),
                 P("60W USB-C mains supply", "The one that charges the Air. The fold-up 3-in-1 will not."),
                 P("Fold-up 3-in-1 charger"),
-                P("Travel keyboard — fold-up"),
                 P("Mouse"),
                 P("USB-C dongle"),
                 P("HDMI cable"),
@@ -144,7 +143,7 @@ LEGS = [
                     "paracetamol","imodium","ibuprofen",
                     "liquids-bag","toothpaste-mini","shave-foam","aftershave","deodorant",
                     "sanitiser","lipbalm","prescriptions",
-                    "mba","mouse","keyboard","dongle","hdmi","ps5-pad","hdmi-switch",
+                    "mba","mouse","dongle","hdmi","ps5-pad","hdmi-switch",
                     "plug-uk","charger-3in1","running","towel-sm"]),
 
             B("L1", "checked", [
@@ -196,6 +195,7 @@ LEGS = [
                 P("MacBook Pro", "For the Phuket handover. In the case, not the cabin bag."),
                 P("iPad mini", "Same handover."),
                 P("Universal travel adapter with USB-C"),
+                P("Travel keyboard — ProtoArc XK01"),
                 P("Luggage scales", "What gets the cabin bag under 7 kg in Phuket."),
                 P("4 packing cubes", "Pre-pack these: Cube 1 clothing, Cube 2 gym and footwear, Cube 3 kit."),
                 P("Lockable daypack"),
@@ -206,7 +206,7 @@ LEGS = [
                 P("Swimming goggles", "Still to buy."),
             ],
                ids=["washbag-lg","suncream","suncream-tr","deodorant-spare","toothpaste","cable-shaver",
-                    "decant","mozzie","eyecream","nail",
+                    "keyboard","decant","mozzie","eyecream","nail",
                     "medkit","motion","antihistamine","antiseptic","plasters","rehydration","athletes",
                     "mbp","ipad-mini","adapter-universal","scales","cubes","daypack","notepad","laundry-bag","binbags","drybag","goggles"]),
 
@@ -323,7 +323,6 @@ LEGS = [
                 P("Luggage scales", "This is the bag that has to come under 7 kg at Phuket. Keep them with it."),
                 P("60W USB-C mains supply", "In here rather than a suitcase — the cases go into storage on the 10th and this is the only charger that will do the iPad."),
                 P("Fold-up 3-in-1 charger", "Same reason. Watch, phone and AirPods."),
-                P("Travel keyboard — fold-up", "With the iPad and the mouse this is a working setup from Bangkok onwards, which is the point of leaving the laptop behind."),
                 P("Mouse"),
                 P("Universal travel adapter"),
                 P("Qatar pyjamas"),
@@ -338,7 +337,7 @@ LEGS = [
                     "towel-sm","drybag","goggles","laundry-bag","binbags","daypack",
                     "washbag-mini","facewash","shaver","etoothbrush","moisturiser",
                     "paracetamol","imodium","ibuprofen",
-                    "scales","plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "scales","plug-uk","charger-3in1","mouse","adapter-universal",
                     "pyjamas","belt","hats","hat-gym","windbreaker","cubes"]),
 
             B("L1", "checked", [
@@ -357,6 +356,7 @@ LEGS = [
                 P("MacBook Pro", "For the handover in Phuket."),
                 P("iPad mini", "Same handover."),
                 P("MacBook Air", "Legal in the hold — the battery is sealed in, so it only has to be fully off and packed so it cannot be crushed. Not sleeping: off."),
+                P("Travel keyboard — ProtoArc XK01"),
                 P("USB-C dongle"),
                 P("HDMI cable"),
                 P("Large fold-out washbag", inside=[
@@ -380,7 +380,7 @@ LEGS = [
                 P("Thai notepad"),
                 P("The Perth surplus", "Whatever you bought and are keeping. This case has the room."),
             ],
-               ids=["mbp","ipad-mini","mba","dongle","hdmi",
+               ids=["mbp","ipad-mini","mba","dongle","hdmi","keyboard",
                     "washbag-lg","suncream","suncream-tr","decant","mozzie",
                     "eyecream","nail","deodorant-spare","toothpaste","cable-shaver","medkit","motion",
                     "antihistamine","antiseptic","plasters","rehydration","athletes","notepad"]),
@@ -481,7 +481,6 @@ LEGS = [
                 P("Mosquito spray", "Khao Sok on the 17th. Buy stronger DEET in Bangkok."),
                 P("60W USB-C mains supply"),
                 P("Fold-up 3-in-1 charger"),
-                P("Travel keyboard — fold-up"),
                 P("Mouse"),
                 P("Universal travel adapter"),
                 P("Microfibre towel, mini"),
@@ -494,7 +493,7 @@ LEGS = [
                     "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
                     "antiseptic","plasters","rehydration","athletes",
                     "decant","suncream-tr","toothpaste","mozzie",
-                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "plug-uk","charger-3in1","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","cubes"]),
 
             B("L1", "checked", [
@@ -521,6 +520,7 @@ LEGS = [
                     P("Gym hat"),
                 ]),
                 P("CUBE 3 — kit", "Lift into the cabin bag.", inside=[
+                    P("Travel keyboard — ProtoArc XK01", "Comes out here and lives in the backpack from Bangkok onwards."),
                     P("Small dry bag", "Khao Sok arrives by boat; the Krabi longtails soak everything."),
                     P("Swimming goggles"),
                     P("Dirty laundry bags"),
@@ -531,7 +531,7 @@ LEGS = [
                     ("shorts", 2), "trousers", "swim", "belt", "pyjamas",
                     ("gym-tops", 2), "gym-shorts", ("socks-gym", 2),
                     "running", "sandals", "sliders", ("hats", 1), "hat-gym",
-                    "drybag", "goggles", "laundry-bag", "binbags"]),
+                    "keyboard", "drybag", "goggles", "laundry-bag", "binbags"]),
 
             B("L2", "checked", [
                 P("THE STORAGE CASE", "Never opened at Bangkok. Straight from the belt to Smilelugg."),
@@ -608,14 +608,14 @@ LEGS = [
                     P("Cube 2 — gym and footwear"),
                     P("Cube 3 — kit"),
                 ]),
-                P("ALREADY IN IT", "Washbag, health kit, decants, suncream, mosquito spray, chargers, keyboard, mouse, adapter, towel, daypack, scales, one change of clothes."),
+                P("ALREADY IN IT", "Washbag, health kit, decants, suncream, mosquito spray, chargers, mouse, adapter, towel, daypack, scales, one change of clothes."),
                 P("RESULT: about 15.6 kg", "No weight limit applies to it again until the 23rd. This is your luggage now."),
             ],
                ids=["washbag-mini","facewash","shaver","etoothbrush","moisturiser",
                     "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
                     "antiseptic","plasters","rehydration","athletes",
                     "decant","suncream-tr","toothpaste","mozzie",
-                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "plug-uk","charger-3in1","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","cubes",
                     ("boxers", 5), ("socks-white", 5), ("tees", 6), ("shirts-nice", 2),
                     ("shorts", 2), "trousers", "swim", "belt", "pyjamas",
@@ -625,9 +625,10 @@ LEGS = [
 
             B("BP", "with", [
                 P("LOSES — the Nintendo Switch", "Into Suitcase 2."),
+                P("GAINS — the travel keyboard", "Out of Cube 3. With the iPad and the mouse that is a working setup for the rest of the trip."),
                 P("KEEPS", "Book, iPad, cable, prescriptions, liquids bag, sleep kit, snacks, Larq, old trainers."),
             ],
-               ids=["book","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","keyboard","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -710,9 +711,10 @@ LEGS = [
                 P("Earplugs"),
                 P("Snacks"),
                 P("Larq bottle"),
+                P("Travel keyboard — ProtoArc XK01"),
                 P("Old trainers", "For Dragon Crest on the 21st. Here rather than the cabin bag to keep that case packable — but the cabin bag is checked on this leg, so they can move across at the desk if anyone weighs the backpack."),
             ],
-               ids=["book","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","keyboard","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -735,7 +737,7 @@ LEGS = [
                 ]),
                 P("TECH", inside=[
                     P("60W USB-C mains supply"), P("Fold-up 3-in-1 charger"),
-                    P("Travel keyboard"), P("Mouse"), P("Universal travel adapter"),
+                    P("Mouse"), P("Universal travel adapter"),
                 ]),
                 P("KIT", inside=[
                     P("Microfibre towel, mini"), P("Dry bag"), P("Swimming goggles"),
@@ -747,7 +749,7 @@ LEGS = [
                     "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
                     "antiseptic","plasters","rehydration","athletes",
                     "decant","suncream-tr","toothpaste","mozzie",
-                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "plug-uk","charger-3in1","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","cubes",
                     ("boxers", 5), ("socks-white", 5), ("tees", 6), ("shirts-nice", 2),
                     ("shorts", 2), "trousers", "swim", "belt", "pyjamas",
@@ -820,9 +822,10 @@ LEGS = [
                 P("Earplugs"),
                 P("Snacks"),
                 P("Larq bottle"),
+                P("Travel keyboard — ProtoArc XK01"),
                 P("Old trainers", "For Dragon Crest on the 21st. Here rather than the cabin bag to keep that case packable — but the cabin bag is checked on this leg, so they can move across at the desk if anyone weighs the backpack."),
             ],
-               ids=["book","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
+               ids=["book","keyboard","trainers-old","ipad-air","cable-ext","prescriptions","liquids-bag",
                     "toothpaste-mini","shave-foam","aftershave","deodorant","sanitiser","lipbalm",
                     "mouthtape","eyemask","earplugs","snacks","larq"]),
 
@@ -845,7 +848,7 @@ LEGS = [
                 ]),
                 P("TECH", inside=[
                     P("60W USB-C mains supply"), P("Fold-up 3-in-1 charger"),
-                    P("Travel keyboard"), P("Mouse"), P("Universal travel adapter"),
+                    P("Mouse"), P("Universal travel adapter"),
                 ]),
                 P("KIT", inside=[
                     P("Microfibre towel, mini"), P("Dry bag"), P("Swimming goggles"),
@@ -857,7 +860,7 @@ LEGS = [
                     "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
                     "antiseptic","plasters","rehydration","athletes",
                     "decant","suncream-tr","toothpaste","mozzie",
-                    "plug-uk","charger-3in1","keyboard","mouse","adapter-universal",
+                    "plug-uk","charger-3in1","mouse","adapter-universal",
                     "towel-sm","daypack","compression","scales","cubes",
                     ("boxers", 5), ("socks-white", 5), ("tees", 6), ("shirts-nice", 2),
                     ("shorts", 2), "trousers", "swim", "belt", "pyjamas",
@@ -925,6 +928,7 @@ LEGS = [
                 P("iPad Air"),
                 P("Extendable USB-C cable"),
                 P("Fold-up 3-in-1 charger"),
+                P("Travel keyboard — ProtoArc XK01"),
                 P("Prescription medication"),
                 P("Clear 1L liquids bag", "Two security checks tonight — Bangkok and Doha.", inside=[
                     P("Mini toothpaste"),
@@ -942,7 +946,7 @@ LEGS = [
                 P("Larq bottle, empty"),
             ],
                ids=["book","switch","ps5-pad","hdmi-switch","sony","ipad-air","cable-ext",
-                    "charger-3in1","prescriptions","liquids-bag","toothpaste-mini","shave-foam",
+                    "charger-3in1","keyboard","prescriptions","liquids-bag","toothpaste-mini","shave-foam",
                     "aftershave","deodorant","sanitiser","lipbalm","mouthtape","eyemask","earplugs",
                     "compression","snacks","larq"]),
 
@@ -957,7 +961,6 @@ LEGS = [
                 ]),
                 P("MacBook Air", "Out of storage. Cabin rather than hold now you are carrying it home."),
                 P("60W USB-C mains supply"),
-                P("Travel keyboard — fold-up"),
                 P("Mouse"),
                 P("One change of clothes", "2 boxers, 2 socks, 2 T-shirts. Twenty-six hours is long enough to want them."),
                 P("Qatar pyjamas", "They are yours. You will be given another pair anyway."),
@@ -967,7 +970,7 @@ LEGS = [
                 P("Packing cubes"),
             ],
                ids=["hoodie","tracksuit","washbag-mini","facewash","shaver","etoothbrush",
-                    "moisturiser","mba","plug-uk","keyboard","mouse","pyjamas","towel-sm",
+                    "moisturiser","mba","plug-uk","mouse","pyjamas","towel-sm",
                     "medkit","paracetamol","ibuprofen","imodium","motion","antihistamine",
                     "antiseptic","plasters","rehydration","athletes",
                     "scales","cubes"]),

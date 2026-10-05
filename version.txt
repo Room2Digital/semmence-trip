@@ -1,4 +1,4 @@
-v63
-2026-10-04
-index.html 315673 bytes md5 5280d59a
-Rottnest is its own place; TSA locks gone; plan locations tidied
+v64
+2026-10-05
+index.html 315918 bytes md5 f81d83a5
+Keyboard rides in a case until Bangkok, then the backpack

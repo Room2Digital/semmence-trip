@@ -40,8 +40,8 @@ it("mba","MacBook Air","tech","L2",1,1240,"store",
 it("dongle","USB-C dongle","tech","L2",1,40,"store","Stores with the Air.")
 it("mouse","Mouse","tech","CB",1,80,"always",
    "Stays with you. With the iPad and the fold-up keyboard it is a working setup without the laptop.")
-it("keyboard","Travel keyboard — fold-up","tech","CB",1,180,"always",
-   "The other half of the no-laptop setup. Bluetooth, so remember it needs charging too.")
+it("keyboard","Travel keyboard — ProtoArc XK01","tech","L1",1,298,"always",
+   "Tri-fold, full size with a number pad, UK QWERTY. 298 g, which is not nothing — it rides in a suitcase until Bangkok and only moves to the backpack once the cases go into storage.")
 it("hdmi","HDMI cable","tech","L2",1,90,"store","General purpose — hotel TVs, the MacBook. Stores at Phuket.")
 it("hdmi-switch","Nintendo Switch HDMI cable","tech","L1",1,80,"store","Travels with the Switch.")
 it("ps5-pad","PS5 controller","tech","L1",1,280,"store",
