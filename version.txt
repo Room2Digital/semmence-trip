@@ -1,4 +1,4 @@
-v84
-2026-10-05
-index.html 337262 bytes md5 db5efc06
-Plan status on the plan, packing progress on the home screen
+v85
+2026-10-06
+index.html 342019 bytes md5 69ed6a25
+Weather on the day cards, forecast or typical

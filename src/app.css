@@ -4181,3 +4181,40 @@ main.onwater::before {
   top: 15px;
   right: 14px;
 }
+
+/* Weather on the day cards */
+.wxc {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.wxc i {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.wxc em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+.wxc.typ {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.nxs-n {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+}

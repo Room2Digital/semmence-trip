@@ -231,7 +231,7 @@ function stayNext() {
   const e = nextStay();
   if (!e) return "";
   const t = e.in.slice(0, 10) <= iso(today()) ? "Where you are" : "Next stay";
-  return `<div class="card nxs tapc" onclick="openStay(${e._i})">\n    <div class="nxs-head"><span class="kicker">${t}</span>\n      <span class="nxs-n">${e.nights} night${1 === e.nights ? "" : "s"}</span></div>\n    ${hero(e, "")}\n    <div class="nxs-body">\n      <h3 class="nxs-name">${esc(e.name)}</h3>\n      <div class="nxs-when">${fmtL(e.in.slice(0, 10))} &rarr; ${fmtL(e.out.slice(0, 10))}</div>\n      <div class="nxs-chips">${whoChip(e.who)}</div>\n    </div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
+  return `<div class="card nxs tapc" onclick="openStay(${e._i})">\n    <div class="nxs-head"><span class="kicker">${t}</span>\n      <span class="nxs-n">${wxChip(e.in.slice(0, 10))}${e.nights} night${1 === e.nights ? "" : "s"}</span></div>\n    ${hero(e, "")}\n    <div class="nxs-body">\n      <h3 class="nxs-name">${esc(e.name)}</h3>\n      <div class="nxs-when">${fmtL(e.in.slice(0, 10))} &rarr; ${fmtL(e.out.slice(0, 10))}</div>\n      <div class="nxs-chips">${whoChip(e.who)}</div>\n    </div>\n    <svg class="nb-arw" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </div>`;
 }
 /* Packing ticks are already stored per leg; this just shows the number on the
    home screen so the progress is visible without opening the tab. */
@@ -396,7 +396,7 @@ function dayHero(e, t) {
       .join(""),
     c = i.length > 5 ? `<div class="dh-more">+${i.length - 5} more</div>` : "",
     r = i.some((e) => llOf(e.o.geo) || cityLL(e.o.city) || cityLL(e.o.from)) || !!s;
-  return `<div class="card dayh${"Tomorrow" === t ? " tmr" : ""}">\n    <div class="dh-head">\n      <div>\n        <div class="kicker">${t} · ${fmtL(e)}</div>\n        <div class="dh-where">${esc(n ? n.name : "—")}</div>\n        ${s ? `<div class="dh-stay">${esc(s.name)}</div>` : ""}\n        ${a ? '<div style="margin-top:6px"><span class="mchip bad">no accommodation booked</span></div>' : ""}\n      </div>\n      \n    </div>\n    ${i.length ? `<div class="dh-list">${l}${c}</div>` : '<div class="dh-empty">Nothing booked — the day is yours.</div>'}\n    ${o ? `<div class="dh-first">First thing at <b>${esc(o.t)}</b> — ${esc(entryTitle(o))}</div>` : ""}\n    ${r ? '<div class="dh-map">◎ Map the day</div>' : ""}\n  </div>`;
+  return `<div class="card dayh${"Tomorrow" === t ? " tmr" : ""}">\n    <div class="dh-head">\n      <div>\n        <div class="kicker">${t} · ${fmtL(e)}</div>\n        <div class="dh-where">${esc(n ? n.name : "—")}</div>\n        ${s ? `<div class="dh-stay">${esc(s.name)}</div>` : ""}\n        ${a ? '<div style="margin-top:6px"><span class="mchip bad">no accommodation booked</span></div>' : ""}\n      </div>\n      ${wxChip(e)}\n    </div>\n    ${i.length ? `<div class="dh-list">${l}${c}</div>` : '<div class="dh-empty">Nothing booked — the day is yours.</div>'}\n    ${o ? `<div class="dh-first">First thing at <b>${esc(o.t)}</b> — ${esc(entryTitle(o))}</div>` : ""}\n    ${r ? '<div class="dh-map">◎ Map the day</div>' : ""}\n  </div>`;
 }
 function vToday(e) {
   const t = iso(e),
@@ -2306,6 +2306,119 @@ const LAYL = { booked: "Booked", planned: "Planned", ideas: "Ideas" },
     return t && isFinite(t.lat) && isFinite(t.lon) ? [t.lat, t.lon] : null;
   },
   svURL = (e) => `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${e[0]},${e[1]}`;
+/* Weather from Open-Meteo. No key, no account. Inside the forecast window it
+   is a real forecast; beyond it there is nothing to forecast, so we average
+   the same week last year and label it "typical" rather than pretend. */
+let WX = store.get("wx", {}),
+  WXBUSY = {};
+const WXC = (e) =>
+    null == e
+      ? ["", ""]
+      : 0 === e
+        ? ["\u2600\ufe0f", "Clear"]
+        : e <= 2
+          ? ["\u26c5", "Partly cloudy"]
+          : 3 === e
+            ? ["\u2601\ufe0f", "Overcast"]
+            : e <= 48
+              ? ["\ud83c\udf2b\ufe0f", "Fog"]
+              : e <= 57
+                ? ["\ud83c\udf26\ufe0f", "Drizzle"]
+                : e <= 67
+                  ? ["\ud83c\udf27\ufe0f", "Rain"]
+                  : e <= 77
+                    ? ["\ud83c\udf28\ufe0f", "Snow"]
+                    : e <= 86
+                      ? ["\ud83c\udf26\ufe0f", "Showers"]
+                      : ["\u26c8\ufe0f", "Thunderstorm"],
+  wxLL = (e) => {
+    const t = stayOn(e);
+    if (t && llOf(t.geo)) return llOf(t.geo);
+    const n = gapOn(e);
+    if (n && cityLL(n.city)) return cityLL(n.city);
+    const s = T.stays.filter(mine).find((t) => t.in.slice(0, 10) === e);
+    return (s && llOf(s.geo)) || null;
+  },
+  wxKey = (e, t) => e[0].toFixed(2) + "," + e[1].toFixed(2) + "|" + t;
+function wxGet(e) {
+  const t = wxLL(e);
+  if (!t) return null;
+  const n = WX[wxKey(t, e)];
+  return n && Date.now() - n.at < ("now" === n.kind ? 108e5 : 2592e6) ? n : null;
+}
+async function wxFetch(e) {
+  const t = wxLL(e);
+  if (!t) return;
+  const n = wxKey(t, e);
+  if (WXBUSY[n] || wxGet(e)) return;
+  WXBUSY[n] = 1;
+  const s = nDays(today(), D(e));
+  try {
+    if (s >= 0 && s <= 15) {
+      const a = await (
+        await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${t[0]}&longitude=${t[1]}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&start_date=${e}&end_date=${e}`,
+        )
+      ).json();
+      const i = a && a.daily;
+      i &&
+        i.temperature_2m_max &&
+        (WX[n] = {
+          at: Date.now(),
+          kind: "now",
+          code: i.weather_code ? i.weather_code[0] : null,
+          hi: Math.round(i.temperature_2m_max[0]),
+          lo: Math.round(i.temperature_2m_min[0]),
+          pop: i.precipitation_probability_max ? i.precipitation_probability_max[0] : null,
+        });
+    } else {
+      const a = D(e),
+        i = new Date(a.getFullYear() - 1, a.getMonth(), a.getDate()),
+        o = new Date(i.getTime() - 2592e5),
+        l = new Date(i.getTime() + 2592e5),
+        c = await (
+          await fetch(
+            `https://archive-api.open-meteo.com/v1/archive?latitude=${t[0]}&longitude=${t[1]}&start_date=${iso(o)}&end_date=${iso(l)}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto`,
+          )
+        ).json(),
+        r = c && c.daily,
+        d = (e) => {
+          const t = (e || []).filter((e) => null != e);
+          return t.length ? t.reduce((e, t) => e + t, 0) / t.length : null;
+        };
+      r &&
+        null != d(r.temperature_2m_max) &&
+        (WX[n] = {
+          at: Date.now(),
+          kind: "typ",
+          code: null,
+          hi: Math.round(d(r.temperature_2m_max)),
+          lo: Math.round(d(r.temperature_2m_min)),
+          wet: (r.precipitation_sum || []).filter((e) => e > 1).length,
+        });
+    }
+    (store.set("wx", WX), (KEEPY = window.scrollY), render());
+  } catch (e) {}
+  delete WXBUSY[n];
+}
+function wxChip(e) {
+  const t = wxGet(e);
+  if (!t) return "";
+  const n = WXC(t.code)[0];
+  return "now" === t.kind
+    ? `<span class="wxc">${n} ${t.hi}&deg;<i>${t.lo}&deg;</i>${null != t.pop ? ` <em>${t.pop}%</em>` : ""}</span>`
+    : `<span class="wxc typ">${t.hi}&deg;<i>${t.lo}&deg;</i> <em>typical</em></span>`;
+}
+function wxEnsure() {
+  if (!T || !navigator.onLine) return;
+  const e = today(),
+    t = [iso(e), iso(new Date(e.getTime() + 864e5))],
+    n = nextStay();
+  (n && t.push(n.in.slice(0, 10)),
+    t.forEach((e) => {
+      wxGet(e) || wxFetch(e);
+    }));
+}
 function legForDate(e) {
   const t = (T.legs || [])
     .filter((e) => "ALL" === WHO || "RP" === e.who || e.who === WHO)
@@ -3033,7 +3146,7 @@ function render() {
     const e = KEEPY;
     ((KEEPY = null), window.scrollTo(0, e));
   }
-  (restoreX(), ticks(), nfBadge(), stickyDiag());
+  (restoreX(), ticks(), nfBadge(), stickyDiag(), wxEnsure());
 }
 function setWho(e) {
   ((WHO = e), store.set("who", e), render());
