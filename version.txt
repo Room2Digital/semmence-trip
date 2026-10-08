@@ -1,4 +1,4 @@
-v87
+v88
 2026-10-08
-index.html 342319 bytes md5 482b28e1
-Perth list trimmed, with butter, Vegemite and beer
+index.html 342369 bytes md5 0c260426
+Coffee off the list, no machine at the Sebel

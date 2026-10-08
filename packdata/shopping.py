@@ -27,8 +27,8 @@ SHOPPING = [
    dict(name="Milk", note="First shop. The Sebel has a kitchen."),
    dict(name="Eggs", note=""),
    dict(name="Breakfast and kitchen basics",
-        note="Coffee, cereal, bread — whatever stops you buying breakfast out every day "
-             "for four weeks."),
+        note="Cereal, bread — whatever stops you buying breakfast out every day for four "
+             "weeks. No coffee: there's no machine, so that's a cafe purchase."),
    dict(name="Spreadable butter", note=""),
    dict(name="Vegemite",
         note="Yeast extract, same family as Marmite but saltier, darker and less sweet. "
