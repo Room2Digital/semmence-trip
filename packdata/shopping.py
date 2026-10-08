@@ -7,7 +7,7 @@ SHOPPING = [
   id="perth",
   name="Perth, first few days",
   when="From 20 Nov",
-  where="Coles or Woolworths · Chemist Warehouse · BWS or Liquorland",
+  where="Coles or Woolworths · BWS or Liquorland for the beer",
   note=("You have seven weeks here and a kitchen at the Sebel, so this is a proper shop, "
         "not a top-up. No protein powder and no blender: the daily smoothie comes from "
         "Boost, where protein is already in the menu option."),
