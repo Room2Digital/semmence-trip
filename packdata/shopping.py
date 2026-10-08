@@ -7,15 +7,11 @@ SHOPPING = [
   id="perth",
   name="Perth, first few days",
   when="From 20 Nov",
-  where="Coles or Woolworths · Chemist Warehouse · BWS or Liquorland · any sports shop",
+  where="Coles or Woolworths · Chemist Warehouse · BWS or Liquorland",
   note=("You have seven weeks here and a kitchen at the Sebel, so this is a proper shop, "
-        "not a top-up. Chemist Warehouse is substantially cheaper than a supermarket for "
-        "toiletries and supplements — it's the one worth a dedicated trip."),
+        "not a top-up. No protein powder and no blender: the daily smoothie comes from "
+        "Boost, where protein is already in the menu option."),
   items=[
-   dict(name="Protein powder", crit=True,
-        note="Chemist Warehouse or a sports shop beats the supermarket on price. Buy a tub "
-             "sized for seven weeks — you won't be taking it to Thailand, so don't over-buy. "
-             "A shaker bottle is all you need for this; no blender required."),
    dict(name="Aftersun or aloe",
         note="Perth in December catches everyone once. Cheaper here than regretting it."),
    dict(name="Washing machine pods",
