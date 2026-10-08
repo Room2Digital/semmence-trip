@@ -1,4 +1,4 @@
-v86
+v87
 2026-10-08
-index.html 342202 bytes md5 45c2c670
-Pods and dryer sheets on the Perth list
+index.html 342319 bytes md5 482b28e1
+Perth list trimmed, with butter, Vegemite and beer

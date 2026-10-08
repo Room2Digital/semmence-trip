@@ -7,16 +7,15 @@ SHOPPING = [
   id="perth",
   name="Perth, first few days",
   when="From 20 Nov",
-  where="Coles or Woolworths · Chemist Warehouse · any sports shop",
+  where="Coles or Woolworths · Chemist Warehouse · BWS or Liquorland · any sports shop",
   note=("You have seven weeks here and a kitchen at the Sebel, so this is a proper shop, "
         "not a top-up. Chemist Warehouse is substantially cheaper than a supermarket for "
         "toiletries and supplements — it's the one worth a dedicated trip."),
   items=[
    dict(name="Protein powder", crit=True,
         note="Chemist Warehouse or a sports shop beats the supermarket on price. Buy a tub "
-             "sized for seven weeks — you won't be taking it to Thailand, so don't over-buy."),
-   dict(name="Shampoo, conditioner, body wash",
-        note="Only if the toiletries waiting for you don't already cover it."),
+             "sized for seven weeks — you won't be taking it to Thailand, so don't over-buy. "
+             "A shaker bottle is all you need for this; no blender required."),
    dict(name="Aftersun or aloe",
         note="Perth in December catches everyone once. Cheaper here than regretting it."),
    dict(name="Washing machine pods",
@@ -25,16 +24,19 @@ SHOPPING = [
    dict(name="Dryer sheets",
         note="Only worth it if the machine is a washer-dryer or there's a dryer in the "
              "building. Worth checking on arrival before you buy."),
-   dict(name="Reusable shopping bag",
-        note="Supermarkets charge for bags and you're here seven weeks."),
    dict(name="Milk", note="First shop. The Sebel has a kitchen."),
    dict(name="Eggs", note=""),
    dict(name="Breakfast and kitchen basics",
         note="Coffee, cereal, bread — whatever stops you buying breakfast out every day "
              "for four weeks."),
-   dict(name="Insect repellent, if yours is mild",
-        note="Perth doesn't need much. Buy the serious DEET in Thailand instead, where it's "
-             "stronger and cheaper."),
+   dict(name="Spreadable butter", note=""),
+   dict(name="Vegemite",
+        note="Yeast extract, same family as Marmite but saltier, darker and less sweet. "
+             "Spread it far thinner than you would Marmite."),
+   dict(name="Kitchen roll", note=""),
+   dict(name="Six pack of beer",
+        note="Not in Coles or Woolworths — WA supermarkets don't sell alcohol. "
+             "Liquorland, BWS or Dan Murphy's, usually attached to the same centre."),
   ],
  ),
  dict(
