@@ -1,4 +1,4 @@
-v85
-2026-10-06
-index.html 342019 bytes md5 69ed6a25
-Weather on the day cards, forecast or typical
+v86
+2026-10-08
+index.html 342202 bytes md5 45c2c670
+Pods and dryer sheets on the Perth list

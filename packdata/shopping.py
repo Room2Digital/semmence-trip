@@ -19,9 +19,12 @@ SHOPPING = [
         note="Only if the toiletries waiting for you don't already cover it."),
    dict(name="Aftersun or aloe",
         note="Perth in December catches everyone once. Cheaper here than regretting it."),
-   dict(name="Laundry pods or sheets",
+   dict(name="Washing machine pods",
         note="The Sebel is self-service, so you need your own for the first stretch. "
-             "Thailand is paid-for and you won't need these there."),
+             "Thailand is paid-for and you won't need these there — don't buy a big box."),
+   dict(name="Dryer sheets",
+        note="Only worth it if the machine is a washer-dryer or there's a dryer in the "
+             "building. Worth checking on arrival before you buy."),
    dict(name="Reusable shopping bag",
         note="Supermarkets charge for bags and you're here seven weeks."),
    dict(name="Milk", note="First shop. The Sebel has a kitchen."),
