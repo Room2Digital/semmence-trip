@@ -174,6 +174,9 @@ LEGS = [
                     "sunglasses","trainers-old","sandals","sliders","towel-lg"]),
 
             B("L2", "checked", [
+                P("PS5 console", "Bubble-wrapped, centre of the case, disc slot inwards."),
+                P("PS5 power lead and stand"),
+                P("PS5 controller \u2014 second", "The other one is with you on the long-haul legs."),
                 P("Large fold-out washbag", "Everything that is not on you.", inside=[
                     P("Face suncream"),
                     P("Mini shower gel"),
@@ -208,7 +211,7 @@ LEGS = [
                 P("Small dry bag", "Still to buy."),
                 P("Swimming goggles", "Still to buy."),
             ],
-               ids=["washbag-lg","suncream","suncream-face","showergel","suncream-tr","deodorant-spare","toothpaste","cable-shaver",
+               ids=["ps5","ps5-lead","ps5-pad-2","washbag-lg","suncream","suncream-face","showergel","suncream-tr","deodorant-spare","toothpaste","cable-shaver",
                     "keyboard","decant","mozzie","eyecream","nail",
                     "medkit","antihistamine","antiseptic","plasters","rehydration","athletes",
                     "mbp","ipad-mini","adapter-universal","scales","cubes","daypack","notepad","laundry-bag","binbags","drybag","goggles"]),
@@ -356,6 +359,9 @@ LEGS = [
                     "ps5-pad","hdmi-switch"]),
 
             B("L2", "checked", [
+                P("PS5 console", "Bubble-wrapped, centre of the case, disc slot inwards."),
+                P("PS5 power lead and stand"),
+                P("PS5 controller \u2014 second", "The other one is with you on the long-haul legs."),
                 P("MacBook Pro", "For the handover in Phuket."),
                 P("iPad mini", "Same handover."),
                 P("MacBook Air", "Legal in the hold — the battery is sealed in, so it only has to be fully off and packed so it cannot be crushed. Not sleeping: off."),
@@ -384,7 +390,7 @@ LEGS = [
                 P("Thai notepad"),
                 P("The Perth surplus", "Whatever you bought and are keeping. This case has the room."),
             ],
-               ids=["mbp","ipad-mini","mba","dongle","hdmi","keyboard",
+               ids=["ps5","ps5-lead","ps5-pad-2","mbp","ipad-mini","mba","dongle","hdmi","keyboard",
                     "washbag-lg","suncream","suncream-face","showergel","suncream-tr","decant","mozzie",
                     "eyecream","nail","deodorant-spare","toothpaste","cable-shaver","medkit","antihistamine","antiseptic","plasters","rehydration","athletes","notepad"]),
 
@@ -538,6 +544,9 @@ LEGS = [
                     "keyboard", "drybag", "goggles", "laundry-bag", "binbags"]),
 
             B("L2", "checked", [
+                P("PS5 console", "Bubble-wrapped, centre of the case, disc slot inwards."),
+                P("PS5 power lead and stand"),
+                P("PS5 controller \u2014 second", "The other one is with you on the long-haul legs."),
                 P("THE STORAGE CASE", "Never opened at Bangkok. Straight from the belt to Smilelugg."),
                 P("MacBook Air"),
                 P("USB-C dongle"),
@@ -565,7 +574,7 @@ LEGS = [
                 ]),
                 P("The clothing left behind", "3 boxers, 3 socks, 1 gym sock, 6 T-shirts, 6 nice shirts, 4 shorts, 1 gym top, 2 hats."),
             ],
-               ids=["mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence","eta-aus",
+               ids=["ps5","ps5-lead","ps5-pad-2","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence","eta-aus",
                     "cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses","notepad",
                     "washbag-lg","suncream","eyecream","nail","deodorant-spare","cable-shaver",
                     ("boxers", 3), ("socks-white", 3), ("tees", 6), ("shirts-nice", 6),
@@ -650,7 +659,7 @@ LEGS = [
             B("L2", "left", [
                 P("Handed over unopened, with the Switch added"),
             ],
-               ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
+               ids=["ps5","ps5-lead","ps5-pad-2","switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
                     "cable-shaver",
@@ -768,7 +777,7 @@ LEGS = [
 
             B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")], ids=[]),
             B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")],
-               ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
+               ids=["ps5","ps5-lead","ps5-pad-2","switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
                     "cable-shaver",
@@ -881,7 +890,7 @@ LEGS = [
 
             B("L1", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")], ids=[]),
             B("L2", "left", [P("At Smilelugg, Bangkok", "Collected 23 Jan.")],
-               ids=["switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
+               ids=["ps5","ps5-lead","ps5-pad-2","switch","mba","dongle","hdmi","ps5-pad","hdmi-switch","sony","licence",
                     "eta-aus","cash-aud","hoodie","tracksuit","windbreaker","towel-lg","sunglasses",
                     "notepad","washbag-lg","suncream","eyecream","nail","deodorant-spare",
                     "cable-shaver",
@@ -1005,6 +1014,9 @@ LEGS = [
                     "sunglasses"]),
 
             B("L2", "checked", [
+                P("PS5 console", "Bubble-wrapped, centre of the case, disc slot inwards."),
+                P("PS5 power lead and stand"),
+                P("PS5 controller \u2014 second", "The other one is with you on the long-haul legs."),
                 P("Re-checked to London"),
                 P("Large fold-out washbag", inside=[
                     P("Suncream — full size"),
@@ -1031,7 +1043,7 @@ LEGS = [
                 P("Swimming goggles"),
                 P("Laundry and bin bags"),
             ],
-               ids=["washbag-lg","suncream","suncream-tr","decant","mozzie","eyecream","nail",
+               ids=["ps5","ps5-lead","ps5-pad-2","washbag-lg","suncream","suncream-tr","decant","mozzie","eyecream","nail",
                     "deodorant-spare","toothpaste","cable-shaver","dongle","hdmi","adapter-universal",
                     "licence","eta-aus","cash-aud","notepad","daypack","drybag","goggles",
                     "laundry-bag","binbags"]),

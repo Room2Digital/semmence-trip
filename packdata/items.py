@@ -46,6 +46,16 @@ it("hdmi","HDMI cable","tech","L2",1,90,"store","General purpose — hotel TVs, 
 it("hdmi-switch","Nintendo Switch HDMI cable","tech","L1",1,80,"store","Travels with the Switch.")
 it("ps5-pad","PS5 controller","tech","L1",1,280,"store",
    "For Remote Play. Qatar's Starlink should genuinely carry it — the bandwidth is there and satellite latency is usually workable. Worth testing on the Gatwick to Doha leg before you count on it for the 14 hours to Perth. Pairs natively with the iPad Air as the fallback.")
+it("ps5","PS5 console","tech","L2",1,4650,"store",
+   "Original disc model, 4.5 kg, plus about 150 g of bubble wrap. Only used in Perth — "
+   "from 7 Jan it is dead weight that rides in the case and sits in Smilelugg 10-23 Jan. "
+   "Pack it centre of the case, disc slot inwards, clothes all round it.")
+it("ps5-lead","PS5 power lead and stand","tech","L2",1,400,"store",
+   "Figure-8 mains lead and the round base. The console is 100-240V so the lead is the only "
+   "thing that needs an adapter. HDMI is already in the case.")
+it("ps5-pad-2","PS5 controller \u2014 second","tech","L2",1,280,"store",
+   "Lives in the case the whole way. The first controller is the one that moves to the cabin "
+   "bag for the two long-haul flights.")
 it("switch","Nintendo Switch","tech","L1",1,400,"store",
    "Stays in the stored cases 10–23 Jan, then into the cabin bag at Bangkok for the flight home.")
 it("plug-uk","60W USB-C mains supply","tech","CB",1,90,"always",
