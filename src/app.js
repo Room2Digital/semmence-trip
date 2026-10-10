@@ -1812,7 +1812,14 @@ const pviewBar = () =>
   `<div class="ptabs pview">
     <button class="${"legs" === PVIEW ? "on" : ""}" onclick="setPView('legs')">By place</button>
     <button class="${"all" === PVIEW ? "on" : ""}" onclick="setPView('all')">Everything</button>
+    <button class="${"map" === PVIEW ? "on" : ""}" onclick="setPView('map')">Map</button>
   </div>`;
+/* The pins live in a Google My Map rather than in here, so this is an embed,
+   not a live layer: it shows whatever was last imported, not what the app
+   knows right now. */
+const MYMAP = "1KBehziF5preSVnMxJemqJAcKNBmeyk0";
+const vMapView = () =>
+  `<section class="sec">${pviewBar()}\n    <div class="sg-head"><h2>Everywhere at once</h2><span class="n">staying &middot; booked &middot; planned &middot; ideas</span></div>\n    <div class="mapwrap"><iframe src="https://www.google.com/maps/d/u/0/embed?mid=${MYMAP}&amp;ehbc=2E312F&amp;noprof=1" loading="lazy" title="Trip map"></iframe></div>\n    <a class="mapopen" href="https://www.google.com/maps/d/u/0/viewer?mid=${MYMAP}" target="_blank" rel="noopener">Open in Google Maps</a>\n    <div class="dim" style="font-size:11px;margin-top:9px;line-height:1.5">Blue is where you are staying, green is booked, yellow is planned, purple is an idea. This map is a snapshot imported into Google My Maps &mdash; adding a plan here will not move a pin until it is re-imported.</div>\n  </section>`;
 function setPSort(e) {
   ((PSORT = e), store.set("psort", e), (KEEPY = 0), render());
 }
@@ -1869,7 +1876,8 @@ function vDests() {
 }
 function vPlans() {
   if (PDAY) return vDay();
-  if (!PLEG) return "all" === PVIEW ? vAllPlans() : vDests();
+  if (!PLEG)
+    return "all" === PVIEW ? vAllPlans() : "map" === PVIEW ? vMapView() : vDests();
   const e = destOf();
   if (!e) return ((PLEG = null), vDests());
   const t = sugAll().filter((t) => e.ids.has(t.leg)),
