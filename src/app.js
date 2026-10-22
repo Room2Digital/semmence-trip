@@ -826,6 +826,29 @@ function ticket(e) {
     : "";
   return `<details class="tk" open><summary>Ticket${e.of ? " " + e.idx + " of " + e.of : ""}${e.vendor ? " · " + esc(e.vendor) : ""}</summary>\n    <div class="tk-body">${t}\n      <div class="tk-ref">${esc(e.ref || "")}</div>\n      <div class="tk-meta">${[e.name, e.qty, e.order ? "Order " + e.order : ""].filter(Boolean).map(esc).join(" · ")}</div>\n    </div></details>`;
 }
+/* Everything that has a QR or a reference you have to show someone, in one
+   place. The codes are drawn from stored vector paths, so they scan with no
+   signal — which is the only time you ever actually need them. */
+function ticketed() {
+  if (!T) return [];
+  const e = [];
+  ((T.activities || []).filter(mine).forEach((t) => {
+    t.ticket && e.push({ k: "act", d: t.date || "", o: t });
+  }),
+    (T.flights || []).filter(mine).forEach((t) => {
+      t.ticket && e.push({ k: "flight", d: (t.dep || "").slice(0, 10), o: t });
+    }));
+  return e.sort((e, t) => (e.d || "9").localeCompare(t.d || "9"));
+}
+function vTickets() {
+  const e = ticketed();
+  return `<section class="sec">\n    <div class="sg-head"><h2>Tickets</h2><span class="n">${e.length}</span></div>\n    ${e.length ? `<div class="note" style="margin-bottom:12px">Held in the app as vector codes, so they scan with no signal and nothing to download at the gate.</div>\n    ${e
+    .map((e) => {
+      const t = e.o;
+      return `<div class="card">\n      <div class="row"><h3 style="font-size:15px">${esc(t.name || t.no || "Ticket")}</h3>\n        <span class="dim">${e.d ? fmtL(e.d) : ""}${t.start ? " &middot; " + esc(t.start) : ""}</span></div>\n      ${t.loc ? `<div class="dim" style="margin-top:2px">${esc(t.loc)}</div>` : ""}\n      ${ticket(t.ticket)}</div>`;
+    })
+    .join("")}` : '<div class="note">No tickets stored yet. Send me a confirmation with a QR on it and it will appear here.</div>'}\n  </section>`;
+}
 let SHEET = null;
 const BRL = {
   start: "Where to start",
@@ -2170,7 +2193,8 @@ function vInfo() {
     n = T.deadlines.filter(mine);
   Math.max(1, ...Object.values(e).flatMap((e) => [e.paid + e.due]));
   const D = Object.entries(e).filter(([c, v]) => "points" !== c && v.due > 0);
-  return `\n  <section class="sec"><button class="infob" onclick="setTab('money')">\n    <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>\n    <span><b>Money</b><i>${D.length ? "Still to pay " + D.map(([c, v]) => money(v.due, c)).join(" · ") : "Nothing outstanding"}</i></span>\n    <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </button></section>\n\n  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Deadlines</h2></div>\n    ${n.map((e) => `<div class="card err" style="padding:13px 16px"><div class="dl-row"><h3 style="font-size:15px">${esc(e.title)}</h3>\n      <span class="mchip bad">${fmt(e.date)} ${esc(e.time)}</span></div>\n      <div class="note-txt">${esc(e.detail)} ${whoChip(e.who)}</div></div>`).join("")}</section>` : ""}\n\n  <section class="sec"><div class="sg-head"><h2>To do</h2><span class="n">${PAYT.length + t.filter((e) => !isDone(e.text)).length} open</span></div>\n    ${PAYT.length ? `<div class="label" style="margin:0 0 8px">Still to pay</div>\n    <div class="card">${PAYT.map(payRow).join("")}</div>\n    <div class="label" style="margin:16px 0 8px">Everything else</div>` : ""}\n    <div class="card">${t
+  const TK = ticketed();
+  return `\n  ${TK.length ? `<section class="sec"><button class="infob" onclick="setTab('tickets')">\n    <svg viewBox="0 0 24 24"><path d="M3 9.5V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2.5a2.5 2.5 0 0 0 0 5V17a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2.5a2.5 2.5 0 0 0 0-5z"/><path d="M14 6v12"/></svg>\n    <span><b>Tickets</b><i>${TK.length} stored &middot; they scan with no signal</i></span>\n    <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </button></section>` : ""}\n\n  <section class="sec"><button class="infob" onclick="setTab('money')">\n    <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>\n    <span><b>Money</b><i>${D.length ? "Still to pay " + D.map(([c, v]) => money(v.due, c)).join(" · ") : "Nothing outstanding"}</i></span>\n    <svg class="nb-arw" style="position:static;opacity:.5" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>\n  </button></section>\n\n  ${n.length ? `<section class="sec"><div class="sg-head"><h2>Deadlines</h2></div>\n    ${n.map((e) => `<div class="card err" style="padding:13px 16px"><div class="dl-row"><h3 style="font-size:15px">${esc(e.title)}</h3>\n      <span class="mchip bad">${fmt(e.date)} ${esc(e.time)}</span></div>\n      <div class="note-txt">${esc(e.detail)} ${whoChip(e.who)}</div></div>`).join("")}</section>` : ""}\n\n  <section class="sec"><div class="sg-head"><h2>To do</h2><span class="n">${PAYT.length + t.filter((e) => !isDone(e.text)).length} open</span></div>\n    ${PAYT.length ? `<div class="label" style="margin:0 0 8px">Still to pay</div>\n    <div class="card">${PAYT.map(payRow).join("")}</div>\n    <div class="label" style="margin:16px 0 8px">Everything else</div>` : ""}\n    <div class="card">${t
     .map((e) => {
       const t = isDone(e.text);
       return `<div class="chk${t ? " done" : ""}" onclick='tog(this,${JSON.stringify(e.text)})'>\n        <div class="box${t ? " on" : ""}"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>\n        <div class="tx">${esc(e.text)} ${e.urgent ? '<span class="mchip bad">soon</span> ' : ""}${whoChip(e.who)}</div></div>`;
@@ -3124,7 +3148,7 @@ function render() {
     document
       .querySelectorAll("#tabs button")
       .forEach((e) => e.setAttribute("aria-current", e.dataset.t === TAB)));
-  const n = { travel: "Travel", stays: "Accommodation", info: "Trip info", stay: "" },
+  const n = { travel: "Travel", stays: "Accommodation", info: "Trip info", tickets: "Tickets", stay: "" },
     s = "stay" === TAB ? "Accommodation" : "Today",
     a = "stay" === TAB ? (T.stays[STAYI] || {}).name || "" : n[TAB],
     i =
@@ -3140,8 +3164,10 @@ function render() {
           ? vTravel()
           : "stays" === TAB
             ? vStays()
-            : "stay" === TAB
-              ? vStay()
+            : "tickets" === TAB
+              ? vTickets()
+              : "stay" === TAB
+                ? vStay()
               : "cal" === TAB
                 ? vPlans()
                 : "money" === TAB
