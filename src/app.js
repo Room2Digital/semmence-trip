@@ -816,10 +816,15 @@ const planCard = (e, t) =>
   `<div class="card tap" style="padding:13px 16px" onclick="tapOpen(event,'act',${e._i})">\n      ${e.img && PIMG ? `<div class="a-hero"><img src="${esc(e.img)}" alt="" loading="lazy" onerror="this.remove()"><span class="scrim"></span><span class="cap">${esc(city(e.city).name)}</span></div>` : ""}\n      <div class="row"><h3 style="font-size:15px">${esc(e.name)}</h3>\n        <span class="dim">${t ? esc(e.start || "") + (e.end ? "–" + esc(e.end) : "") : fmt(e.date) + (e.start ? " · " + esc(e.start) : "")}</span></div>\n      <div class="dim" style="margin-top:2px">${esc(e.loc || "")}</div>\n      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">\n        ${e.status ? `<span class="mchip ${"Idea" === e.status ? "idea" : "good"}">${esc(e.status)}</span>` : ""}<span class="mchip">${esc(e.type)}</span>\n        ${null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}</span>` : ""}${whoChip(e.who)}\n        ${e.brief ? '<span class="mchip">tap for details</span>' : ""}</div>\n      ${e.note ? `<div class="note-txt">${esc(e.note)}</div>` : ""}</div>`;
 function ticket(e) {
   if (!e) return "";
+  /* Two VIP tickets for the same event, so a list as well as a single. */
+  if (Array.isArray(e))
+    return e
+      .map((t, n) => ticket(Object.assign({}, t, { idx: n + 1, of: e.length })))
+      .join("");
   const t = e.qrd
     ? `<div class="tk-qr"><svg viewBox="-2 -2 ${(e.qrn || 21) + 4} ${(e.qrn || 21) + 4}" role="img" aria-label="Ticket QR code">\n      <rect x="-2" y="-2" width="${(e.qrn || 21) + 4}" height="${(e.qrn || 21) + 4}" fill="#fff"/>\n      <path d="${e.qrd}" fill="#000"/></svg></div>`
     : "";
-  return `<details class="tk" open><summary>Ticket${e.vendor ? " · " + esc(e.vendor) : ""}</summary>\n    <div class="tk-body">${t}\n      <div class="tk-ref">${esc(e.ref || "")}</div>\n      <div class="tk-meta">${[e.name, e.qty, e.order ? "Order " + e.order : ""].filter(Boolean).map(esc).join(" · ")}</div>\n    </div></details>`;
+  return `<details class="tk" open><summary>Ticket${e.of ? " " + e.idx + " of " + e.of : ""}${e.vendor ? " · " + esc(e.vendor) : ""}</summary>\n    <div class="tk-body">${t}\n      <div class="tk-ref">${esc(e.ref || "")}</div>\n      <div class="tk-meta">${[e.name, e.qty, e.order ? "Order " + e.order : ""].filter(Boolean).map(esc).join(" · ")}</div>\n    </div></details>`;
 }
 let SHEET = null;
 const BRL = {
@@ -953,6 +958,9 @@ function sheetBody() {
           ticket(e.ticket) +
           (e.note ? `<div class="br"><h4>The plan</h4><p>${esc(e.note)}</p></div>` : "") +
           briefHTML(e.brief) +
+          (e.plans && e.plans.length
+            ? `<div class="br"><h4>${esc(e.planslabel || "Poster")}</h4>\n        ${e.plans.map((e) => `<figure class="splan"><img src="${esc(e.src)}" alt="${esc(e.cap || "")}" loading="lazy" onerror="this.closest('figure').remove()">${e.cap ? `<figcaption>${esc(e.cap)}</figcaption>` : ""}</figure>`).join("")}</div>`
+            : "") +
           (e.phone || e.url || e.email || e.line
             ? `<div class="br"><h4>Contact</h4>\n        ${e.phone ? `<p><a href="tel:${esc(e.phone.replace(/\s/g, ""))}">${esc(e.phone)}</a></p>` : ""}\n        ${e.email ? `<p style="margin-top:5px"><a href="mailto:${esc(e.email)}">${esc(e.email)}</a></p>` : ""}\n        ${e.line ? `<p style="margin-top:5px">Line <a href="https://line.me/R/ti/p/${esc(e.line)}" target="_blank" rel="noopener">${esc(e.line)}</a></p>` : ""}\n        ${e.url ? `<p style="margin-top:5px"><a href="${esc(e.url)}" target="_blank" rel="noopener">Open website</a></p>` : ""}</div>`
             : "") +

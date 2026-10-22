@@ -1,4 +1,4 @@
-v92
-2026-10-10
-index.html 345884 bytes md5 447caaed
-The map sits in the Plans tab
+v93
+2026-10-22
+index.html 346512 bytes md5 39cd299d
+Two tickets on one plan, and a poster block
