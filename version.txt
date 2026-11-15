@@ -1,4 +1,4 @@
-v95
+v96
 2026-11-15
-index.html 355430 bytes md5 9be36c5b
-Live flight status on every boarding pass (AeroDataBox)
+index.html 356674 bytes md5 102188b1
+Every screen runs on live flight times

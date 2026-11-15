@@ -606,7 +606,7 @@ const liveNo = (s) => {
   },
   liveFor = (e) =>
     LIVE && LIVE.flights && e && e.no && e.dep
-      ? LIVE.flights[liveNo(e.no) + "|" + e.dep.slice(0, 10)] || null
+      ? LIVE.flights[liveNo(e.no) + "|" + (e._depBooked || e.dep).slice(0, 10)] || null
       : null,
   liveMs = (s) => (s ? new Date(s.replace(" ", "T")).getTime() : NaN),
   liveHM = (s) => (s ? s.replace("T", " ").slice(11, 16) : ""),
@@ -618,6 +618,28 @@ const liveNo = (s) => {
     const l = liveFor(e);
     return l ? liveMs(l.depBest || l.depSched) : NaN;
   };
+/* Make every screen run on live times: each flight's dep/arr is swapped for
+   AeroDataBox's best estimate (airport-local wall clock, same format as the
+   booked times). The booked times are kept in _depBooked/_arrBooked so this
+   can be re-applied as fresh data arrives. Nothing is written back to Supabase. */
+function applyLive() {
+  if (!T || !T.flights) return;
+  const wall = (s) => s.replace(" ", "T").slice(0, 16);
+  T.flights.forEach((f) => {
+    if (!f || !f.dep) return;
+    void 0 === f._depBooked
+      ? ((f._depBooked = f.dep), (f._arrBooked = f.arr), (f._durBooked = f.dur))
+      : ((f.dep = f._depBooked), (f.arr = f._arrBooked), (f.dur = f._durBooked));
+    if (f.tbc) return;
+    const l = liveFor(f);
+    if (!l || !l.status || /cancel/i.test(l.status)) return;
+    const d = l.depBest || l.depSched,
+      a = l.arrBest || l.arrSched;
+    (d && (f.dep = wall(d)), a && (f.arr = wall(a)));
+    const m = d && a ? Math.round((liveMs(a) - liveMs(d)) / 6e4) : NaN;
+    isFinite(m) && m > 0 && m < 1440 && (f.dur = Math.floor(m / 60) + "h " + String(m % 60).padStart(2, "0") + "m");
+  });
+}
 async function loadLive() {
   try {
     const e = await fetch(`${SB_URL}/functions/v1/flight-live`, { headers: HDRS, cache: "no-store" });
@@ -2390,7 +2412,7 @@ function ticks() {
                   const l = liveFor(t);
                   if (!l || !l.status) return "";
                   const d = liveDelay(l.depBest, l.depSched);
-                  return d >= 5 ? ` · now ${liveHM(l.depBest)}` : " · on schedule";
+                  return d >= 5 ? ` · delayed ${d >= 60 ? Math.floor(d / 60) + "h " + (d % 60) + "m" : d + " min"}` : " · live, on schedule";
                 })()));
           const lm = liveDepMs(t);
           let a = (isFinite(lm) ? lm : new Date(t.dep)) - n;
@@ -3334,7 +3356,8 @@ async function boot() {
     n || (n = store.get("legs", null)),
     T && (t && (T.suggest = t), n && (T.legs = n)),
     T
-      ? (render(),
+      ? (applyLive(),
+        render(),
         await Promise.all([
           loadPicks(),
           loadEdits(),
@@ -3345,9 +3368,10 @@ async function boot() {
           loadLive(),
         ]),
         mergePicks(),
+        applyLive(),
         render(),
         setInterval(async () => {
-          document.hidden || ((await loadLive()) && render());
+          document.hidden || ((await loadLive()) && (applyLive(), render()));
         }, 5 * 6e4))
       : (document.getElementById("view").innerHTML =
           '<div class="center">Could not load the trip, and there is no saved copy on this device yet. Open it once with a connection.</div>'));
