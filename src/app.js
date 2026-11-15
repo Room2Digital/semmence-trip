@@ -595,8 +595,102 @@ function bagChips(e) {
     ? `<div class="bags">${t.checked ? bagChip("checked", t.checked, /none|add-on/i.test(t.checked)) : ""}\n    ${t.cabin ? bagChip("cabin", t.cabin) : ""}${t.personal ? bagChip("personal", t.personal) : ""}</div>`
     : "";
 }
+/* Live flight status — from the flight-live edge function (AeroDataBox).
+   The function caches and only asks AeroDataBox when a flight is within
+   48 hours, so polling from here costs nothing. */
+let LIVE = store.get("live", null);
+const liveNo = (s) => {
+    const t = String(s || "").toUpperCase().replace(/\s+/g, ""),
+      m = t.match(/^([A-Z0-9]{2})0*(\d+[A-Z]?)$/);
+    return m ? m[1] + m[2] : t;
+  },
+  liveFor = (e) =>
+    LIVE && LIVE.flights && e && e.no && e.dep
+      ? LIVE.flights[liveNo(e.no) + "|" + e.dep.slice(0, 10)] || null
+      : null,
+  liveMs = (s) => (s ? new Date(s.replace(" ", "T")).getTime() : NaN),
+  liveHM = (s) => (s ? s.replace("T", " ").slice(11, 16) : ""),
+  liveDelay = (best, sched) => {
+    const d = Math.round((liveMs(best) - liveMs(sched)) / 6e4);
+    return isFinite(d) ? d : 0;
+  },
+  liveDepMs = (e) => {
+    const l = liveFor(e);
+    return l ? liveMs(l.depBest || l.depSched) : NaN;
+  };
+async function loadLive() {
+  try {
+    const e = await fetch(`${SB_URL}/functions/v1/flight-live`, { headers: HDRS, cache: "no-store" });
+    if (!e.ok) return !1;
+    const t = await e.json();
+    if (!t || !t.flights) return !1;
+    const n = JSON.stringify(t.flights) !== JSON.stringify((LIVE && LIVE.flights) || {});
+    return ((LIVE = t), store.set("live", t), n);
+  } catch (e) {
+    return !1;
+  }
+}
+function liveAgo(e) {
+  const t = Math.round((Date.now() - e) / 6e4);
+  return t < 1 ? "just now" : t < 60 ? t + " min ago" : t < 1440 ? Math.round(t / 60) + " hr ago" : Math.round(t / 1440) + " days ago";
+}
+function liveState(l) {
+  const s = String(l.status || ""),
+    dd = liveDelay(l.depBest, l.depSched),
+    ad = liveDelay(l.arrBest, l.arrSched);
+  return /cancel/i.test(s)
+    ? ["bad", "Cancelled"]
+    : /divert/i.test(s)
+      ? ["bad", "Diverted"]
+      : /arrived/i.test(s)
+        ? ["ok", ad >= 15 ? `Landed ${ad} min late` : "Landed"]
+        : /approach/i.test(s)
+          ? ["air", "Coming in to land"]
+          : /departed|enroute/i.test(s)
+            ? ["air", "In the air"]
+            : /boarding/i.test(s)
+              ? ["warn", "Boarding"]
+              : /gateclosed/i.test(s)
+                ? ["warn", "Gate closed"]
+                : /delayed/i.test(s) || dd >= 15
+                  ? ["warn", dd >= 1 ? `Delayed ${dd >= 60 ? Math.floor(dd / 60) + "h " + (dd % 60) + "m" : dd + " min"}` : "Delayed"]
+                  : /checkin/i.test(s)
+                    ? ["ok", "Check-in open"]
+                    : ["ok", "On schedule"];
+}
+function liveTime(best, sched, actual) {
+  const b = best || sched;
+  if (!b) return "";
+  const d = liveDelay(best, sched),
+    was = best && sched && Math.abs(d) >= 5 ? ` <s>${liveHM(sched)}</s>` : "";
+  return `<b>${liveHM(b)}</b>${was}${actual ? ' <i class="lv-act">actual</i>' : best && best !== sched ? ' <i class="lv-act">est.</i>' : ""}`;
+}
+function liveStrip(e) {
+  if (e.tbc) return "";
+  const l = liveFor(e);
+  if (!l || !l.status) return "";
+  const [k, label] = liveState(l),
+    term = (t) => (/^N$/i.test(t) ? "North Terminal" : /^S$/i.test(t) ? "South Terminal" : "Terminal " + esc(t)),
+    bits = (arr) => arr.filter(Boolean).map((x) => `<span>${x}</span>`).join(""),
+    dep = bits([
+      l.depTerminal && term(l.depTerminal),
+      l.checkIn && "Check-in " + esc(l.checkIn),
+      l.depGate && "Gate " + esc(l.depGate),
+    ]),
+    arr = bits([
+      l.arrTerminal && term(l.arrTerminal),
+      l.arrGate && "Gate " + esc(l.arrGate),
+      l.belt && "Bags belt " + esc(l.belt),
+    ]);
+  return `<div class="live">
+    <div class="lv-top"><span class="lv-pill ${k}"><span class="lv-dot"></span>${esc(label)}</span><span class="lv-src">Live · ${liveAgo(l.fetched)}</span></div>
+    <div class="lv-row"><span class="lv-k">Departs</span><span class="lv-v">${liveTime(l.depBest, l.depSched, l.depActual)}</span>${dep ? `<span class="lv-x">${dep}</span>` : ""}</div>
+    <div class="lv-row"><span class="lv-k">Lands</span><span class="lv-v">${liveTime(l.arrBest, l.arrSched, l.arrActual)}</span>${arr ? `<span class="lv-x">${arr}</span>` : ""}</div>
+    <div class="lv-foot">Flight data by AeroDataBox</div>
+  </div>`;
+}
 const passCard = (e) =>
-    `<div class="pass tap ${e.who}${e.tbc ? " tbc" : ""}" onclick="tapOpen(event,'flight',${e._i})">\n  <div class="p-perf"></div><div class="p-perf r"></div>\n  <div class="p-date"><span>${fmtL(e.dep.slice(0, 10))}</span>\n    <span class="d2">${e.tbc ? "Not booked" : tm(e.dep) + " → " + tm(e.arr) + (e.arr.slice(0, 10) !== e.dep.slice(0, 10) ? " +1" : "")}</span></div>\n  ${e.cabinimg ? `<div class="c-hero nc"><img class="bl" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.remove()"><img class="fg" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.closest('.c-hero').remove()"><span class="scrim"></span><span class="cap">${esc(e.cabinname || e.cabin || "")}</span></div>` : '<div style="height:12px"></div>'}\n  <div class="p-top"><span style="display:flex;align-items:center;gap:7px"><img class="alogo" src="${logoFor(e)}" alt="" loading="lazy" onerror="this.remove()">${esc(e.airline)}</span><span>${esc(e.no)}</span></div>\n  <div class="p-route">\n    <div><div class="p-code">${esc(city(e.from).code)}</div><div class="p-city">${esc(city(e.from).name)}</div></div>\n    <div class="p-mid"><div class="p-line"><span class="l"></span>✈<span class="l"></span></div><div class="dur">${esc(e.dur || "TBC")}</div></div>\n    <div style="text-align:right"><div class="p-code">${esc(city(e.to).code)}</div><div class="p-city">${esc(city(e.to).name)}</div></div>\n  </div>\n  <div class="p-meta">\n    ${e.cabin ? `<span class="mchip ${"Business" === e.cabin ? "cabin-biz" : ""}">${esc(e.cabin)}</span>` : ""}\n    ${e.seat ? `<span class="mchip">${esc(e.seat)}</span>` : ""}\n    ${e.ref ? `<span class="mchip">${esc(e.ref)}</span>` : '<span class="mchip tbd">No ref</span>'}\n    ${whoChip(e.who)}\n  </div>\n  ${bagChips(e)}\n  ${e.plane ? `<div class="note-txt">${esc(e.plane)}</div>` : ""}\n</div>`,
+    `<div class="pass tap ${e.who}${e.tbc ? " tbc" : ""}" onclick="tapOpen(event,'flight',${e._i})">\n  <div class="p-perf"></div><div class="p-perf r"></div>\n  <div class="p-date"><span>${fmtL(e.dep.slice(0, 10))}</span>\n    <span class="d2">${e.tbc ? "Not booked" : tm(e.dep) + " → " + tm(e.arr) + (e.arr.slice(0, 10) !== e.dep.slice(0, 10) ? " +1" : "")}</span></div>\n  ${e.cabinimg ? `<div class="c-hero nc"><img class="bl" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.remove()"><img class="fg" src="${esc(e.cabinimg)}" alt="" loading="lazy" onerror="this.closest('.c-hero').remove()"><span class="scrim"></span><span class="cap">${esc(e.cabinname || e.cabin || "")}</span></div>` : '<div style="height:12px"></div>'}\n  <div class="p-top"><span style="display:flex;align-items:center;gap:7px"><img class="alogo" src="${logoFor(e)}" alt="" loading="lazy" onerror="this.remove()">${esc(e.airline)}</span><span>${esc(e.no)}</span></div>\n  <div class="p-route">\n    <div><div class="p-code">${esc(city(e.from).code)}</div><div class="p-city">${esc(city(e.from).name)}</div></div>\n    <div class="p-mid"><div class="p-line"><span class="l"></span>✈<span class="l"></span></div><div class="dur">${esc(e.dur || "TBC")}</div></div>\n    <div style="text-align:right"><div class="p-code">${esc(city(e.to).code)}</div><div class="p-city">${esc(city(e.to).name)}</div></div>\n  </div>\n  ${liveStrip(e)}\n  <div class="p-meta">\n    ${e.cabin ? `<span class="mchip ${"Business" === e.cabin ? "cabin-biz" : ""}">${esc(e.cabin)}</span>` : ""}\n    ${e.seat ? `<span class="mchip">${esc(e.seat)}</span>` : ""}\n    ${e.ref ? `<span class="mchip">${esc(e.ref)}</span>` : '<span class="mchip tbd">No ref</span>'}\n    ${whoChip(e.who)}\n  </div>\n  ${bagChips(e)}\n  ${e.plane ? `<div class="note-txt">${esc(e.plane)}</div>` : ""}\n</div>`,
   trCard = (e) =>
     `<div class="card tap" style="padding:13px 16px${e.tbc ? ";border-style:dashed" : ""}" onclick="tapOpen(event,'transfer',${e._i})">\n  ${e.img ? `<div class="a-hero nc"><img class="bl" src="${esc(e.img)}" alt="" loading="lazy" onerror="this.remove()"><img class="fg" src="${esc(e.img)}" alt="" loading="lazy" onerror="this.closest('.a-hero').remove()"><span class="scrim"></span><span class="cap">${esc(e.kind)}</span></div>` : ""}\n  <div class="row"><h3 style="font-size:15px">${esc(e.kind)} · ${esc(e.label || city(e.from).name + " → " + city(e.to).name)}</h3>\n    <span class="dim">${fmt(e.date)}${e.time ? " · " + esc(e.time) : ""}</span></div>\n  <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">\n    ${e.tbc ? '<span class="mchip tbd">Not booked</span>' : e.included ? '<span class="mchip good">Included</span>' : '<span class="mchip good">Booked</span>'}\n    ${null != e.amount ? `<span class="mchip">${money(e.amount, e.ccy)}</span>` : ""}\n    ${e.provider ? `<span class="mchip">${esc(e.provider)}</span>` : ""}${whoChip(e.who)}</div>\n  ${e.note ? `<div class="note-txt">${esc(e.note)}</div>` : ""}\n  ${e.geo ? mapLink(e.geo, e.label || e.kind) + wazeLink(e.geo) : ""}</div>`;
 function vStays() {
@@ -2291,8 +2385,15 @@ function ticks() {
                 " · " +
                 tm(t.dep) +
                 " local" +
-                (t.tbc ? " · not booked" : "")));
-          let a = new Date(t.dep) - n;
+                (t.tbc ? " · not booked" : "") +
+                (() => {
+                  const l = liveFor(t);
+                  if (!l || !l.status) return "";
+                  const d = liveDelay(l.depBest, l.depSched);
+                  return d >= 5 ? ` · now ${liveHM(l.depBest)}` : " · on schedule";
+                })()));
+          const lm = liveDepMs(t);
+          let a = (isFinite(lm) ? lm : new Date(t.dep)) - n;
           (a < 0 && (a = 0),
             e("d", Math.floor(a / 864e5)),
             e("h", Math.floor(a / 36e5) % 24),
@@ -3241,9 +3342,13 @@ async function boot() {
           loadTodos(),
           loadMoney(),
           PK.load(),
+          loadLive(),
         ]),
         mergePicks(),
-        render())
+        render(),
+        setInterval(async () => {
+          document.hidden || ((await loadLive()) && render());
+        }, 5 * 6e4))
       : (document.getElementById("view").innerHTML =
           '<div class="center">Could not load the trip, and there is no saved copy on this device yet. Open it once with a connection.</div>'));
 }

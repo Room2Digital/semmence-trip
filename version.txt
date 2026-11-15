@@ -1,4 +1,4 @@
-v94
-2026-10-22
-index.html 348632 bytes md5 745e7577
-A tickets section, scannable with no signal
+v95
+2026-11-15
+index.html 355430 bytes md5 9be36c5b
+Live flight status on every boarding pass (AeroDataBox)
